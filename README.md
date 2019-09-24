@@ -1,2 +1,2 @@
-# Re-Skin
+# Re:Skin
 Skin customiser for mc
