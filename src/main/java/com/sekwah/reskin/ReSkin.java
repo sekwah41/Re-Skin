@@ -15,14 +15,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = ReSkin.modid, name = "Re:Skin", version = ReSkin.version)
+@Mod(modid = ReSkin.MODID, name = "Re:Skin", version = ReSkin.VERSION)
 public class ReSkin {
 
-    public static final String modid = "reskin";
+    public static final String MODID = "reskin";
 
     public static final Logger logger = LogManager.getLogger("Re:Skin");
 
-    public static final String version = "0.1.0";
+    public static final String VERSION = "0.1.0";
 
     public static SimpleNetworkWrapper packetNetwork;
 
