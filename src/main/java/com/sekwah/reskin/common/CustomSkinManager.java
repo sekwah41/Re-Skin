@@ -19,6 +19,6 @@ public class CustomSkinManager {
         /**
          * TODO swap to all tracking and handle skin loading more dynamically. Dont need to load 10000 skins for offline players or not nearby ones.
          */
-        ReSkin.packetNetwork.sendToAll(new ClientChangeSkinPacket(uniqueID.toString(), url));
+        ReSkin.packetNetwork.sendToAll(new ClientChangeSkinPacket(uniqueID.toString(), url, SkinConfig.allowTransparentSkin));
     }
 }

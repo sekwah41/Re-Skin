@@ -25,6 +25,8 @@ public  class ClientSkinManager {
 
     private static Map<UUID, ResourceLocation> playerSkinMap = Maps.newHashMap();
 
+    private static Map<UUID, ResourceLocation> originalSkinMap = Maps.newHashMap();
+
     /**
      * URL map
      */
@@ -37,19 +39,28 @@ public  class ClientSkinManager {
             textureManager.deleteTexture(resources.getValue());
         }
         cachedUrls.clear();
-        playerSkinMap.clear();
+        //playerSkinMap.clear();
+        for(Map.Entry<UUID, ResourceLocation> entry : playerSkinMap.entrySet()) {
+            ResourceLocation resourceLocation = originalSkinMap.getOrDefault(entry.getKey(), missing);
+            playerSkinMap.put(entry.getKey(), resourceLocation == null ? missing : resourceLocation);
+        }
     }
 
     public static void getTextureManager() {
         textureManager = Minecraft.getMinecraft().getTextureManager();
     }
 
-    public static void setSkin(UUID uuid, String url) {
-        if(cachedUrls.containsKey(url)) {
+    public static void setSkin(UUID uuid, String url, boolean isTransparent) {
+        if(url.equalsIgnoreCase("reset")) {
+            if(originalSkinMap.containsKey(uuid)) {
+                playerSkinMap.put(uuid, originalSkinMap.get(uuid));
+            }
+        }
+        else if(cachedUrls.containsKey(url)) {
             playerSkinMap.put(uuid, cachedUrls.get(url));
         }
         else {
-            texturesToLoad.add(new SkinLoadJob(uuid, url));
+            texturesToLoad.add(new SkinLoadJob(uuid, url, isTransparent));
         }
     }
 
@@ -62,7 +73,7 @@ public  class ClientSkinManager {
             /**
              * TODO enable local cache with first value (for between restarts)
              */
-            HDImageBufferDownload imageBuffer = new HDImageBufferDownload();
+            HDImageBufferDownload imageBuffer = new HDImageBufferDownload(loadJob.isTransparent);
             ThreadDownloadImageData threaddownloadimagedata = new ThreadDownloadImageData(null, loadJob.url, missing, new IImageBuffer()
             {
                 public BufferedImage parseUserSkin(BufferedImage image)
@@ -94,6 +105,9 @@ public  class ClientSkinManager {
         ResourceLocation currentSkin = player.playerInfo.playerTextures.get(MinecraftProfileTexture.Type.SKIN);
         ResourceLocation wantedSkin = playerSkinMap.get(player.getUniqueID());
         if(wantedSkin != null && currentSkin != wantedSkin) {
+            if(!originalSkinMap.containsKey(player.getUniqueID())) {
+                originalSkinMap.put(player.getUniqueID(), player.playerInfo.playerTextures.get(MinecraftProfileTexture.Type.SKIN));
+            }
             player.playerInfo.playerTextures.put(MinecraftProfileTexture.Type.SKIN, wantedSkin);
         }
     }
