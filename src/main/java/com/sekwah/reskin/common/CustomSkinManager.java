@@ -24,7 +24,7 @@ public class CustomSkinManager {
     public static void sendAllToPlayer(EntityPlayerMP player, boolean excludeSelf) {
         for(Map.Entry<UUID, String> skin : playerSkins.entrySet()) {
             if(!(excludeSelf && skin.getKey() == player.getUniqueID())) {
-                ReSkin.packetNetwork.sendTo(new ClientChangeSkinPacket(skin.getKey().toString(), skin.getValue()), player);
+                ReSkin.packetNetwork.sendTo(new ClientChangeSkinPacket(skin.getKey().toString(), skin.getValue(), SkinConfig.allowTransparentSkin), player);
             }
         }
     }
