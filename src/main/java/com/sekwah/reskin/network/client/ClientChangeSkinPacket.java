@@ -14,13 +14,15 @@ public class ClientChangeSkinPacket implements IMessage {
 
     private String uuid;
     private String url;
+    private boolean isTransparent;
 
     public ClientChangeSkinPacket() {
     }
 
-    public ClientChangeSkinPacket(String uuid, String url) {
+    public ClientChangeSkinPacket(String uuid, String url, boolean isTransparent) {
         this.uuid = uuid;
         this.url = url;
+        this.isTransparent = isTransparent;
     }
 
     @Override
@@ -28,6 +30,7 @@ public class ClientChangeSkinPacket implements IMessage {
         PacketBuffer packetBuffer = new PacketBuffer(buf);
         this.uuid = packetBuffer.readString(Short.MAX_VALUE);
         this.url = packetBuffer.readString(Short.MAX_VALUE);
+        this.isTransparent = packetBuffer.readBoolean();
     }
 
     @Override
@@ -35,13 +38,14 @@ public class ClientChangeSkinPacket implements IMessage {
         PacketBuffer packetBuffer = new PacketBuffer(buf);
         packetBuffer.writeString(this.uuid);
         packetBuffer.writeString(this.url);
+        packetBuffer.writeBoolean(this.isTransparent);
     }
 
     public static class Handler implements IMessageHandler<ClientChangeSkinPacket, IMessage> {
 
         @Override
         public IMessage onMessage(ClientChangeSkinPacket message, MessageContext ctx) {
-            ClientSkinManager.setSkin(UUID.fromString(message.uuid), message.url);
+            ClientSkinManager.setSkin(UUID.fromString(message.uuid), message.url, message.isTransparent);
             return null;
         }
     }

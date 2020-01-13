@@ -12,7 +12,6 @@ public class ClientEventHook {
 
     @SubscribeEvent
     public void leaveServer(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
-        System.out.println("DISCONNECTED");
     }
 
     @SubscribeEvent

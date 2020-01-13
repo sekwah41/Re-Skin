@@ -33,12 +33,12 @@ public class CustomSkinManager {
         EntityPlayer player = ReSkin.getProxy().getFromUUID(uuid);
         setSkin(player, url);
     }
-
+  
     public static void setSkin(EntityPlayer player, String url) {
         if(player != null) {
             player.getCapability(SkinLocationProvider.SKIN_LOC, null).setSkin(url);
             if(url.length() > 0) {
-                ReSkin.packetNetwork.sendToAll(new ClientChangeSkinPacket(player.getUniqueID().toString(), url));
+                ReSkin.packetNetwork.sendToAll(new ClientChangeSkinPacket(player.getUniqueID().toString(), url, SkinConfig.allowTransparentSkin));
                 playerSkins.put(player.getUniqueID(), url);
             }
         }
