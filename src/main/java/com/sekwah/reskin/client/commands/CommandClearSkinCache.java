@@ -1,7 +1,9 @@
 package com.sekwah.reskin.client.commands;
 
+import com.sekwah.reskin.ReSkin;
 import com.sekwah.reskin.client.ClientSkinManager;
 import com.sekwah.reskin.common.CustomSkinManager;
+import com.sekwah.reskin.network.server.ServerRequestSkinsPacket;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -29,5 +31,6 @@ public class CommandClearSkinCache extends CommandBase {
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         ClientSkinManager.clearSkinCache();
         sender.sendMessage(TextComponentHelper.createComponentTranslation(sender, "setskin.clearedcache"));
+        ReSkin.packetNetwork.sendToServer(new ServerRequestSkinsPacket());
     }
 }

@@ -3,6 +3,7 @@ package com.sekwah.reskin;
 import com.sekwah.reskin.common.CommonProxy;
 import com.sekwah.reskin.common.commands.CommandSetSkin;
 import com.sekwah.reskin.network.client.ClientChangeSkinPacket;
+import com.sekwah.reskin.network.server.ServerRequestSkinsPacket;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -22,12 +23,16 @@ public class ReSkin {
 
     public static final Logger logger = LogManager.getLogger("Re:Skin");
 
-    public static final String VERSION = "0.1.0";
+    public static final String VERSION = "1.0.0";
 
     public static SimpleNetworkWrapper packetNetwork;
 
     @SidedProxy(clientSide = "com.sekwah.reskin.client.ClientProxy", serverSide = "com.sekwah.reskin.common.CommonProxy")
-    public static CommonProxy proxy;
+    private static CommonProxy proxy;
+
+    public static CommonProxy getProxy() {
+        return proxy;
+    }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
@@ -52,6 +57,7 @@ public class ReSkin {
     private void packetNetwork() {
         packetNetwork = NetworkRegistry.INSTANCE.newSimpleChannel("RSK");
         packetNetwork.registerMessage(ClientChangeSkinPacket.Handler.class, ClientChangeSkinPacket.class, 0, Side.CLIENT);
+        packetNetwork.registerMessage(ServerRequestSkinsPacket.Handler.class, ServerRequestSkinsPacket.class, 100, Side.SERVER);
     }
 
 }

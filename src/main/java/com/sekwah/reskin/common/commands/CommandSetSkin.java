@@ -33,8 +33,13 @@ public class CommandSetSkin extends CommandBase {
             sender.sendMessage(TextComponentHelper.createComponentTranslation(sender, "setskin.missingargs"));
         }
         else if(args.length == 1){
-            EntityPlayer player = (EntityPlayer) sender;
-            CustomSkinManager.setSkin(player.getUniqueID(), args[0]);
+            if(sender instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) sender;
+                CustomSkinManager.setSkin(player, args[0]);
+            }
+            else {
+                sender.sendMessage(TextComponentHelper.createComponentTranslation(sender, "setskin.notplayer"));
+            }
         }
     }
 }
