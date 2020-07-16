@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "Re:Skin resources",
-        "pack_format": 3
+        "description": "reskin resources",
+        "pack_format": 5,
     }
 }
