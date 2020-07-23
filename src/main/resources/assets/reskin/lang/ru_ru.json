@@ -1,0 +1,5 @@
+{
+  "setskin.missingargs": "Вы должны предоставить ссылку на скин.",
+  "setskin.clearedcache": "Кеш скинов был очищен. Загружаем необходимые скины...",
+  "setskin.setplayer": "Set %s's skin to %s"
+}
