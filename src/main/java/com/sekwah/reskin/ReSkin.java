@@ -1,5 +1,6 @@
 package com.sekwah.reskin;
 
+import com.sekwah.reskin.capabilities.CapabilityHandler;
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.network.MessageHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,6 +39,7 @@ public class ReSkin {
 
     private void setup(final FMLCommonSetupEvent event) {
         MessageHandler.init();
+        CapabilityHandler.init();
     }
 
     @SubscribeEvent

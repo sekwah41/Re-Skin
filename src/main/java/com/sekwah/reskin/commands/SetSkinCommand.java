@@ -6,6 +6,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
+import com.sekwah.reskin.CustomSkinManager;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.ISuggestionProvider;
 import net.minecraft.command.arguments.EntityArgument;
@@ -39,7 +40,6 @@ public class SetSkinCommand {
                         .then(argument("url", MessageArgument.message())
                         .suggests(URL_SUGGESTIONS)
                             .executes(ctx -> {
-                                // Test command /setskin Dev https://imgur.com/mORJxcm
                                 ServerPlayerEntity targetPlayer = EntityArgument.getPlayer(ctx, "targets");
                                 ITextComponent url = MessageArgument.getMessage(ctx, "url");
                                 return execute(ctx.getSource(), targetPlayer, url);
@@ -57,7 +57,7 @@ public class SetSkinCommand {
             return Command.SINGLE_SUCCESS;
         }
         source.sendFeedback(new TranslationTextComponent("setskin.setplayer", target.getDisplayName(), url), false);
-
+        CustomSkinManager.setSkin(target, url);
         return Command.SINGLE_SUCCESS;
     }
 }
