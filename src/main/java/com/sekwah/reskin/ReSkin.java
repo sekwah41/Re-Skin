@@ -3,15 +3,12 @@ package com.sekwah.reskin;
 import com.sekwah.reskin.capabilities.CapabilityHandler;
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.config.SkinConfig;
-import com.sekwah.reskin.network.MessageHandler;
-import com.sekwah.reskin.server.ServerEventHook;
-import net.minecraftforge.common.MinecraftForge;
+import com.sekwah.reskin.network.PacketHandler;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ConfigFileTypeHandler;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -44,7 +41,7 @@ public class ReSkin {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        MessageHandler.init();
+        PacketHandler.init();
         CapabilityHandler.init();
     }
 
