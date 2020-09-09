@@ -8,7 +8,6 @@ import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
-import java.io.File;
 import java.util.*;
 
 public class ClientSkinManager {

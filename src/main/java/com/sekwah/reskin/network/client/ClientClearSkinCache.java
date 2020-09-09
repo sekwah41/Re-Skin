@@ -1,13 +1,9 @@
 package com.sekwah.reskin.network.client;
 
 import com.sekwah.reskin.client.ClientSkinManager;
-import com.sekwah.reskin.network.PacketHandler;
-import com.sekwah.reskin.network.server.ServerRequestSkins;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.util.UUID;
 import java.util.function.Supplier;
 
 public class ClientClearSkinCache {

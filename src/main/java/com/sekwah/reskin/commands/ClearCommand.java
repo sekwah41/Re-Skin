@@ -5,20 +5,12 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.ReSkin;
-import com.sekwah.reskin.client.ClientSkinManager;
-import com.sekwah.reskin.config.SkinConfig;
 import com.sekwah.reskin.network.PacketHandler;
-import com.sekwah.reskin.network.client.ClientChangeSkin;
 import com.sekwah.reskin.network.client.ClientClearSkinCache;
-import com.sekwah.reskin.network.server.ServerRequestSkins;
-import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandSource;
-import net.minecraft.command.ISuggestionProvider;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 import static net.minecraft.command.Commands.literal;
 
