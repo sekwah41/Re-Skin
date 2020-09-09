@@ -11,11 +11,11 @@ import net.minecraft.command.ISuggestionProvider;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.command.arguments.MessageArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import static net.minecraft.command.Commands.argument;
 import static net.minecraft.command.Commands.literal;
@@ -51,12 +51,20 @@ public class SetSkinCommand {
     }
 
     private static int execute(CommandSource source, Collection<ServerPlayerEntity> targets, ITextComponent skinUrl) {
+        String url = skinUrl.getString().split(" ")[0];
+        if(url.contains(" ")) {
+            return -1;
+        }
+        List<String> whitelist = SkinConfig.SKIN_SERVER_WHITELIST.get();
+        long passedWhitelist = whitelist.stream().filter(value -> url.startsWith(value)).count();
+        if(SkinConfig.ENABLE_SKIN_SERVER_WHITELIST.get() && passedWhitelist == 0) {
+            TranslationTextComponent message = new TranslationTextComponent("setskin.notwhitelisted");
+            Style redMessage = message.getStyle().setColor(Color.func_240744_a_(TextFormatting.RED));
+            source.sendFeedback(message.setStyle(redMessage), false);
+            return -1;
+        }
         targets.forEach(target -> {
             if(target == null) {
-                return;
-            }
-            String url = skinUrl.getString().split(" ")[0];
-            if(url.contains(" ")) {
                 return;
             }
             source.sendFeedback(new TranslationTextComponent("setskin.setplayer", target.getDisplayName(), url), false);

@@ -35,8 +35,7 @@ public class CustomSkinManager {
      */
     public static void sendAllToPlayer(ServerPlayerEntity player, boolean excludeSelf) {
         for(Map.Entry<UUID, String> skin : playerSkins.entrySet()) {
-            if(!(excludeSelf && skin.getKey() == player.getUniqueID())) {
-                PacketHandler.SKIN_CHANNEL.sendTo(new ClientChangeSkin(skin.getKey().toString(), skin.getValue(), SkinConfig.ALLOW_TRANSPARENT_SKIN.get()), player.connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
+            if(!(excludeSelf && skin.getKey() == player.getUniqueID()) && skin.getValue() != null) {
                 PacketHandler.sendToPlayer(new ClientChangeSkin(skin.getKey().toString(), skin.getValue(), SkinConfig.ALLOW_TRANSPARENT_SKIN.get()), player);
             }
         }

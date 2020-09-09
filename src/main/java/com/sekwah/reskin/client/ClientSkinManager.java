@@ -17,8 +17,6 @@ public class ClientSkinManager {
 
     private static ResourceLocation missing = new ResourceLocation("textures/entity/steve.png");
 
-    private static final ResourceLocation TEXTURE_ALEX = new ResourceLocation("textures/entity/alex.png");
-
     private static final Map<UUID, ResourceLocation> playerSkinMap = Maps.newHashMap();
 
     private static final Map<UUID, ResourceLocation> originalSkinMap = Maps.newHashMap();
@@ -68,7 +66,7 @@ public class ClientSkinManager {
             ResourceLocation resourcelocation = new ResourceLocation("reskin", "skins/" + loadJob.url.hashCode());
             ReSkin.LOGGER.info("Downloading skin from: {}", loadJob.url);
 
-            HDDownloadingTexture downloadingTexture = new HDDownloadingTexture(null, loadJob.url, TEXTURE_ALEX, loadJob.isTransparent, null);
+            HDDownloadingTexture downloadingTexture = new HDDownloadingTexture(null, loadJob.url, missing, loadJob.isTransparent, null);
             if(downloadingTexture != null) {
                 textureManager.loadTexture(resourcelocation, downloadingTexture);
             }
@@ -91,6 +89,9 @@ public class ClientSkinManager {
                 originalSkinMap.put(player.getUniqueID(), player.playerInfo.playerTextures.get(MinecraftProfileTexture.Type.SKIN));
             }
             player.playerInfo.playerTextures.put(MinecraftProfileTexture.Type.SKIN, wantedSkin);
+            // Add storing this data into the packets and alter the commands to allow changing the models
+            player.playerInfo.skinType = "default";
+            //player.playerInfo.skinType = "slim";
         }
     }
 }

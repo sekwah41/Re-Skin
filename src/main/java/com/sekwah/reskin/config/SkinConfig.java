@@ -3,6 +3,9 @@ package com.sekwah.reskin.config;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 @Mod.EventBusSubscriber
 public class SkinConfig {
@@ -17,6 +20,10 @@ public class SkinConfig {
 
     public static ForgeConfigSpec.BooleanValue OTHERS_SELF_SKIN_NEEDS_OP;
 
+    public static ForgeConfigSpec.BooleanValue ENABLE_SKIN_SERVER_WHITELIST;
+
+    public static ForgeConfigSpec.ConfigValue<List<String>> SKIN_SERVER_WHITELIST;
+
     static {
         ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
 
@@ -30,6 +37,12 @@ public class SkinConfig {
 
         OTHERS_SELF_SKIN_NEEDS_OP = SERVER_BUILDER.comment("Does setting other peoples skins need op?")
                 .define("setOtherSkinsNeedsOp ", true);
+
+        ENABLE_SKIN_SERVER_WHITELIST = SERVER_BUILDER.comment("Server skin whitelist")
+                .define("enableSkinServerWhitelist ", true);
+
+        SKIN_SERVER_WHITELIST = SERVER_BUILDER.comment("Server skin whitelist")
+                .define("enforceSkinWhitelist ", Arrays.asList(new String[]{"https://i.imgur.com/"}));
 
         //SERVER_BUILDER.pop();
 
