@@ -36,9 +36,8 @@ public class ClientChangeSkin {
 
     public static class Handler {
         public static void handle(ClientChangeSkin msg, Supplier<NetworkEvent.Context> ctx) {
-            ctx.get().enqueueWork(() -> {
-                ClientSkinManager.setSkin(UUID.fromString(msg.uuid), msg.url, msg.isTransparent);
-            });
+            ctx.get().enqueueWork(() ->
+                    ClientSkinManager.setSkin(UUID.fromString(msg.uuid), msg.url, msg.isTransparent));
             ctx.get().setPacketHandled(true);
         }
     }

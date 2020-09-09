@@ -1,10 +1,10 @@
 package com.sekwah.reskin.network;
 
 import com.sekwah.reskin.ReSkin;
-import com.sekwah.reskin.config.SkinConfig;
 import com.sekwah.reskin.network.client.ClientChangeSkin;
+import com.sekwah.reskin.network.client.ClientClearSkinCache;
+import com.sekwah.reskin.network.server.ServerRequestSkins;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.NetworkManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -26,10 +26,8 @@ public class PacketHandler {
 
     public static void init() {
         SKIN_CHANNEL.registerMessage(0, ClientChangeSkin.class, ClientChangeSkin::encode, ClientChangeSkin::decode, ClientChangeSkin.Handler::handle);
-        //SKIN_CHANNEL.registerMessage(0,/*stuff*/)
-        // Old packets (Mimic these)
-        /*packetNetwork.registerMessage(ClientChangeSkinPacket.Handler.class, ClientChangeSkinPacket.class, 0, Side.CLIENT);
-        packetNetwork.registerMessage(ServerRequestSkinsPacket.Handler.class, ServerRequestSkinsPacket.class, 100, Side.SERVER);*/
+        SKIN_CHANNEL.registerMessage(1, ClientClearSkinCache.class, ClientClearSkinCache::encode, ClientClearSkinCache::decode, ClientClearSkinCache.Handler::handle);
+        SKIN_CHANNEL.registerMessage(100, ServerRequestSkins.class, ServerRequestSkins::encode, ServerRequestSkins::decode, ServerRequestSkins.Handler::handle);
     }
 
     public static void sendToPlayer(Object obj, ServerPlayerEntity player) {

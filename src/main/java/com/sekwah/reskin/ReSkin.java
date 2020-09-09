@@ -1,6 +1,7 @@
 package com.sekwah.reskin;
 
 import com.sekwah.reskin.capabilities.CapabilityHandler;
+import com.sekwah.reskin.client.ClientSkinManager;
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.config.SkinConfig;
 import com.sekwah.reskin.network.PacketHandler;
@@ -37,7 +38,7 @@ public class ReSkin {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
-        // Nothing implemented yet.
+        ClientSkinManager.getTextureManager();
     }
 
     private void setup(final FMLCommonSetupEvent event) {

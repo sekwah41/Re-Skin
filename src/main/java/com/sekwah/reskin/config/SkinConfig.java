@@ -13,6 +13,10 @@ public class SkinConfig {
 
     public static ForgeConfigSpec.BooleanValue ALLOW_TRANSPARENT_SKIN;
 
+    public static ForgeConfigSpec.BooleanValue SELF_SKIN_NEEDS_OP;
+
+    public static ForgeConfigSpec.BooleanValue OTHERS_SELF_SKIN_NEEDS_OP;
+
     static {
         ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
 
@@ -20,6 +24,12 @@ public class SkinConfig {
 
         ALLOW_TRANSPARENT_SKIN = SERVER_BUILDER.comment("Server side variable allowing transparent skins to be set")
                 .define("allowTransparentSkin ", false);
+
+        SELF_SKIN_NEEDS_OP = SERVER_BUILDER.comment("Does setting their own skins need op?")
+                .define("setSelfSkinsNeedsOp ", false);
+
+        OTHERS_SELF_SKIN_NEEDS_OP = SERVER_BUILDER.comment("Does setting other peoples skins need op?")
+                .define("setOtherSkinsNeedsOp ", true);
 
         //SERVER_BUILDER.pop();
 

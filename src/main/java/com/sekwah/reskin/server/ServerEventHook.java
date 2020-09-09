@@ -26,7 +26,7 @@ public class ServerEventHook {
     }
 
     @SubscribeEvent
-    public void playerJoin(EntityJoinWorldEvent event) {
+    public static void playerJoin(EntityJoinWorldEvent event) {
         if(event.getEntity() instanceof PlayerEntity) {
             event.getEntity().getCapability(SkinLocationProvider.SKIN_LOC, null).ifPresent(skin -> {
                 CustomSkinManager.setSkin((PlayerEntity) event.getEntity(),
@@ -39,12 +39,12 @@ public class ServerEventHook {
     }
 
     @SubscribeEvent
-    public void playerLeave(PlayerEvent.PlayerLoggedOutEvent event) {
+    public static void playerLeave(PlayerEvent.PlayerLoggedOutEvent event) {
         CustomSkinManager.playerLoggedOut(event.getPlayer().getUniqueID());
     }
 
     /*@SubscribeEvent
-    public void entityConstruction(EntityEvent.EntityConstructing event) {
+    public static void entityConstruction(EntityEvent.EntityConstructing event) {
         if(event.getEntity() instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) event.getEntity();
 
