@@ -21,9 +21,10 @@ license="All rights reserved"
     ordering="NONE"
     side="BOTH"
 
+# https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html
 [[dependencies.reskin]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.1]"
+    versionRange="[1.16,)"
     ordering="NONE"
     side="BOTH"
