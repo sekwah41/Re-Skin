@@ -36,6 +36,11 @@ public class ClientSkinManager {
         }
     }
 
+    public static void cleanupSkinData() {
+        playerSkinMap.clear();
+        originalSkinMap.clear();
+    }
+
     /**
      * URL map
      */
@@ -56,7 +61,6 @@ public class ClientSkinManager {
             texturesToLoad.add(new SkinLoadJob(uuid, url, isTransparent));
         }
     }
-
 
     public static void loadQueuedSkins() {
         Iterator<SkinLoadJob> i = texturesToLoad.iterator();

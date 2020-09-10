@@ -27,6 +27,11 @@ public class ClientEventHook {
     @SubscribeEvent
     public static void leaveWorldEvent(ClientPlayerNetworkEvent.LoggedOutEvent event) {
         ClientSkinManager.clearSkinCache();
+        ClientPlayerEntity client = event.getPlayer();
+        if(event.getPlayer() instanceof AbstractClientPlayerEntity && event.getPlayer() != client) {
+            ClientSkinManager.checkSkin(event.getPlayer());
+        }
+        ClientSkinManager.cleanupSkinData();
     }
 
     @SubscribeEvent
