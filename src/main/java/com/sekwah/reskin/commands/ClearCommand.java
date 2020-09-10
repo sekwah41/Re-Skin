@@ -19,7 +19,7 @@ public class ClearCommand {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
 
         // Thing to note, arguments are handled in alphabetical order.
-        LiteralArgumentBuilder<CommandSource> clear = literal("clearskin").executes(ClearCommand::run);
+        LiteralArgumentBuilder<CommandSource> clear = literal("clearskincache").executes(ClearCommand::run);
 
         dispatcher.register(clear);
     }

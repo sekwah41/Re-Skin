@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,6 +22,11 @@ public class ClientEventHook {
         if(client != null) {
             ClientSkinManager.checkSkin(client);
         }
+    }
+
+    @SubscribeEvent
+    public static void leaveWorldEvent(ClientPlayerNetworkEvent.LoggedOutEvent event) {
+        ClientSkinManager.clearSkinCache();
     }
 
     @SubscribeEvent
