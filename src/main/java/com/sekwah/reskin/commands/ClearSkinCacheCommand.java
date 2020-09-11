@@ -14,12 +14,12 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 import static net.minecraft.command.Commands.literal;
 
-public class ClearCommand {
+public class ClearSkinCacheCommand {
 
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
 
         // Thing to note, arguments are handled in alphabetical order.
-        LiteralArgumentBuilder<CommandSource> clear = literal("clearskincache").executes(ClearCommand::run);
+        LiteralArgumentBuilder<CommandSource> clear = literal("clearskincache").executes(ClearSkinCacheCommand::run);
 
         dispatcher.register(clear);
     }

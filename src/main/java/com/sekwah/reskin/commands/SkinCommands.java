@@ -7,7 +7,8 @@ public class SkinCommands {
 
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         SetSkinCommand.register(dispatcher);
-        ClearCommand.register(dispatcher);
+        ClearSkinCacheCommand.register(dispatcher);
+        ResetSkinCommand.register(dispatcher);
     }
 
 }

@@ -1,6 +1,6 @@
 {
-  "setskin.missingargs": "You must provide a link to set the skin.",
   "setskin.clearedcache": "Skin cache cleared. Will now re-download all needed skins.",
   "setskin.notwhitelisted": "The desired skin url is not from a whitelisted server.",
-  "setskin.setplayer": "Set %s's skin to %s"
+  "setskin.setplayer": "Set %s's skin to %s",
+  "setskin.resetplayer": "Reset %s's skin"
 }
