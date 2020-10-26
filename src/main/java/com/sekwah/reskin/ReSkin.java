@@ -34,7 +34,6 @@ public class ReSkin {
 
         eventBus.addListener(this::clientSetup);
         eventBus.addListener(this::setup);
-        eventBus.addListener(this::onModConfigEvent);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
@@ -50,10 +49,5 @@ public class ReSkin {
     public static void onServerStarting(RegisterCommandsEvent event) {
         SkinCommands.register(event.getDispatcher());
     }
-
-    private void onModConfigEvent(final ModConfig.ModConfigEvent event) {
-        // Configs not implemented yet
-    }
-
 
 }
