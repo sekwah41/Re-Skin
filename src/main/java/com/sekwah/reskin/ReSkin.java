@@ -41,7 +41,7 @@ public class ReSkin {
 
     private void setup(final FMLCommonSetupEvent event) {
         PacketHandler.init();
-        CapabilityHandler.init();
+        CapabilityHandler.register();
     }
 
     @SubscribeEvent

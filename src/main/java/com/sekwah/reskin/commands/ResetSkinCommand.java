@@ -9,13 +9,11 @@ import com.sekwah.reskin.config.SkinConfig;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.ISuggestionProvider;
 import net.minecraft.command.arguments.EntityArgument;
-import net.minecraft.command.arguments.MessageArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.text.*;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import static net.minecraft.command.Commands.argument;
 import static net.minecraft.command.Commands.literal;
