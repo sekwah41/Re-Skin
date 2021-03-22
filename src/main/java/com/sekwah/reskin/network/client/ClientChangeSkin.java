@@ -20,15 +20,15 @@ public class ClientChangeSkin {
     }
 
     public static void encode(ClientChangeSkin msg, PacketBuffer outBuffer) {
-        outBuffer.writeString(msg.uuid);
-        outBuffer.writeString(msg.url);
+        outBuffer.writeUtf(msg.uuid);
+        outBuffer.writeUtf(msg.url);
         outBuffer.writeBoolean(msg.isTransparent);
     }
 
     public static ClientChangeSkin decode(PacketBuffer inBuffer) {
 
-        String uuid = inBuffer.readString();
-        String url = inBuffer.readString();
+        String uuid = inBuffer.readUtf();
+        String url = inBuffer.readUtf();
         boolean isTransparent = inBuffer.readBoolean();
 
         return new ClientChangeSkin(uuid, url, isTransparent);

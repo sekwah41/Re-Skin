@@ -70,17 +70,18 @@ public class HDDownloadingTexture extends SimpleTexture {
     }
 
     private void upload(NativeImage imageIn) {
-        TextureUtil.prepareImage(this.getGlTextureId(), imageIn.getWidth(), imageIn.getHeight());
-        imageIn.uploadTextureSub(0, 0, 0, true);
+        TextureUtil.prepareImage(this.getId(), imageIn.getWidth(), imageIn.getHeight());
+        imageIn.upload(0, 0, 0, true);
     }
 
-    public void loadTexture(IResourceManager manager) throws IOException {
+    @Override
+    public void load(IResourceManager manager) throws IOException {
         Minecraft.getInstance().execute(() -> {
             if (!this.textureUploaded) {
                 try {
-                    super.loadTexture(manager);
+                    super.load(manager);
                 } catch (IOException ioexception) {
-                    LOGGER.warn("Failed to load texture: {}", this.textureLocation, ioexception);
+                    LOGGER.warn("Failed to load texture: {}", this.location, ioexception);
                 }
 
                 this.textureUploaded = true;
@@ -134,7 +135,7 @@ public class HDDownloadingTexture extends SimpleTexture {
 
                     }
 
-                }, Util.getServerExecutor());
+                }, Util.backgroundExecutor());
             }
         }
     }
@@ -170,11 +171,11 @@ public class HDDownloadingTexture extends SimpleTexture {
         float scaleFactor = (1f / 64f) * this.imageWidth;
         if (flag) {
             NativeImage nativeimage = new NativeImage(this.imageWidth, this.imageWidth, true);
-            nativeimage.copyImageData(nativeImageIn);
+            nativeimage.copyFrom(nativeImageIn);
             nativeImageIn.close();
             nativeImageIn = nativeimage;
             if(!isTransparent) {
-                nativeimage.fillAreaRGBA(0, (int) (32 * scaleFactor), (int) (64 * scaleFactor), (int) (32 * scaleFactor), 0);
+                nativeimage.fillRect(0, (int) (32 * scaleFactor), (int) (64 * scaleFactor), (int) (32 * scaleFactor), 0);
             }
             copyAreaRGBAScale(nativeimage, 4, 16, 16, 32, 4, 4, true, false, scaleFactor);
             copyAreaRGBAScale(nativeimage, 8, 16, 16, 32, 4, 4, true, false, scaleFactor);
@@ -206,7 +207,7 @@ public class HDDownloadingTexture extends SimpleTexture {
     }
 
     private static void copyAreaRGBAScale(NativeImage nativeimage, int xFrom, int yFrom, int xToDelta, int yToDelta, int widthIn, int heightIn, boolean mirrorX, boolean mirrorY, float scaleFactor) {
-        nativeimage.copyAreaRGBA((int) (xFrom * scaleFactor),
+        nativeimage.copyRect((int) (xFrom * scaleFactor),
                 (int) (yFrom * scaleFactor),
                 (int) (xToDelta * scaleFactor),
                 (int) (yToDelta * scaleFactor),

@@ -40,7 +40,7 @@ public class ServerEventHook {
 
     @SubscribeEvent
     public static void playerLeave(PlayerEvent.PlayerLoggedOutEvent event) {
-        CustomSkinManager.playerLoggedOut(event.getPlayer().getUniqueID());
+        CustomSkinManager.playerLoggedOut(event.getPlayer().getUUID());
     }
 
     /*@SubscribeEvent

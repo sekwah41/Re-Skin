@@ -29,15 +29,15 @@ public class SetSkinCommand {
 
         // Thing to note, arguments are handled in alphabetical order.
         LiteralArgumentBuilder<CommandSource> setSkin = literal("setskin")
-                .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermissionLevel(2)))
+                .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                 .then(argument("url", MessageArgument.message())
                         .suggests(URL_SUGGESTIONS)
                             .executes(ctx -> {
-                                ServerPlayerEntity entity = ctx.getSource().asPlayer();
+                                ServerPlayerEntity entity = ctx.getSource().getPlayerOrException();
                                 ITextComponent url = MessageArgument.getMessage(ctx, "url");
                                 return execute(ctx.getSource(), Collections.singletonList(entity), url);
                             }))
-                .requires((sender) -> (!SkinConfig.OTHERS_SELF_SKIN_NEEDS_OP.get() || sender.hasPermissionLevel(2)))
+                .requires((sender) -> (!SkinConfig.OTHERS_SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                 .then(argument("targets", EntityArgument.players())
                         .then(argument("url", MessageArgument.message())
                         .suggests(URL_SUGGESTIONS)
@@ -59,15 +59,15 @@ public class SetSkinCommand {
         long passedWhitelist = whitelist.stream().filter(value -> url.startsWith(value)).count();
         if(SkinConfig.ENABLE_SKIN_SERVER_WHITELIST.get() && passedWhitelist == 0 && !skinUrl.equals("reset")) {
             TranslationTextComponent message = new TranslationTextComponent("setskin.notwhitelisted");
-            Style redMessage = message.getStyle().setColor(Color.fromTextFormatting(TextFormatting.RED));
-            source.sendFeedback(message.setStyle(redMessage), false);
+            Style redMessage = message.getStyle().withColor(Color.fromLegacyFormat(TextFormatting.RED));
+            source.sendSuccess(message.setStyle(redMessage), false);
             return -1;
         }
         targets.forEach(target -> {
             if(target == null) {
                 return;
             }
-            source.sendFeedback(new TranslationTextComponent("setskin.setplayer", target.getDisplayName(), url), false);
+            source.sendSuccess(new TranslationTextComponent("setskin.setplayer", target.getDisplayName(), url), false);
             CustomSkinManager.setSkin(target, url);
         });
         if(targets.size() == 0) {

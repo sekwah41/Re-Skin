@@ -27,12 +27,12 @@ public class ResetSkinCommand {
 
         // Thing to note, arguments are handled in alphabetical order.
         LiteralArgumentBuilder<CommandSource> setSkin = literal("resetskin")
-                .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermissionLevel(2)))
+                .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                 .executes(ctx -> {
-                    ServerPlayerEntity entity = ctx.getSource().asPlayer();
+                    ServerPlayerEntity entity = ctx.getSource().getPlayerOrException();
                     return execute(ctx.getSource(), Collections.singletonList(entity));
                 })
-                .requires((sender) -> (!SkinConfig.OTHERS_SELF_SKIN_NEEDS_OP.get() || sender.hasPermissionLevel(2)))
+                .requires((sender) -> (!SkinConfig.OTHERS_SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                 .then(argument("targets", EntityArgument.players())
                         .executes(ctx -> {
                             Collection<ServerPlayerEntity> targetPlayers = EntityArgument.getPlayers(ctx, "targets");
@@ -47,7 +47,7 @@ public class ResetSkinCommand {
             if(target == null) {
                 return;
             }
-            source.sendFeedback(new TranslationTextComponent("setskin.resetplayer", target.getDisplayName()), false);
+            source.sendSuccess(new TranslationTextComponent("setskin.resetplayer", target.getDisplayName()), false);
             CustomSkinManager.setSkin(target, "reset");
         });
         if(targets.size() == 0) {

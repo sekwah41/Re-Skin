@@ -26,7 +26,7 @@ public class ClientSkinManager {
 
     public static void clearSkinCache() {
         for(Map.Entry<String, ResourceLocation> resources : cachedUrls.entrySet()) {
-            textureManager.deleteTexture(resources.getValue());
+            textureManager.release(resources.getValue());
         }
         cachedUrls.clear();
 
@@ -71,7 +71,7 @@ public class ClientSkinManager {
 
             HDDownloadingTexture downloadingTexture = new HDDownloadingTexture(null, loadJob.url, missing, loadJob.isTransparent, null);
             if(downloadingTexture != null) {
-                textureManager.loadTexture(resourcelocation, downloadingTexture);
+                textureManager.register(resourcelocation, downloadingTexture);
             }
             else {
                 resourcelocation = missing;
@@ -85,15 +85,15 @@ public class ClientSkinManager {
 
     public static void checkSkin(AbstractClientPlayerEntity player) {
         if(player.playerInfo == null) return;
-        ResourceLocation currentSkin = player.playerInfo.playerTextures.get(MinecraftProfileTexture.Type.SKIN);
-        ResourceLocation wantedSkin = playerSkinMap.get(player.getUniqueID());
+        ResourceLocation currentSkin = player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN);
+        ResourceLocation wantedSkin = playerSkinMap.get(player.getUUID());
         if(wantedSkin != null && currentSkin != wantedSkin) {
-            if(!originalSkinMap.containsKey(player.getUniqueID())) {
-                originalSkinMap.put(player.getUniqueID(), player.playerInfo.playerTextures.get(MinecraftProfileTexture.Type.SKIN));
+            if(!originalSkinMap.containsKey(player.getUUID())) {
+                originalSkinMap.put(player.getUUID(), player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN));
             }
-            player.playerInfo.playerTextures.put(MinecraftProfileTexture.Type.SKIN, wantedSkin);
+            player.playerInfo.textureLocations.put(MinecraftProfileTexture.Type.SKIN, wantedSkin);
             // Add storing this data into the packets and alter the commands to allow changing the models
-            player.playerInfo.skinType = "default";
+            player.playerInfo.skinModel = "default";
             //player.playerInfo.skinType = "slim";
         }
     }

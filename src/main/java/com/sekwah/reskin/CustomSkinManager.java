@@ -19,8 +19,8 @@ public class CustomSkinManager {
         if(target != null) {
             target.getCapability(SkinLocationProvider.SKIN_LOC, null).ifPresent(skinCap -> skinCap.setSkin(url));
             if(url.length() > 0) {
-                PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUniqueID().toString(), url, SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));
-                playerSkins.put(target.getUniqueID(), url);
+                PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUUID().toString(), url, SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));
+                playerSkins.put(target.getUUID(), url);
             }
         }
     }
@@ -33,7 +33,7 @@ public class CustomSkinManager {
      */
     public static void sendAllToPlayer(ServerPlayerEntity player, boolean excludeSelf) {
         for(Map.Entry<UUID, String> skin : playerSkins.entrySet()) {
-            if(!(excludeSelf && skin.getKey() == player.getUniqueID()) && skin.getValue() != null) {
+            if(!(excludeSelf && skin.getKey() == player.getUUID()) && skin.getValue() != null) {
                 PacketHandler.sendToPlayer(new ClientChangeSkin(skin.getKey().toString(), skin.getValue(), SkinConfig.ALLOW_TRANSPARENT_SKIN.get()), player);
             }
         }

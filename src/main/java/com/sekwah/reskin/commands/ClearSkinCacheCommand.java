@@ -26,12 +26,12 @@ public class ClearSkinCacheCommand {
 
     private static int run(CommandContext<CommandSource> ctx) {
         try {
-            PacketHandler.sendToPlayer(new ClientClearSkinCache(), ctx.getSource().asPlayer());
-            CustomSkinManager.sendAllToPlayer(ctx.getSource().asPlayer(), false);
+            PacketHandler.sendToPlayer(new ClientClearSkinCache(), ctx.getSource().getPlayerOrException());
+            CustomSkinManager.sendAllToPlayer(ctx.getSource().getPlayerOrException(), false);
         } catch (CommandSyntaxException e) {
             ReSkin.LOGGER.info("This command can only be run from the console");
         }
-        ctx.getSource().sendFeedback(new TranslationTextComponent("setskin.clearedcache"), false);
+        ctx.getSource().sendSuccess(new TranslationTextComponent("setskin.clearedcache"), false);
         return Command.SINGLE_SUCCESS;
     }
 }

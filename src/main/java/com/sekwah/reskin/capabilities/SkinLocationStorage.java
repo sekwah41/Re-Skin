@@ -18,7 +18,7 @@ public class SkinLocationStorage implements Capability.IStorage<ISkinLocation> {
     @Override
     public void readNBT(Capability<ISkinLocation> capability, ISkinLocation instance, Direction side, INBT nbt) {
         if(nbt instanceof StringNBT) {
-            instance.setSkin(nbt.getString());
+            instance.setSkin(nbt.getAsString());
         }
     }
 }
