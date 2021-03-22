@@ -55,7 +55,7 @@ public class SetSkinCommand {
         if(url.contains(" ")) {
             return -1;
         }
-        List<String> whitelist = SkinConfig.SKIN_SERVER_WHITELIST.get();
+        List<? extends String> whitelist = SkinConfig.SKIN_SERVER_WHITELIST.get();
         long passedWhitelist = whitelist.stream().filter(value -> url.startsWith(value)).count();
         if(SkinConfig.ENABLE_SKIN_SERVER_WHITELIST.get() && passedWhitelist == 0 && !skinUrl.equals("reset")) {
             TranslationTextComponent message = new TranslationTextComponent("setskin.notwhitelisted");

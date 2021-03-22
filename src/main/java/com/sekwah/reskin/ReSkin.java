@@ -18,6 +18,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(ReSkin.MOD_ID)
+@Mod.EventBusSubscriber(modid = ReSkin.MOD_ID)
 public class ReSkin {
 
     public static final String MOD_ID = "reskin";

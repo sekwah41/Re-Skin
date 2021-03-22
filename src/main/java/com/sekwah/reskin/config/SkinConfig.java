@@ -5,6 +5,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ public class SkinConfig {
 
     public static ForgeConfigSpec.BooleanValue ENABLE_SKIN_SERVER_WHITELIST;
 
-    public static ForgeConfigSpec.ConfigValue<List<String>> SKIN_SERVER_WHITELIST;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> SKIN_SERVER_WHITELIST;
 
     static {
         ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -31,19 +32,19 @@ public class SkinConfig {
         //SERVER_BUILDER.comment("Server side variable allowing transparent skins to be set.").push(CATEGORY_SERVER);
 
         ALLOW_TRANSPARENT_SKIN = SERVER_BUILDER.comment("Server side variable allowing transparent skins to be set")
-                .define("allowTransparentSkin ", false);
+                .define("allowTransparentSkin", false);
 
         SELF_SKIN_NEEDS_OP = SERVER_BUILDER.comment("Does setting their own skins need op?")
-                .define("setSelfSkinsNeedsOp ", false);
+                .define("setSelfSkinsNeedsOp", false);
 
         OTHERS_SELF_SKIN_NEEDS_OP = SERVER_BUILDER.comment("Does setting other peoples skins need op?")
-                .define("setOtherSkinsNeedsOp ", true);
+                .define("setOtherSkinsNeedsOp", true);
 
         ENABLE_SKIN_SERVER_WHITELIST = SERVER_BUILDER.comment("Server skin whitelist")
-                .define("enableSkinServerWhitelist ", true);
+                .define("enableSkinServerWhitelist", true);
 
         SKIN_SERVER_WHITELIST = SERVER_BUILDER.comment("Server skin whitelist")
-                .define("enforceSkinWhitelist ", Arrays.asList(new String[]{"https://i.imgur.com/"}));
+                .defineList("enforceSkinWhitelist", Collections.singletonList("https://i.imgur.com/"), (value) -> true);
 
         //SERVER_BUILDER.pop();
 
