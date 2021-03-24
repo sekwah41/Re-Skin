@@ -14,13 +14,14 @@ buildscript {
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
     }
 }
-
+plugins {
+    id "com.matthewprenger.cursegradle" version "1.4.0"
+}
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: "java"
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "com.wynprice.cursemaven"
-apply plugin: "com.matthewprenger.cursegradle"
 
 version = "${project.version}"
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -204,10 +205,9 @@ task deobfJar(type:Jar) {
     classifier 'deobf'
 }
 
-tasks.curseforge.enabled = System.getenv("CURSE_API") != null && isReleaseBranch
+tasks.curseforge.enabled = true // System.getenv("CURSE_API") != null && isReleaseBranch
 
 curseforge {
-    logger.info("Curse api: " + System.getenv("CURSE_API"))
     if (System.getenv("CURSE_API") != null) {
         apiKey = System.getenv("CURSE_API")
     }
