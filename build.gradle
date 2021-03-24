@@ -25,7 +25,7 @@ apply plugin: "com.wynprice.cursemaven"
 version = "${project.version}"
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = project.archive
-def isReleaseBranch = System.getenv("BRANCH") == "refs/heads/release-forge-1.16" || System.getenv("BRANCH") == "refs/heads/release-forge-1.16";
+def isReleaseBranch = System.getenv("BRANCH") == "refs/heads/release-forge-1.16";
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -160,7 +160,7 @@ jar {
                 "Specification-Vendor": project.vendor,
                 "Specification-Version": "1", // We are version 1 of ourselves
                 "Implementation-Title": project.name,
-                "Implementation-Version": "${version}",
+                "Implementation-Version": "${getArchiveVersion()}",
                 "Implementation-Vendor" :project.vendor,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
