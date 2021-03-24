@@ -1,5 +1,5 @@
 ### 1.3.2
-Added support for other 1.16 versions
+Fixed issues with whitelist config as well as config names.
 ### 1.3.1
 Added support for other 1.16 versions
 ### 1.3.0
