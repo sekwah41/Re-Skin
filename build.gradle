@@ -11,6 +11,7 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
         classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
+        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
     }
 }
 
@@ -19,10 +20,13 @@ apply plugin: "java"
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "com.wynprice.cursemaven"
+apply plugin: "com.matthewprenger.cursegradle"
 
 version = "${project.version}"
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = project.archive
+println('Git Branch' + System.getenv('GITHUB_REF'))
+def isReleaseBranch = System.getenv("BRANCH") == "release" || System.getenv("BRANCH") == "release-1.15" || System.getenv("BRANCH") == "release-1.16";
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -183,5 +187,49 @@ publishing {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set('javadoc')
+    from javadoc.destinationDir
+}
+
+task deobfJar(type:Jar) {
+    from sourceSets.main.output
+    classifier 'deobf'
+}
+
+tasks.curseforge.enabled = System.getenv("CURSE_API") != null && isReleaseBranch
+
+curseforge {
+    logger.info("Curse api: " + System.getenv("CURSE_API"))
+    if (System.getenv("CURSE_API") != null) {
+        apiKey = System.getenv("CURSE_API")
+    }
+    project {
+        id = '342729'
+        // TODO add code to reference this but also cut the latest change logs in for the files
+        changelog = '''Note: All versions listed should be supported however we always compile against the latest listed.
+Changelog: https://github.com/sekwah41/Re-Skin/blob/changelog/CHANGELOG.md'''
+        changelogType = 'markdown'
+        releaseType = 'beta'
+        addGameVersion '1.16.1'
+        addGameVersion '1.16.2'
+        addGameVersion '1.16.3'
+        addGameVersion '1.16.4'
+        addGameVersion '1.16.5'
+
+        mainArtifact(jar){
+
+        }
+        addArtifact sourcesJar
+        addArtifact deobfJar
+        addArtifact javadocJar
     }
 }
