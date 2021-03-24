@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[35,)"
+loaderVersion="[32,)"
 issueTrackerURL="https://github.com/sekwah41/Re-Skin/issues"
 license="All rights reserved"
 [[mods]] #mandatory
@@ -17,7 +17,7 @@ license="All rights reserved"
 [[dependencies.reskin]]
     modId="forge"
     mandatory=true
-    versionRange="[35,)"
+    versionRange="[32,)"
     ordering="NONE"
     side="BOTH"
 
