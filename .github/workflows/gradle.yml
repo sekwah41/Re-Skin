@@ -16,6 +16,9 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Publish to Curseforge (If release branch)
+      if: contains('
+        refs/heads/release
+      ', github.ref)
       env:
         CURSE_API: ${{ secrets.CURSE_API }}
       run: ./gradlew curseforge
