@@ -207,6 +207,7 @@ task deobfJar(type:Jar) {
 tasks.curseforge.enabled = System.getenv("CURSE_API") != null && isReleaseBranch
 
 curseforge {
+    logger.info("Curse api: " + System.getenv("CURSE_API"))
     if (System.getenv("CURSE_API") != null) {
         apiKey = System.getenv("CURSE_API")
     }
