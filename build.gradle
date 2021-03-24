@@ -25,7 +25,6 @@ apply plugin: "com.wynprice.cursemaven"
 version = "${project.version}"
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = project.archive
-def isReleaseBranch = System.getenv("BRANCH") == "refs/heads/release-forge-1.16";
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -204,7 +203,7 @@ task deobfJar(type:Jar) {
     classifier 'deobf'
 }
 
-tasks.curseforge.enabled = System.getenv("CURSE_API") != null && isReleaseBranch
+tasks.curseforge.enabled = System.getenv("CURSE_API") != null
 
 curseforge {
     logger.info("Curse api: " + System.getenv("CURSE_API"))
