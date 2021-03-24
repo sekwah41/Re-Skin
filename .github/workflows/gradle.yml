@@ -14,4 +14,8 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Gradle
-      run: ./gradlew build curseforge
+      run: ./gradlew build
+    - name: Publish to Curseforge (If release branch)
+      env:
+        CURSE_API: ${{ secrets.CURSE_API }}
+      run: ./gradlew curseforge
