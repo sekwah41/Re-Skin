@@ -213,8 +213,7 @@ curseforge {
     project {
         id = '342729'
         // TODO add code to reference this but also cut the latest change logs in for the files
-        changelog = '''Note: All versions listed should be supported however we always compile against the latest listed.
-Changelog: https://github.com/sekwah41/Re-Skin/blob/release-forge-1.16/README.md'''
+        changelog = '''https://github.com/sekwah41/Re-Skin/blob/release-forge-1.16/CHANGELOG.md'''
         changelogType = 'markdown'
         releaseType = 'beta'
         addGameVersion '1.16.1'
