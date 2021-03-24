@@ -11,7 +11,6 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
         classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
-        classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.4.0"
     }
 }
 plugins {
@@ -26,7 +25,7 @@ apply plugin: "com.wynprice.cursemaven"
 version = "${project.version}"
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = project.archive
-def isReleaseBranch = System.getenv("BRANCH") == "refs/heads/release-forge-1.16";
+def isReleaseBranch = System.getenv("BRANCH") == "refs/heads/release-forge-1.16" || System.getenv("BRANCH") == "refs/heads/release-forge-1.16";
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -205,7 +204,7 @@ task deobfJar(type:Jar) {
     classifier 'deobf'
 }
 
-tasks.curseforge.enabled = true // System.getenv("CURSE_API") != null && isReleaseBranch
+tasks.curseforge.enabled = System.getenv("CURSE_API") != null && isReleaseBranch
 
 curseforge {
     if (System.getenv("CURSE_API") != null) {
