@@ -151,7 +151,6 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 
-    compile "com.sekwah:SekCLib:${sekclib_version}:deobf"
     // Trick intellij to allow for better editing in here for the discord task
     // compile "org.apache.httpcomponents:httpmime:4.5.13"
 
