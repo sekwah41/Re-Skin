@@ -17,7 +17,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
-        classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
+        //classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
         classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
         classpath "org.apache.httpcomponents:httpmime:4.5.13"
     }
@@ -31,8 +31,7 @@ apply plugin: "java"
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-// May be able to remove it
-apply plugin: "org.spongepowered.mixin"
+//apply plugin: "org.spongepowered.mixin"
 apply plugin: "com.wynprice.cursemaven"
 
 def branch = System.getenv("GITHUB_REF")
@@ -86,8 +85,8 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            //property 'mixin.env.remapRefMap', 'true'
+            //property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
 
             mods {
                 "${project.modid}" {
@@ -149,7 +148,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:' + "${project.minecraft_version}-${project.forge_version}"
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+    //annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
 
     // Trick intellij to allow for better editing in here for the discord task
     // compile "org.apache.httpcomponents:httpmime:4.5.13"
@@ -174,9 +173,9 @@ dependencies {
 
 }
 
-mixin {
-    add sourceSets.main, "mixins.${project.modid}.refmap.json"
-}
+//mixin {
+//    add sourceSets.main, "mixins.${project.modid}.refmap.json"
+//}
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
@@ -191,7 +190,7 @@ jar {
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :project.vendor,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "mixins.${project.modid}.json"
+                //"MixinConfigs": "mixins.${project.modid}.json"
         ])
     }
 }
