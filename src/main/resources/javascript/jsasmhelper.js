@@ -97,6 +97,14 @@ function setupJSASMHelper (){
         /**
          * @return QueryConstructor
          */
+        this.methodType = function(methodType) {
+            this._methodType = methodType;
+            return this;
+        }
+
+        /**
+         * @return QueryConstructor
+         */
         this.methodNode = function(node) {
             this._methodNode = node;
             return this;

@@ -66,13 +66,9 @@ function initializeCoreMod() {
                             .method(newFunctionCall)
                              .desc('(Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;')
                             .buildMethodCall();
-                        var inserted = methodNode.instructions.insertBefore(instructionNode, methodCall);
+                        methodNode.instructions.insertBefore(instructionNode, methodCall);
                         methodNode.instructions.remove(instructionNode);
-                        if(inserted) {
-                            logger.info("Method call replaced (" + instructionNode.name + " -> " + newFunctionCall + ")");
-                        } else {
-                            logger.error("There was a problem redirecting the call");
-                        }
+                        logger.info("Method call replaced (" + instructionNode.name + " -> " + newFunctionCall + ")");
                     }
                 });
 

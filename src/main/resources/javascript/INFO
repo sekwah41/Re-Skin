@@ -1,0 +1,28 @@
+Instruction
+Type org.objectweb.asm.tree.MethodInsnNode@3d6e9368
+Opcode 184
+Name entitySolid
+Desc (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+net/minecraft/client/renderer/IRenderTypeBuffer
+
+Instruction
+Type org.objectweb.asm.tree.MethodInsnNode@2a689699
+Opcode 184
+Name entityTranslucent
+Desc (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+net/minecraft/client/renderer/IRenderTypeBuffer
+
+
+
+
+Instruction
+Type org.objectweb.asm.tree.MethodInsnNode@28dd3496
+Opcode 184
+Name entityTranslucent
+Desc (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+net/minecraft/client/renderer/IRenderTypeBuffer
+
+Opcode 184
+Name entityTranslucent
+Desc (Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+net/minecraft/client/renderer/IRenderTypeBuffer
