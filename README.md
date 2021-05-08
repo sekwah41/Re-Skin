@@ -2,4 +2,4 @@
 Skin customiser for mc https://www.curseforge.com/minecraft/mc-mods/re-skin
 
 
-For values for the js method names check in build/createMcpToSrg
+For values for AT and other stuff check in build/createMcpToSrg

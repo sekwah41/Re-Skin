@@ -40,7 +40,7 @@ function initializeCoreMod() {
             'target': {
                 'type': 'METHOD',
                 'class': 'net.minecraft.client.renderer.entity.PlayerRenderer',
-                'methodName': 'func_229145_a_', // renderHand
+                'methodName': 'func_229145_a_disabled', // renderHand
                 'methodDesc': '(Lcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer;ILnet/minecraft/client/entity/player/AbstractClientPlayerEntity;Lnet/minecraft/client/renderer/model/ModelRenderer;Lnet/minecraft/client/renderer/model/ModelRenderer;)V'
             },
             /**
@@ -51,8 +51,8 @@ function initializeCoreMod() {
 
                 logger.info("Altering first person hand to support transparent skins.");
 
-                logger.info("BEFORE")
-                jsASMHelper.printNode(methodNode);
+                //logger.info("BEFORE")
+                //jsASMHelper.printNode(methodNode);
 
                 jsASMHelper.eachInstruction(methodNode, function(instructionNode) {
                     var newFunctionCall = null;
@@ -62,19 +62,19 @@ function initializeCoreMod() {
                         newFunctionCall = "func_228644_e_"
                     }
                     if(newFunctionCall != null) {
-                        var methodCall = jsASMHelper.class("net/minecraft/client/renderer/entity/PlayerRenderer")
+                        var methodCall = jsASMHelper.class("net/minecraft/client/renderer/RenderType")
                             .method(newFunctionCall)
                              .desc('(Lnet/minecraft/util/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;')
                             .buildMethodCall();
-                        methodNode.instructions.insertBefore(instructionNode, methodCall);
-                        methodNode.instructions.remove(instructionNode);
+                        //methodNode.instructions.insertBefore(instructionNode, methodCall);
+                        //methodNode.instructions.remove(instructionNode);
                         logger.info("Method call replaced (" + instructionNode.name + " -> " + newFunctionCall + ")");
                     }
                 });
 
 
-                logger.info("AFTER")
-                jsASMHelper.printNode(methodNode);
+                //logger.info("AFTER")
+                //jsASMHelper.printNode(methodNode);
 
                 return methodNode;
             },

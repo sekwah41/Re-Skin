@@ -216,41 +216,12 @@ function setupJSASMHelper (){
                 return ASMAPI.buildMethodCall(this._class, this._method, this._descriptor, this._methodType);
             }
         }
-
-        this.insertInto = function(node) {
-            node.instructions.insert(this.buildMethodCall());
-            return this;
-        }
-
-        // TODO add class based methods. Though these should do for now for injecting hooks into places
-
-        /**
-         * @param methodCall
-         * @param insertMode
-         * @return boolean if the method was inserted successfully
-         */
-        this.insertMethod = function(methodCall, insertMode) {
-            return ASMAPI.insertInsnList(this._methodNode, this._methodType, this._class, this._method, this._descriptor,
-                ASMAPI.listOf(methodCall), insertMode);
-
-        }
-
-        this.insertMethodBefore = function(methodCall) {
-            return this.insertMethod(methodCall, ASMAPI.InsertMode.INSERT_BEFORE);
-        }
-
-        this.insertMethodAfter = function(methodCall) {
-            return this.insertMethod(methodCall, ASMAPI.InsertMode.INSERT_AFTER);
-        }
-
-        this.insertMethodReplace = function(methodCall) {
-            return this.insertMethod(methodCall, ASMAPI.InsertMode.REMOVE_ORIGINAL);
-        }
     }
 
     function printIfDefined(label, value) {
         if(value === undefined) {
-            logger.info(label + ": undefined");
+            // If needed logger.info(label + ": undefined");
+            return;
         }
         else {
             if(value instanceof String) {
@@ -271,6 +242,7 @@ function setupJSASMHelper (){
             logger.info("Instruction")
             printIfDefined("Type", instruction);
             printIfDefined("Opcode", instruction.getOpcode());
+            printIfDefined("Owner", instruction.owner);
             printIfDefined("Name", instruction.name);
             printIfDefined("Desc", instruction.desc);
             if(instruction.next) logger.info(instruction.next.owner);
