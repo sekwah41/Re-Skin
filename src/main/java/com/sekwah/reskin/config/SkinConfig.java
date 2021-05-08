@@ -4,7 +4,6 @@ import com.sekwah.reskin.ReSkin;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
