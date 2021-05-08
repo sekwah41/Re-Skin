@@ -1,8 +1,15 @@
+import org.apache.http.HttpEntity
+import org.apache.http.client.methods.CloseableHttpResponse
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.entity.ContentType
+import org.apache.http.entity.mime.MultipartEntityBuilder
+import org.apache.http.impl.client.CloseableHttpClient
+import org.apache.http.impl.client.HttpClients
+
 buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = "https://repo.spongepowered.org/maven" }
-        maven { url = "https://maven.sekwah.com" }
         maven {url "https://plugins.gradle.org/m2/"}
         // Only temporary
         jcenter()
@@ -10,19 +17,29 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
         classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
+        classpath "org.apache.httpcomponents:httpmime:4.5.13"
     }
 }
 plugins {
     id "com.matthewprenger.cursegradle" version "1.4.0"
 }
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: "java"
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+
+apply plugin: "org.spongepowered.mixin"
 apply plugin: "com.wynprice.cursemaven"
 
-version = "${project.version}"
+def branch = System.getenv("GITHUB_REF")
+def sha = System.getenv("GITHUB_SHA")
+def isDevBranch = branch == null || (!(branch.startsWith("refs/heads/release/") || branch.startsWith("refs/tags/")))
+
+
+version = "${project.version}${isDevBranch ? '-SNAPSHOT' : ''}"
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = project.archive
 
@@ -34,6 +51,7 @@ repositories {
     maven {
         url 'https://dvs1.progwml6.com/files/maven'
     }
+    maven { url = "https://maven.sekwah.com" }
     maven {
         url "https://minecraft.curseforge.com/api/maven/"
     }
@@ -67,8 +85,11 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
             mods {
-                reskin {
+                "${project.modid}" {
                     source sourceSets.main
                 }
             }
@@ -85,7 +106,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                reskin {
+                "${project.modid}" {
                     source sourceSets.main
                 }
             }
@@ -101,10 +122,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'reskin', '--all', '--output', file('src/generated/resources/')
+            args '--mod', project.modid, '--all', '--output', file('src/generated/resources/')
 
             mods {
-                reskin {
+                "${project.modid}" {
                     source sourceSets.main
                 }
             }
@@ -127,7 +148,10 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:' + "${project.minecraft_version}-${project.forge_version}"
 
-    //compile "com.sekwah:SekCLib:${sekclib_version}:deobf"
+    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+
+    // Trick intellij to allow for better editing in here for the discord task
+    // compile "org.apache.httpcomponents:httpmime:4.5.13"
 
     // compile fg.deobf("curse.maven:neat:${project.neat_fileid}")
 
@@ -149,6 +173,10 @@ dependencies {
 
 }
 
+mixin {
+    add sourceSets.main, "mixins.${project.modid}.refmap.json"
+}
+
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     finalizedBy 'reobfJar'
@@ -159,9 +187,10 @@ jar {
                 "Specification-Vendor": project.vendor,
                 "Specification-Version": "1", // We are version 1 of ourselves
                 "Implementation-Title": project.name,
-                "Implementation-Version": "${getArchiveVersion()}",
+                "Implementation-Version": "${version}",
                 "Implementation-Vendor" :project.vendor,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs": "mixins.${project.modid}.json"
         ])
     }
 }
@@ -175,32 +204,73 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
     type 'jar'
     builtBy 'reobfJar'
 }
+
+task srcJar(type: Jar) {
+    build.dependsOn it
+    from sourceSets.main.allSource
+    classifier = 'sources'
+    from file("LICENSE")
+}
+
+task deobfJar(type: Jar) {
+    build.dependsOn it
+    from sourceSets.main.output
+    classifier = 'deobf'
+    from file("LICENSE")
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact reobfArtifact
+            artifact srcJar
+            artifact deobfJar
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "s3://sekwah-maven/"
+            authentication {
+                awsIm(AwsImAuthentication)
+            }
         }
     }
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    archiveClassifier.set('sources')
-    from sourceSets.main.allSource
-}
+/** For pre-releases and testers to be able to try the latest commits if they want.
+ * If the builds start exceeding 8MB then we may want to upload to s3 instead and periodically clear.
+ * TODO possibly add a task that announces when builds are made?
+ * Though add a note that it may take a while for Curse to approve the files.
+ */
+task discordupload {
+    dependsOn(jar)
+    doLast {
+        String discordWebhook = System.getenv("DISCORD_WEBHOOK")
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    archiveClassifier.set('javadoc')
-    from javadoc.destinationDir
-}
+        if(discordWebhook != null) {
+            println("Logging Into Discord")
 
-task deobfJar(type:Jar) {
-    from sourceSets.main.output
-    classifier 'deobf'
+            CloseableHttpClient httpClient = HttpClients.createDefault()
+            HttpPost uploadFile = new HttpPost(discordWebhook)
+
+            MultipartEntityBuilder builder = MultipartEntityBuilder.create()
+            builder.addTextBody("content", "New automated dev build\n\n" +
+                    "Current Features: <${project.github}/blob/${sha}/CHANGELOG.md>")
+
+            builder.addBinaryBody("file", file(jar.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jar.archiveName)
+
+            HttpEntity multipart = builder.build()
+
+            uploadFile.setEntity(multipart)
+            CloseableHttpResponse response = httpClient.execute(uploadFile)
+            response.getEntity()
+
+            println("Posted build")
+
+        } else {
+            println("Discord webhook unspecified")
+        }
+    }
 }
 
 tasks.curseforge.enabled = System.getenv("CURSE_API") != null
@@ -211,10 +281,9 @@ curseforge {
         apiKey = System.getenv("CURSE_API")
     }
     project {
-        id = '342729'
+        id = project.curse_project_id
         // TODO add code to reference this but also cut the latest change logs in for the files
-        changelog = '''Note: All versions listed should be supported however we always compile against the latest listed.
-Changelog: https://github.com/sekwah41/Re-Skin/blob/release-forge-1.16/README.md'''
+        changelog = "${project.github}/blob/${sha}/CHANGELOG.md"
         changelogType = 'markdown'
         releaseType = 'beta'
         addGameVersion '1.16.1'
@@ -226,8 +295,8 @@ Changelog: https://github.com/sekwah41/Re-Skin/blob/release-forge-1.16/README.md
         mainArtifact(jar){
 
         }
-        //addArtifact sourcesJar
-        //addArtifact deobfJar
-        //addArtifact javadocJar
+        addArtifact srcJar
+        addArtifact deobfJar
     }
 }
+
