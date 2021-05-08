@@ -10,7 +10,7 @@ import net.minecraft.command.CommandSource;
 import net.minecraft.command.ISuggestionProvider;
 import net.minecraft.command.arguments.EntityArgument;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.text.*;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.Collection;
 import java.util.Collections;
