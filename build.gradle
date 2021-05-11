@@ -300,3 +300,10 @@ curseforge {
     }
 }
 
+task updateChangelog(type: Exec) {
+    commandLine 'cmd', '/c', 'npx @dwmkerr/standard-version --packageFiles build.gradle --bumpFiles build.gradle'
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
+
