@@ -301,14 +301,14 @@ curseforge {
 }
 
 task updateChangelog(type: Exec) {
-    commandLine 'cmd', '/c', 'npx @dwmkerr/standard-version --packageFiles build.gradle --bumpFiles build.gradle'
+    commandLine 'cmd', '/c', 'npx standard-version'
     ext.output = {
         return standardOutput.toString()
     }
 }
 
 task updateChangelogPreRelease(type: Exec) {
-    commandLine 'cmd', '/c', 'npx @dwmkerr/standard-version --packageFiles build.gradle --prerelease --bumpFiles build.gradle'
+    commandLine 'cmd', '/c', 'npx standard-version --prerelease'
     ext.output = {
         return standardOutput.toString()
     }
