@@ -7,7 +7,6 @@ const tracker = {
       return versionRegex.exec(contents)[2];
     },
     'writeVersion': (contents, version) => {
-      console.log(contents, version);
       return contents.replace(versionRegex, `$1${version}`);
     }
   }
