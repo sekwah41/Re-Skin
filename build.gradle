@@ -307,3 +307,10 @@ task updateChangelog(type: Exec) {
     }
 }
 
+task updateChangelogPreRelease(type: Exec) {
+    commandLine 'cmd', '/c', 'npx @dwmkerr/standard-version --packageFiles build.gradle --prerelease --bumpFiles build.gradle'
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
+
