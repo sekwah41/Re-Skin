@@ -28,13 +28,13 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle
       - name: Build with Gradle
         run: ./gradlew build
-      - name: Upload to Discord (If dev branch)
-        if: 'startsWith(github.ref, "refs/tags/") && endsWith(github.ref, "-[0-9]+")'
+      - name: Upload to Discord (If pre-release tag)
+        if: "startsWith(github.ref, 'refs/tags/') && endsWith(github.ref, '-[0-9]+')"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: ./gradlew discordupload
-      - name: Publish to Curseforge (If tagged)
-        if: 'startsWith(github.ref, "refs/tags/") && !endsWith(github.ref, "-[0-9]+")'
+      - name: Publish to Curseforge (If release tag)
+        if: "startsWith(github.ref, 'refs/tags/') && !endsWith(github.ref, '-[0-9]+')"
         env:
           CURSE_API: ${{ secrets.CURSE_API }}
         run: ./gradlew curseforge
