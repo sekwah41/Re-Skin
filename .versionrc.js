@@ -1,4 +1,4 @@
-let versionRegex = /(\nversion=)([0-9.]+)/;
+let versionRegex = /(\nversion=)([0-9.-]+)/;
 
 const tracker = {
   filename: 'gradle.properties',
