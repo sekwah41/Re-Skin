@@ -143,6 +143,10 @@ configurations {
 }
 
 dependencies {
+
+    // to stop IntelliJ complaining about this build script
+    testCompile "org.apache.httpcomponents:httpmime:4.5.13"
+
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
@@ -255,7 +259,7 @@ task discordupload {
 
             MultipartEntityBuilder builder = MultipartEntityBuilder.create()
             builder.addTextBody("content", "New automated dev build\n\n" +
-                    "Current Features: <${project.github}/blob/${sha}/CHANGELOG.md>")
+                    "Current Features: <${project.github}/blob/${sha}/docs/SNAPSHOT_CHANGELOG.md>")
 
             builder.addBinaryBody("file", file(jar.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jar.archiveName)
 
@@ -283,7 +287,7 @@ curseforge {
     project {
         id = project.curse_project_id
         // TODO add code to reference this but also cut the latest change logs in for the files
-        changelog = "${project.github}/blob/${sha}/CHANGELOG.md"
+        changelog = "${project.github}/blob/${sha}/docs/CHANGELOG.md"
         changelogType = 'markdown'
         releaseType = 'release'
         addGameVersion '1.16.1'
@@ -300,15 +304,41 @@ curseforge {
     }
 }
 
-task updateChangelog(type: Exec) {
-    commandLine 'cmd', '/c', 'npx standard-version'
+/**
+ * These are needed as standard-version doesnt allow for the ability to skip tag versions for the changelog.
+ * Well it does but not on purpose and it breaks things.
+ *
+ * Tagging is skipped so that the release can be merged and confirmed (A little long winded but just to stop mistakes)
+ */
+task updateChangelog {
+    doLast{
+        exec {
+            commandLine 'cmd', '/c', 'npx standard-version@9.3.0 -i docs/CHANGELOG.md -t (v)[0-9]+.[0-0]+.[0-0]+(?!-) --skip.tag'
+            ext.output = {
+                return standardOutput.toString()
+            }
+        }
+        exec {
+            commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --skip.changelog --skip.bump --skip.tag'
+            ext.output = {
+                return standardOutput.toString()
+            }
+        }
+    }
+}
+
+task updateChangelogPreRelease(type: Exec) {
+    commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --prerelease -i docs/SNAPSHOT_CHANGELOG.md --skip.tag'
     ext.output = {
         return standardOutput.toString()
     }
 }
 
-task updateChangelogPreRelease(type: Exec) {
-    commandLine 'cmd', '/c', 'npx standard-version --prerelease'
+/**
+ * Just to stop having to manually tagging. Probably could do this easier but meh stops typos or other issues.
+ */
+task tagRelease(type: Exec) {
+    commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --prerelease -i docs/SNAPSHOT_CHANGELOG.md --skip.changelog --skip.bump'
     ext.output = {
         return standardOutput.toString()
     }
