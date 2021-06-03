@@ -14,11 +14,15 @@ public class ClientSkinManager {
 
     private static TextureManager textureManager;
 
-    private static ResourceLocation missing = new ResourceLocation("textures/entity/steve.png");
+    private static ClientSkinData missing = new ClientSkinData(new ResourceLocation("textures/entity/steve.png"), "default");
 
-    private static final Map<UUID, ResourceLocation> playerSkinMap = Maps.newHashMap();
+    private static final Map<UUID, ClientSkinData> playerSkinMap = Maps.newHashMap();
 
-    private static final Map<UUID, ResourceLocation> originalSkinMap = Maps.newHashMap();
+    private static final Map<UUID, ClientSkinData> originalSkinMap = Maps.newHashMap();
+
+    private static Map<String, ResourceLocation> cachedUrls = Maps.newHashMap();
+
+    private static List<SkinLoadJob> texturesToLoad = new ArrayList<>();
 
     public static void getTextureManager() {
         textureManager = Minecraft.getInstance().getTextureManager();
@@ -30,9 +34,9 @@ public class ClientSkinManager {
         }
         cachedUrls.clear();
 
-        for(Map.Entry<UUID, ResourceLocation> entry : playerSkinMap.entrySet()) {
-            ResourceLocation resourceLocation = originalSkinMap.getOrDefault(entry.getKey(), missing);
-            playerSkinMap.put(entry.getKey(), resourceLocation == null ? missing : resourceLocation);
+        for(Map.Entry<UUID, ClientSkinData> entry : playerSkinMap.entrySet()) {
+            ClientSkinData skinData = originalSkinMap.getOrDefault(entry.getKey(), missing);
+            playerSkinMap.put(entry.getKey(), skinData == null ? missing : skinData);
         }
     }
 
@@ -41,24 +45,17 @@ public class ClientSkinManager {
         originalSkinMap.clear();
     }
 
-    /**
-     * URL map
-     */
-    private static Map<String, ResourceLocation> cachedUrls = Maps.newHashMap();
-
-    private static List<SkinLoadJob> texturesToLoad = new ArrayList<>();
-
-    public static void setSkin(UUID uuid, String url, boolean isTransparent) {
+    public static void setSkin(UUID uuid, String url, String bodyType, boolean isTransparent) {
         if(url.equalsIgnoreCase("reset")) {
             if(originalSkinMap.containsKey(uuid)) {
                 playerSkinMap.put(uuid, originalSkinMap.get(uuid));
             }
         }
         else if(cachedUrls.containsKey(url)) {
-            playerSkinMap.put(uuid, cachedUrls.get(url));
+            playerSkinMap.put(uuid, new ClientSkinData(cachedUrls.get(url), bodyType));
         }
         else {
-            texturesToLoad.add(new SkinLoadJob(uuid, url, isTransparent));
+            texturesToLoad.add(new SkinLoadJob(uuid, url, bodyType, isTransparent));
         }
     }
 
@@ -66,19 +63,19 @@ public class ClientSkinManager {
         Iterator<SkinLoadJob> i = texturesToLoad.iterator();
         while (i.hasNext()) {
             SkinLoadJob loadJob = i.next();
-            ResourceLocation resourcelocation = new ResourceLocation("reskin", "skins/" + loadJob.url.hashCode());
+            ResourceLocation resourceLocation = new ResourceLocation("reskin", "skins/" + loadJob.url.hashCode());
             ReSkin.LOGGER.info("Downloading skin from: {}", loadJob.url);
 
-            HDDownloadingTexture downloadingTexture = new HDDownloadingTexture(null, loadJob.url, missing, loadJob.isTransparent, null);
+            HDDownloadingTexture downloadingTexture = new HDDownloadingTexture(null, loadJob.url, missing.resourceLocation, loadJob.isTransparent, null);
             if(downloadingTexture != null) {
-                textureManager.register(resourcelocation, downloadingTexture);
+                textureManager.register(resourceLocation, downloadingTexture);
             }
             else {
-                resourcelocation = missing;
+                resourceLocation = missing.resourceLocation;
             }
 
-            cachedUrls.put(loadJob.url, resourcelocation);
-            playerSkinMap.put(loadJob.uuid, resourcelocation);
+            cachedUrls.put(loadJob.url, resourceLocation);
+            playerSkinMap.put(loadJob.uuid, new ClientSkinData(resourceLocation, loadJob.bodyType));
             i.remove();
         }
     }
@@ -86,15 +83,20 @@ public class ClientSkinManager {
     public static void checkSkin(AbstractClientPlayerEntity player) {
         if(player.playerInfo == null) return;
         ResourceLocation currentSkin = player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN);
-        ResourceLocation wantedSkin = playerSkinMap.get(player.getUUID());
-        if(wantedSkin != null && currentSkin != wantedSkin) {
-            if(!originalSkinMap.containsKey(player.getUUID())) {
-                originalSkinMap.put(player.getUUID(), player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN));
+        ClientSkinData wantedSkin = playerSkinMap.get(player.getUUID());
+        if(wantedSkin != null) {
+            if(currentSkin != wantedSkin.resourceLocation) {
+                if(!originalSkinMap.containsKey(player.getUUID())) {
+                    originalSkinMap.put(player.getUUID(), new ClientSkinData(player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN), player.playerInfo.skinModel));
+                }
+                player.playerInfo.textureLocations.put(MinecraftProfileTexture.Type.SKIN, wantedSkin.resourceLocation);
             }
-            player.playerInfo.textureLocations.put(MinecraftProfileTexture.Type.SKIN, wantedSkin);
-            // Add storing this data into the packets and alter the commands to allow changing the models
-            player.playerInfo.skinModel = "default";
-            //player.playerInfo.skinType = "slim";
+
+            if(!wantedSkin.modelType.equals(player.playerInfo.skinModel)) {
+                // Add storing this data into the packets and alter the commands to allow changing the models
+                //player.playerInfo.skinType = "slim";
+                player.playerInfo.skinModel = wantedSkin.modelType;
+            }
         }
     }
 }

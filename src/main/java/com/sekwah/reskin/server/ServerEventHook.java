@@ -43,12 +43,4 @@ public class ServerEventHook {
         CustomSkinManager.playerLoggedOut(event.getPlayer().getUUID());
     }
 
-    /*@SubscribeEvent
-    public static void entityConstruction(EntityEvent.EntityConstructing event) {
-        if(event.getEntity() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) event.getEntity();
-
-        }
-    }*/
-
 }

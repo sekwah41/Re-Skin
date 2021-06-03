@@ -12,7 +12,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 public class PacketHandler {
 
-    public static final String PROTOCOL_VERSION = "1";
+    public static final String PROTOCOL_VERSION = "2";
 
     /**
      * Could just use {@link NetworkRegistry#newSimpleChannel} but this is more descriptive.
