@@ -16,7 +16,6 @@ module.exports = {
   bumpFiles: [tracker],
   packageFiles: [tracker],
   // In case you need to force a version change (mostly due to change of scope of the update e.g. major now instead of patch)
-  //releaseAs: '0.16.0',
   header:"# Changelog\n" +
       "\n" +
       "All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.\n" +

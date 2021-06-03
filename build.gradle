@@ -310,7 +310,7 @@ curseforge {
  *
  * Tagging is skipped so that the release can be merged and confirmed (A little long winded but just to stop mistakes)
  */
-task updateChangelog {
+task release {
     doLast{
         exec {
             commandLine 'cmd', '/c', 'npx standard-version@9.3.0 -i docs/CHANGELOG.md -t (v)[0-9]+.[0-0]+.[0-0]+(?!-) --skip.tag'
@@ -327,7 +327,7 @@ task updateChangelog {
     }
 }
 
-task updateChangelogPreRelease(type: Exec) {
+task preRelease(type: Exec) {
     commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --prerelease -i docs/SNAPSHOT_CHANGELOG.md --skip.tag'
     ext.output = {
         return standardOutput.toString()
@@ -338,7 +338,7 @@ task updateChangelogPreRelease(type: Exec) {
  * Just to stop having to manually tagging. Probably could do this easier but meh stops typos or other issues.
  */
 task tagRelease(type: Exec) {
-    commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --prerelease beta -i docs/SNAPSHOT_CHANGELOG.md --skip.changelog --skip.bump'
+    commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --prerelease -i docs/SNAPSHOT_CHANGELOG.md --skip.changelog --skip.bump'
     ext.output = {
         return standardOutput.toString()
     }

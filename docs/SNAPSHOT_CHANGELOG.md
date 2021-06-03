@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file. See [standa
 For the release changelogs see [CHANGELOG.md](CHANGELOG.md)  
 For the snapshot changelogs see [SNAPSHOT_CHANGELOG.md](SNAPSHOT_CHANGELOG.md)
 
+## 1.4.0-0 (2021-06-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* Specifically relating to if you have command blocks. targeting other entities with /setskin now is /setskin (url) (targets)
+
+### Features
+
+* Added /setmodel command & Reworked /setskin ([01083f1](https://github.com/sekwah41/Re-Skin/commit/01083f13e420ab5f84c1e8bcef230541fc12834c))
+
 ### 1.3.4-0 (2021-05-11)
  * First test version of new build process
 ### 1.3.3

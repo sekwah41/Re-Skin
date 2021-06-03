@@ -28,18 +28,18 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Upload to Discord (If pre-release tag)
-        if: "startsWith(github.ref, 'refs/tags/') && endsWith(github.ref, '-[0-9]+')"
+        if: "startsWith(github.ref, 'refs/tags/v') && contains(github.ref, '-')"
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         run: ./gradlew discordupload
       - name: Publish to Curseforge (If release tag)
-        if: "startsWith(github.ref, 'refs/tags/') && !endsWith(github.ref, '-[0-9]+')"
+        if: "startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-')"
         env:
           CURSE_API: ${{ secrets.CURSE_API }}
         run: ./gradlew curseforge
       - uses: shallwefootball/s3-upload-action@master
+        if: "startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-')"
         with:
-          if: "startsWith(github.ref, 'refs/tags/') && !endsWith(github.ref, '-[0-9]+')"
           aws_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: ${{ secrets.AWS_BUCKET }}
