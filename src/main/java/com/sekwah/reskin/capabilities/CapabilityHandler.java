@@ -5,7 +5,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 public class CapabilityHandler {
 
     public static void register() {
-        CapabilityManager.INSTANCE.register(ISkinLocation.class, new SkinLocationStorage(), SkinLocation::new);
+        CapabilityManager.INSTANCE.register(ISkinData.class, new SkinLocationStorage(), SkinData::new);
     }
 
 }

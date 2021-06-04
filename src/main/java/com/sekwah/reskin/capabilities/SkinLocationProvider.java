@@ -12,10 +12,10 @@ import javax.annotation.Nullable;
 
 public class SkinLocationProvider implements ICapabilitySerializable<INBT> {
 
-    @CapabilityInject(ISkinLocation.class)
-    public static final Capability<ISkinLocation> SKIN_LOC = null;
+    @CapabilityInject(ISkinData.class)
+    public static final Capability<ISkinData> SKIN_LOC = null;
 
-    private LazyOptional<ISkinLocation> instance = LazyOptional.of(SKIN_LOC::getDefaultInstance);
+    private LazyOptional<ISkinData> instance = LazyOptional.of(SKIN_LOC::getDefaultInstance);
 
     @Nonnull
     @Override
