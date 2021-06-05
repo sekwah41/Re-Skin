@@ -313,7 +313,7 @@ curseforge {
 task release {
     doLast{
         exec {
-            commandLine 'cmd', '/c', 'npx standard-version@9.3.0 -i docs/CHANGELOG.md -t (v)[0-9]+.[0-0]+.[0-0]+(?!-) --skip.tag'
+            commandLine 'cmd', '/c', 'npx standard-version@9.3.0 -i docs/CHANGELOG.md -t (v)[0-9]+.[0-9]+.[0-9]+(?!-) --skip.tag'
             ext.output = {
                 return standardOutput.toString()
             }
