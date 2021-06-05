@@ -5,7 +5,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.sekwah.reskin.CustomSkinManager;
-import com.sekwah.reskin.commands.arguments.NoSpacesArgument;
 import com.sekwah.reskin.commands.arguments.URLArgument;
 import com.sekwah.reskin.config.SkinConfig;
 import net.minecraft.command.CommandSource;
@@ -33,7 +32,7 @@ public class SetSkinCommand {
         // Thing to note, arguments are handled in alphabetical order.
         LiteralArgumentBuilder<CommandSource> setSkin = literal("setskin")
                 .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
-                .then(argument(URL_ARG, new URLArgument())
+                .then(argument(URL_ARG, URLArgument.urlArg())
                         .suggests(URL_SUGGESTIONS)
                         .executes(ctx -> {
                             ServerPlayerEntity entity = ctx.getSource().getPlayerOrException();
