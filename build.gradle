@@ -24,6 +24,7 @@ buildscript {
 }
 plugins {
     id "com.matthewprenger.cursegradle" version "1.4.0"
+    id 'net.researchgate.release' version '2.6.0'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -39,7 +40,7 @@ def sha = System.getenv("GITHUB_SHA")
 def isDevBranch = branch == null || (!(branch.startsWith("refs/heads/release/") || branch.startsWith("refs/tags/")))
 
 
-version = "${project.version}${isDevBranch ? '-SNAPSHOT' : ''}"
+version = project.version
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = project.archive
 
@@ -48,13 +49,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 repositories {
     mavenLocal()
     mavenCentral()
-    maven {
-        url 'https://dvs1.progwml6.com/files/maven'
-    }
+    maven { url 'https://dvs1.progwml6.com/files/maven' }
     maven { url = "https://maven.sekwah.com" }
-    maven {
-        url "https://minecraft.curseforge.com/api/maven/"
-    }
 }
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
@@ -304,43 +300,10 @@ curseforge {
     }
 }
 
-/**
- * These are needed as standard-version doesnt allow for the ability to skip tag versions for the changelog.
- * Well it does but not on purpose and it breaks things.
- *
- * Tagging is skipped so that the release can be merged and confirmed (A little long winded but just to stop mistakes)
- */
-task release {
-    doLast{
-        exec {
-            commandLine 'cmd', '/c', 'npx standard-version@9.3.0 -i docs/CHANGELOG.md -t (v)[0-9]+.[0-9]+.[0-9]+(?!-) --skip.tag'
-            ext.output = {
-                return standardOutput.toString()
-            }
-        }
-        exec {
-            commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --skip.changelog --skip.bump --skip.tag'
-            ext.output = {
-                return standardOutput.toString()
-            }
-        }
+// https://github.com/researchgate/gradle-release
+release {
+    failOnSnapshotDependencies = false
+    git {
+        requireBranch = 'release/*'
     }
 }
-
-task preRelease(type: Exec) {
-    commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --prerelease -i docs/SNAPSHOT_CHANGELOG.md --skip.tag'
-    ext.output = {
-        return standardOutput.toString()
-    }
-}
-
-/**
- * Just to stop having to manually tagging. Probably could do this easier but meh stops typos or other issues.
- */
-task tagRelease(type: Exec) {
-    commandLine 'cmd', '/c', 'npx standard-version@9.3.0 --prerelease -i docs/SNAPSHOT_CHANGELOG.md --skip.changelog --skip.bump'
-    ext.output = {
-        return standardOutput.toString()
-    }
-}
-

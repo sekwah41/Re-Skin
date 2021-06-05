@@ -18,6 +18,7 @@ When commits close an issue refer in the commit description in the following sty
 * **perf**: A code change that improves performance
 * **refactor**: A code change that neither fixes a bug nor adds a feature
 * **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+* **chore**: Other changes that don't modify src or test files
 <!---
 We don't currently do tests. But in case.
  * **test**: Adding missing tests or correcting existing tests
