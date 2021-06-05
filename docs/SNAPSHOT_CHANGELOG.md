@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file. See [standa
 For the release changelogs see [CHANGELOG.md](CHANGELOG.md)  
 For the snapshot changelogs see [SNAPSHOT_CHANGELOG.md](SNAPSHOT_CHANGELOG.md)
 
+### [1.4.1-0](https://github.com/sekwah41/Re-Skin/compare/v1.4.0...v1.4.1-0) (2021-06-05)
+
+
+### Bug Fixes
+
+* Client render errors with /clearskin ([4642527](https://github.com/sekwah41/Re-Skin/commit/4642527cda891e715196b95825cc5304f0e21d9d))
+* Command arg types causing network errors ([2057d6d](https://github.com/sekwah41/Re-Skin/commit/2057d6d3cb25a92e24d6df3fe0631f4976de60d6))
+
 ## 1.4.0-0 (2021-06-03)
 
 
