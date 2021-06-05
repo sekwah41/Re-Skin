@@ -9,7 +9,7 @@ public class SkinCommands {
         SetSkinCommand.register(dispatcher);
         SetModelCommand.register(dispatcher);
         ClearSkinCacheCommand.register(dispatcher);
-        ResetSkinCommand.register(dispatcher);
+        ClearSkinCommand.register(dispatcher);
     }
 
 }

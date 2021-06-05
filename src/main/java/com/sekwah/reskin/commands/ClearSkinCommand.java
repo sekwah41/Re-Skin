@@ -18,15 +18,12 @@ import java.util.Collections;
 import static net.minecraft.command.Commands.argument;
 import static net.minecraft.command.Commands.literal;
 
-public class ResetSkinCommand {
-
-    private static SuggestionProvider<CommandSource> URL_SUGGESTIONS = (ctx, builder)
-            -> ISuggestionProvider.suggest(new String[]{"https://", "https://i.imgur.com/mORJxcm.png"}, builder);
+public class ClearSkinCommand {
 
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
 
         // Thing to note, arguments are handled in alphabetical order.
-        LiteralArgumentBuilder<CommandSource> setSkin = literal("resetskin")
+        LiteralArgumentBuilder<CommandSource> setSkin = literal("clearskin")
                 .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                 .executes(ctx -> {
                     ServerPlayerEntity entity = ctx.getSource().getPlayerOrException();
