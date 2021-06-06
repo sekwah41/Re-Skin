@@ -1,6 +1,6 @@
 {
-  "prereleaseBranches": ["dev/forge-1.16"],
-  "baseBranch": "release/forge-1.16",
+  "prereleaseBranches": ["dev-forge-1.16"],
+  "baseBranch": "release-forge-1.16",
   "plugins": [
     [
           "gradle",
@@ -10,12 +10,11 @@
         ],
     ["conventional-commits", { "preset": "angular" }],
     "released",
-    "git-tag",
     ["upload-assets", ["./build/libs/*.jar"]]
   ],
   "owner": "sekwah41",
   "repo": "Re-Skin",
   "name": "Sekwah",
   "email": "contact@sekwah.com",
-  "onlyPublishWithReleaseLabel": true
+  "onlyPublishWithReleaseLabel": false
 }

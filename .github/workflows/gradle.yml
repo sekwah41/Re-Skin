@@ -25,28 +25,33 @@ jobs:
             node_modules
           key: ${{ runner.os }}-gradle2-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
-      - name: Build with Gradle
-        run: ./gradlew build
-      - name: Upload to Discord (If pre-release tag)
-        if: "startsWith(github.ref, 'refs/tags/v') && contains(github.ref, '-')"
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        run: ./gradlew discordupload
-      - name: Publish to Curseforge (If release tag)
-        if: "startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-')"
-        env:
-          CURSE_API: ${{ secrets.CURSE_API }}
-        run: ./gradlew curseforge
-      - name: Upload Forge Version file
-        if: "startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-')"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: aws s3 cp ./forgeupdatefile s3://${{secrets.AWS_BUCKET}}/modversions/ --recursive
+#      - name: Build with Gradle
+#        run: ./gradlew build
+#      - name: Upload to Discord (If pre-release tag)
+#        if: "startsWith(github.ref, 'refs/tags/v') && contains(github.ref, '-')"
+#        env:
+#          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+#        run: ./gradlew discordupload
+#      - name: Publish to Curseforge (If release tag)
+#        if: "startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-')"
+#        env:
+#          CURSE_API: ${{ secrets.CURSE_API }}
+#        run: ./gradlew curseforge
+#      - name: Upload Forge Version file
+#        if: "startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-')"
+#        env:
+#          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          AWS_REGION: ${{ secrets.AWS_REGION }}
+#        run: aws s3 cp ./forgeupdatefile s3://${{secrets.AWS_BUCKET}}/modversions/ --recursive
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CURSE_API: ${{ secrets.CURSE_API }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
           yarn install --frozen-lockfile
           yarn release
