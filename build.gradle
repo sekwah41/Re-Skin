@@ -303,6 +303,9 @@ curseforge {
 // https://github.com/researchgate/gradle-release
 release {
     failOnSnapshotDependencies = false
+    failOnUnversionedFiles = false
+    failOnUpdateNeeded = false
+    failOnCommitNeeded = false
     git {
         requireBranch = 'release/forge-1.16'
     }
