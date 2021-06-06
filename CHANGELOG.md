@@ -2,6 +2,30 @@
 
 #### 🐛 Bug Fix
 
+- chore(ci): Add logging for Auto to debug issues [#30](https://github.com/sekwah41/Re-Skin/pull/30) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Update CHANGELOG.md [#29](https://github.com/sekwah41/Re-Skin/pull/29) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Ignoring more build cases [#28](https://github.com/sekwah41/Re-Skin/pull/28) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Updating to stop fails [#27](https://github.com/sekwah41/Re-Skin/pull/27) ([@sekwah41](https://github.com/sekwah41))
+- Updating changelog generation [#26](https://github.com/sekwah41/Re-Skin/pull/26) ([@sekwah41](https://github.com/sekwah41))
+- Release skin fixes (fixes #24) [#25](https://github.com/sekwah41/Re-Skin/pull/25) ([@sekwah41](https://github.com/sekwah41))
+- Update CI actions [#23](https://github.com/sekwah41/Re-Skin/pull/23) ([@sekwah41](https://github.com/sekwah41))
+- Added /setmodel command & rewrote parts of /setskin [#22](https://github.com/sekwah41/Re-Skin/pull/22) ([@sekwah41](https://github.com/sekwah41))
+
+#### ⚠️ Pushed to `release/forge-1.16`
+
+- chore(ci): Upload build files ([@sekwah41](https://github.com/sekwah41))
+- chore: Trying to fix new pipelines ([@sekwah41](https://github.com/sekwah41))
+
+#### Authors: 1
+
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+
+---
+
+# v1.4.1 (Sun Jun 06 2021)
+
+#### 🐛 Bug Fix
+
 - chore(ci): Update CHANGELOG.md [#29](https://github.com/sekwah41/Re-Skin/pull/29) ([@sekwah41](https://github.com/sekwah41))
 - chore(ci): Ignoring more build cases [#28](https://github.com/sekwah41/Re-Skin/pull/28) ([@sekwah41](https://github.com/sekwah41))
 - chore(ci): Updating to stop fails [#27](https://github.com/sekwah41/Re-Skin/pull/27) ([@sekwah41](https://github.com/sekwah41))
