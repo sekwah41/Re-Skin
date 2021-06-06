@@ -8,9 +8,7 @@
             "gradleCommand": "./gradlew",
           }
         ],
-    ["conventional-commits", {
-        "ignoreCommitPattern": "^(chore|ci|docs|refactor)",
-    }],
+    ["conventional-commits", { "preset": "angular" }],
     "released",
     "git-tag"
   ],
