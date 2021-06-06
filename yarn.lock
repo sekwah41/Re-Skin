@@ -115,7 +115,7 @@
     parse-author "^2.0.0"
     parse-github-url "1.0.2"
 
-"@auto-it/released@10.29.2":
+"@auto-it/released@10.29.2", "@auto-it/released@^10.29.2":
   version "10.29.2"
   resolved "https://registry.yarnpkg.com/@auto-it/released/-/released-10.29.2.tgz#984ad9d3c9af6a1f95e788685dd19603ef561cad"
   integrity sha512-4P1/Sf5AqiCUuSlKHbwU2NXcd7RV1EdZ9fRuYkdpAgZPRd92pE49OAqfoSuhfJDs/jKyyjmVmasWPfUKLR1qeg==

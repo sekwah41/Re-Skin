@@ -7,6 +7,7 @@
     "@auto-it/conventional-commits": "^10.29.2",
     "@auto-it/git-tag": "^10.29.2",
     "@auto-it/gradle": "^10.29.2",
+    "@auto-it/released": "^10.29.2",
     "@auto-it/upload-assets": "^10.29.2",
     "auto": "^10.29.2"
   },
