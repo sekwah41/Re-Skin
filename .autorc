@@ -12,7 +12,8 @@
         "ignoreCommitPattern": "^(chore|ci|docs|refactor)",
     }],
     "released",
-    "git-tag"
+    "git-tag",
+    ["upload-assets", ["./build/libs/*.jar"]]
   ],
   "owner": "sekwah41",
   "repo": "Re-Skin",
