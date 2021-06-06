@@ -13,7 +13,7 @@
   },
   "scripts": {
     "changelog": "auto changelog",
-    "release": "auto shipit",
+    "release": "auto shipit -vv",
     "next": "auto next"
   }
 }
