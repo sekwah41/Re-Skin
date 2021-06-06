@@ -2,10 +2,10 @@ package com.sekwah.reskin.commands;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.sekwah.reskin.CustomSkinManager;
-import com.sekwah.reskin.commands.arguments.NoSpacesArgument;
 import com.sekwah.reskin.config.SkinConfig;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.ISuggestionProvider;
@@ -31,18 +31,18 @@ public class SetModelCommand {
         // Thing to note, arguments are handled in alphabetical order.
         LiteralArgumentBuilder<CommandSource> setModel = literal("setmodel")
                 .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
-                .then(argument(MODEL_ARG, new NoSpacesArgument())
+                .then(argument(MODEL_ARG, StringArgumentType.word())
                         .suggests(MODEL_SUGGESTIONS)
                         .executes(ctx -> {
                             ServerPlayerEntity entity = ctx.getSource().getPlayerOrException();
-                            String modelType = NoSpacesArgument.getText(ctx, MODEL_ARG);
+                            String modelType = StringArgumentType.getString(ctx, MODEL_ARG);
                             return execute(ctx.getSource(), Collections.singletonList(entity), modelType);
                         })
                         .requires((sender) -> (!SkinConfig.OTHERS_SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                         .then(argument("targets", EntityArgument.players())
                                 .executes(ctx -> {
                                     Collection<ServerPlayerEntity> targetPlayers = EntityArgument.getPlayers(ctx, "targets");
-                                    String modelType = NoSpacesArgument.getText(ctx, MODEL_ARG);
+                                    String modelType = StringArgumentType.getString(ctx, MODEL_ARG);
                                     return execute(ctx.getSource(), targetPlayers, modelType);
                                 })));
 

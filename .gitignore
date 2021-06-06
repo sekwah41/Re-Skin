@@ -6,6 +6,9 @@ bin
 .classpath
 .project
 
+.env
+node_modules/
+
 # idea
 out
 *.ipr

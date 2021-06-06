@@ -1,0 +1,18 @@
+{
+  "name": "Re-Skin",
+  "private": true,
+  "dependencies": {},
+  "version": "1.4.0",
+  "devDependencies": {
+    "@auto-it/conventional-commits": "^10.29.2",
+    "@auto-it/git-tag": "^10.29.2",
+    "@auto-it/gradle": "^10.29.2",
+    "@auto-it/upload-assets": "^10.29.2",
+    "auto": "^10.29.2"
+  },
+  "scripts": {
+    "changelog": "auto changelog",
+    "release": "auto shipit",
+    "next": "auto next"
+  }
+}

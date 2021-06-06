@@ -1,0 +1,22 @@
+{
+  "prereleaseBranches": ["dev/forge-1.16"],
+  "baseBranch": "release/forge-1.16",
+  "plugins": [
+    [
+          "gradle",
+          {
+            "gradleCommand": "./gradlew",
+          }
+        ],
+    ["conventional-commits", {
+        "ignoreCommitPattern": "^(chore|ci|docs|refactor)",
+    }],
+    "released",
+    "git-tag"
+  ],
+  "owner": "sekwah41",
+  "repo": "Re-Skin",
+  "name": "Sekwah",
+  "email": "contact@sekwah.com",
+  "onlyPublishWithReleaseLabel": true
+}

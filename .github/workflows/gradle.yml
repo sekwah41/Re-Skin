@@ -1,12 +1,6 @@
 name: Build Project
 
-on:
-  push:
-    branches:
-      - '**'
-    tags:
-      - '*'
-  pull_request:
+on: [push]
 
 jobs:
   build:
@@ -15,6 +9,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Prepare repository
+        run: |
+          git fetch --unshallow --tags
+          yarn install --frozen-lockfile
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
@@ -22,8 +20,10 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v2
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          path: |
+            ~/.gradle/caches
+            node_modules
+          key: ${{ runner.os }}-gradle2-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
       - name: Build with Gradle
         run: ./gradlew build
@@ -43,4 +43,11 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
-        run: aws s3 cp ./docs/forgeupdatefile s3://${{secrets.AWS_BUCKET}}/modversions/ --recursive
+        run: aws s3 cp ./forgeupdatefile s3://${{secrets.AWS_BUCKET}}/modversions/ --recursive
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn install --frozen-lockfile
+          npx auto shipit
+

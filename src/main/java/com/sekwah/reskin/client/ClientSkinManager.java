@@ -92,11 +92,7 @@ public class ClientSkinManager {
                 player.playerInfo.textureLocations.put(MinecraftProfileTexture.Type.SKIN, wantedSkin.resourceLocation);
             }
 
-            if(!wantedSkin.modelType.equals(player.playerInfo.skinModel)) {
-                // Add storing this data into the packets and alter the commands to allow changing the models
-                //player.playerInfo.skinType = "slim";
-                player.playerInfo.skinModel = wantedSkin.modelType;
-            }
+            player.playerInfo.skinModel = wantedSkin.modelType;
         }
     }
 }

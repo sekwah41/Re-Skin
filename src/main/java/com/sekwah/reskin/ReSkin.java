@@ -43,6 +43,7 @@ public class ReSkin {
     private void setup(final FMLCommonSetupEvent event) {
         PacketHandler.init();
         CapabilityHandler.register();
+        SkinCommands.registerNewArgTypes();
     }
 
     @SubscribeEvent
