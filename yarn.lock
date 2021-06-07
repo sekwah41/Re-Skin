@@ -67,13 +67,16 @@
     typescript-memoize "^1.0.0-alpha.3"
     url-join "^4.0.0"
 
-"@auto-it/git-tag@^10.29.2":
+"@auto-it/exec@^10.29.2":
   version "10.29.2"
-  resolved "https://registry.yarnpkg.com/@auto-it/git-tag/-/git-tag-10.29.2.tgz#1b2ad8b888a5ca9d8ec8d37cc3183c8312e5eb7f"
-  integrity sha512-osOmpPcv5ZBuHmPmGX65t6DdGAzrPoHe2vCmY1VlMdty3Jmsh/70Cta5Pu+UHKjK2jjJ0G9dFmFxcT1/RdwIPg==
+  resolved "https://registry.yarnpkg.com/@auto-it/exec/-/exec-10.29.2.tgz#01cd52cb711199ae1a9fe2699700eb5000029cae"
+  integrity sha512-oxZNPhyMdKieMVqm0hfa3xtxzenMuyADH8ZyeJWlCZuh14Ei8W7AGInRbUGfaWdjGAMm8sNnuc+ztTg2RvM0Ww==
   dependencies:
     "@auto-it/core" "10.29.2"
-    semver "^7.0.0"
+    endent "^2.0.1"
+    fp-ts "^2.5.3"
+    fromentries "^1.2.0"
+    io-ts "^2.1.2"
     tslib "2.1.0"
 
 "@auto-it/gradle@^10.29.2":

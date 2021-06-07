@@ -3,11 +3,17 @@
   "baseBranch": "release-forge-1.16",
   "plugins": [
     [
-          "gradle",
-          {
-            "gradleCommand": "./gradlew",
-          }
-        ],
+      "gradle",
+      {
+        "gradleCommand": "./gradlew",
+      }
+    ],
+    [
+      "exec",
+      {
+        "afterVersion": "gradlew runBuildTasks",
+      }
+    ],
     ["conventional-commits", { "preset": "angular" }],
     "released",
     ["upload-assets", ["./build/libs/*.jar"]]
