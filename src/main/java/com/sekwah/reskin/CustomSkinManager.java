@@ -28,6 +28,15 @@ public class CustomSkinManager {
             });
         }
     }
+    
+    /**
+     * Reset the skin of the target player.
+     *
+     * @param target the target player
+     */
+    public static void resetSkin(PlayerEntity target) {
+        setSkin(target, "reset");
+    }
 
     public static void setModel(PlayerEntity target, String modelType) {
         if(target != null) {

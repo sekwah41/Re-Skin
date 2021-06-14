@@ -29,11 +29,12 @@ public class ClientSkinManager {
     }
 
     public static void clearSkinCache() {
-        for(Map.Entry<String, ResourceLocation> resources : cachedUrls.entrySet()) {
-            textureManager.release(resources.getValue());
+        // Release all cached resources and clear the cache list
+        for(ResourceLocation resource : cachedUrls.values()) {
+            textureManager.release(resource);
         }
         cachedUrls.clear();
-
+        
         for(Map.Entry<UUID, ClientSkinData> entry : playerSkinMap.entrySet()) {
             ClientSkinData skinData = originalSkinMap.getOrDefault(entry.getKey(), missing);
             playerSkinMap.put(entry.getKey(), skinData == null ? missing : skinData);
@@ -44,18 +45,35 @@ public class ClientSkinManager {
         playerSkinMap.clear();
         originalSkinMap.clear();
     }
-
+    
+    /**
+     * Change the model of the target player.
+     *
+     * @param uuid the uuid of the player
+     * @param url the url of the skin
+     * @param bodyType the body type of the player
+     * @param isTransparent if the texture has transparency
+     */
     public static void setSkin(UUID uuid, String url, String bodyType, boolean isTransparent) {
-        if(url.equalsIgnoreCase("reset")) {
-            if(originalSkinMap.containsKey(uuid)) {
-                playerSkinMap.put(uuid, originalSkinMap.get(uuid));
-            }
-        }
-        else if(cachedUrls.containsKey(url)) {
+        if("reset".equals(url)) {
+            resetSkin(uuid);
+        } else if(cachedUrls.containsKey(url)) {
             playerSkinMap.put(uuid, new ClientSkinData(cachedUrls.get(url), bodyType));
         }
         else {
             texturesToLoad.add(new SkinLoadJob(uuid, url, bodyType, isTransparent));
+        }
+    }
+    
+    /**
+     * Reset the skin of the target player.
+     *
+     * If the player was not found no action will be performed.
+     * @param uuid the uuid of the player
+     */
+    public static void resetSkin(UUID uuid) {
+        if(originalSkinMap.containsKey(uuid)) {
+            playerSkinMap.put(uuid, originalSkinMap.get(uuid));
         }
     }
 
@@ -82,12 +100,13 @@ public class ClientSkinManager {
 
     public static void checkSkin(AbstractClientPlayerEntity player) {
         if(player.playerInfo == null) return;
+        
         ResourceLocation currentSkin = player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN);
         ClientSkinData wantedSkin = playerSkinMap.get(player.getUUID());
         if(wantedSkin != null) {
             if(currentSkin != wantedSkin.resourceLocation) {
                 if(!originalSkinMap.containsKey(player.getUUID())) {
-                    originalSkinMap.put(player.getUUID(), new ClientSkinData(player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN), player.playerInfo.skinModel));
+                    originalSkinMap.put(player.getUUID(), new ClientSkinData(currentSkin, player.playerInfo.skinModel));
                 }
                 player.playerInfo.textureLocations.put(MinecraftProfileTexture.Type.SKIN, wantedSkin.resourceLocation);
             }

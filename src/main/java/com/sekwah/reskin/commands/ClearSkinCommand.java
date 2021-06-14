@@ -45,7 +45,7 @@ public class ClearSkinCommand {
                 return;
             }
             source.sendSuccess(new TranslationTextComponent("setskin.resetplayer", target.getDisplayName()), false);
-            CustomSkinManager.setSkin(target, "reset");
+            CustomSkinManager.resetSkin(target);
         });
         if(targets.size() == 0) {
             return -1;
