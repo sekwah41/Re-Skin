@@ -22,7 +22,7 @@ public class CustomSkinManager {
             target.getCapability(SkinLocationProvider.SKIN_LOC, null).ifPresent(skinCap -> {
                 skinCap.setSkin(url);
                 if(url.length() > 0) {
-                    PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUUID().toString(), url, skinCap.getModelType(), SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));
+                    PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUUID(), url, skinCap.getModelType(), SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));
                     playerSkins.put(target.getUUID(), new ServerSkinData(url, skinCap.getModelType()));
                 }
             });
@@ -34,7 +34,7 @@ public class CustomSkinManager {
             target.getCapability(SkinLocationProvider.SKIN_LOC, null).ifPresent(skinCap -> {
                 skinCap.setModelType(modelType);
                 if(modelType.length() > 0) {
-                    PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUUID().toString(), skinCap.getSkin(), modelType, SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));
+                    PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUUID(), skinCap.getSkin(), modelType, SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));
                     playerSkins.put(target.getUUID(), new ServerSkinData(skinCap.getSkin(), modelType));
                 }
             });
@@ -49,7 +49,7 @@ public class CustomSkinManager {
     public static void sendAllToPlayer(ServerPlayerEntity player, boolean excludeSelf) {
         for(Map.Entry<UUID, ServerSkinData> skin : playerSkins.entrySet()) {
             if(!(excludeSelf && skin.getKey() == player.getUUID()) && skin.getValue() != null) {
-                PacketHandler.sendToPlayer(new ClientChangeSkin(skin.getKey().toString(), skin.getValue().url, skin.getValue().modelType, SkinConfig.ALLOW_TRANSPARENT_SKIN.get()), player);
+                PacketHandler.sendToPlayer(new ClientChangeSkin(skin.getKey(), skin.getValue().url, skin.getValue().modelType, SkinConfig.ALLOW_TRANSPARENT_SKIN.get()), player);
             }
         }
     }

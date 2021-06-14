@@ -9,12 +9,12 @@ import java.util.function.Supplier;
 
 public class ClientChangeSkin {
 
-    public final String uuid;
+    public final UUID uuid;
     public final String url;
     public final String bodyType;
     public final boolean isTransparent;
 
-    public ClientChangeSkin(String uuid, String url, String bodyType, boolean isTransparent) {
+    public ClientChangeSkin(UUID uuid, String url, String bodyType, boolean isTransparent) {
         this.uuid = uuid;
         this.url = url;
         this.bodyType = bodyType;
@@ -22,15 +22,14 @@ public class ClientChangeSkin {
     }
 
     public static void encode(ClientChangeSkin msg, PacketBuffer outBuffer) {
-        outBuffer.writeUtf(msg.uuid);
+        outBuffer.writeUUID(msg.uuid);
         outBuffer.writeUtf(msg.url);
         outBuffer.writeUtf(msg.bodyType);
         outBuffer.writeBoolean(msg.isTransparent);
     }
 
     public static ClientChangeSkin decode(PacketBuffer inBuffer) {
-
-        String uuid = inBuffer.readUtf();
+        UUID uuid = inBuffer.readUUID();
         String url = inBuffer.readUtf();
         String bodyType = inBuffer.readUtf();
         boolean isTransparent = inBuffer.readBoolean();
@@ -41,7 +40,7 @@ public class ClientChangeSkin {
     public static class Handler {
         public static void handle(ClientChangeSkin msg, Supplier<NetworkEvent.Context> ctx) {
             ctx.get().enqueueWork(() ->
-                    ClientSkinManager.setSkin(UUID.fromString(msg.uuid), msg.url, msg.bodyType, msg.isTransparent));
+                    ClientSkinManager.setSkin(msg.uuid, msg.url, msg.bodyType, msg.isTransparent));
             ctx.get().setPacketHandled(true);
         }
     }
