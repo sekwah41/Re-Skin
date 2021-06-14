@@ -54,8 +54,7 @@ public class SetSkinCommand {
         String url = skinUrl;
         List<? extends String> whitelist = SkinConfig.SKIN_SERVER_WHITELIST.get();
         long passedWhitelist = whitelist.stream().filter(value -> url.startsWith(value)).count();
-        if (Boolean.TRUE.equals(SkinConfig.ENABLE_SKIN_SERVER_WHITELIST.get())
-                && passedWhitelist == 0 && !skinUrl.equals("reset")) {
+        if (Boolean.TRUE.equals(SkinConfig.ENABLE_SKIN_SERVER_WHITELIST.get()) && passedWhitelist == 0) {
             TranslationTextComponent message = new TranslationTextComponent("setskin.notwhitelisted");
             Style redMessage = message.getStyle().withColor(Color.fromLegacyFormat(TextFormatting.RED));
             source.sendSuccess(message.setStyle(redMessage), false);
