@@ -24,23 +24,20 @@ buildscript {
 }
 plugins {
     id "com.matthewprenger.cursegradle" version "1.4.0"
-    id 'net.researchgate.release' version '2.6.0'
+    id 'net.researchgate.release' version '2.8.1'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: "java"
 apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
 apply plugin: "org.spongepowered.mixin"
 apply plugin: "com.wynprice.cursemaven"
 
 def branch = System.getenv("GITHUB_REF")
 def sha = System.getenv("GITHUB_SHA")
-def isDevBranch = branch == null || (!(branch.startsWith("refs/heads/release/") || branch.startsWith("refs/tags/")))
+def isCanary = version.toString().contains('canary')
 
-
-version = project.version
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = project.archive
 
@@ -218,24 +215,6 @@ task deobfJar(type: Jar) {
     from file("LICENSE")
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact reobfArtifact
-            artifact srcJar
-            artifact deobfJar
-        }
-    }
-    repositories {
-        maven {
-            url "s3://sekwah-maven/"
-            authentication {
-                awsIm(AwsImAuthentication)
-            }
-        }
-    }
-}
-
 /** For pre-releases and testers to be able to try the latest commits if they want.
  * If the builds start exceeding 8MB then we may want to upload to s3 instead and periodically clear.
  * TODO possibly add a task that announces when builds are made?
@@ -253,8 +232,13 @@ task discordupload {
             HttpPost uploadFile = new HttpPost(discordWebhook)
 
             MultipartEntityBuilder builder = MultipartEntityBuilder.create()
-            builder.addTextBody("content", "New automated dev build\n\n" +
-                    "Current Features: <${project.github}/blob/${sha}/docs/SNAPSHOT_CHANGELOG.md>")
+
+            if(isCanary) {
+                builder.addTextBody("content", "New canary Build")
+            } else {
+                builder.addTextBody("content", "New release build\n\n" +
+                        "Current Features: <${project.github}/blob/${sha}/CHANGELOG.md>")
+            }
 
             builder.addBinaryBody("file", file(jar.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jar.archiveName)
 
@@ -300,14 +284,30 @@ curseforge {
 }
 
 // https://github.com/researchgate/gradle-release
+// Only other plugin I can find using auto & gradle https://github.com/intuit/hooks
 release {
-    failOnCommitNeeded = false
     failOnPublishNeeded = false
     failOnSnapshotDependencies = false
-    failOnUnversionedFiles = false
-    failOnUpdateNeeded = false
-    tagTemplate = "v${version}"
     git {
-        requireBranch = 'release-forge-1.16'
+        requireBranch = ''
     }
+
+
+    // Disable tasks because something we have is causing -x to be ignored
+    createReleaseTag.enabled = false
+    preTagCommit.enabled = false
+    commitNewVersion.enabled = false
+}
+
+task publish {
+    println "This is a dummy task to run others for version: ${version}"
+
+}
+
+// Publish rules
+// Current behavior seems to be canary or release. Though pre-releases may break this pattern.
+publish.dependsOn 'build'
+publish.finalizedBy 'discordupload'
+if (!isCanary) {
+    publish.finalizedBy 'curseforge'
 }
