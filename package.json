@@ -4,7 +4,7 @@
   "dependencies": {},
   "version": "1.4.0",
   "devDependencies": {
-    "@auto-it/conventional-commits": "^10.29.2",
+    "@auto-it/conventional-commits": "10.29.3",
     "@auto-it/exec": "^10.29.2",
     "@auto-it/gradle": "^10.29.2",
     "@auto-it/released": "^10.29.2",
