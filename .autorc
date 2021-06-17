@@ -6,21 +6,31 @@
       "gradle",
       {
         "gradleCommand": "./gradlew",
+        "gradleOptions": [""]
       }
     ],
     [
       "exec",
       {
-        "afterVersion": "gradlew runBuildTasks",
+        "canary": "./gradlew build discord"
       }
     ],
     ["conventional-commits", { "preset": "angular" }],
     "released",
     ["upload-assets", ["./build/libs/*.jar"]]
   ],
+  "changelog": {
+    "message": "string"
+  },
   "owner": "sekwah41",
   "repo": "Re-Skin",
   "name": "Sekwah",
   "email": "contact@sekwah.com",
-  "onlyPublishWithReleaseLabel": false
+  "onlyPublishWithReleaseLabel": true,
+  "shipit": {
+      "onlyGraduateWithReleaseLabel": true
+  },
+  "canary": {
+    "message": "📦 Published PR to [discord](https://discord.sekwah.com/) as canary version: %v"
+  }
 }
