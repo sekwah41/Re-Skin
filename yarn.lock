@@ -91,7 +91,7 @@
     tslib "2.1.0"
     url-join "^4.0.0"
 
-"@auto-it/gradle@^10.20.6":
+"@auto-it/gradle@10.29.3":
   version "10.29.3"
   resolved "https://registry.yarnpkg.com/@auto-it/gradle/-/gradle-10.29.3.tgz#2a53425b4fbd51d658888a2d0affa40a31a643db"
   integrity sha512-WPTfNlqCPV8IFlGvNLAOqlCSvvpO3zSZP4BuV51o6Cg9vYmWi8c95oYozOTygmeoqqypcTwyjaeXnBGIBRiLGA==
