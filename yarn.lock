@@ -67,7 +67,7 @@
     typescript-memoize "^1.0.0-alpha.3"
     url-join "^4.0.0"
 
-"@auto-it/exec@^10.20.6":
+"@auto-it/exec@10.29.3":
   version "10.29.3"
   resolved "https://registry.yarnpkg.com/@auto-it/exec/-/exec-10.29.3.tgz#b5777c1f4fa7eca13ab5c97ec02351fe1f4c2333"
   integrity sha512-1qdEnlKi7xtRNdCgusVEtGi+l3MSghtbPejpSVve8yxxu4DVdNSp3psEBcWlYloaJyTzsu+husT8RgzZR1eMsA==
