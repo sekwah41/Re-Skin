@@ -19,9 +19,6 @@
     "released",
     ["upload-assets", ["./build/libs/*.jar"]]
   ],
-  "changelog": {
-    "message": "string"
-  },
   "owner": "sekwah41",
   "repo": "Re-Skin",
   "name": "Sekwah",
