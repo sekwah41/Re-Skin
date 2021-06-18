@@ -1,3 +1,45 @@
+# v2.0.0 (Fri Jun 18 2021)
+
+### Release Notes
+
+#### chore(ci): Update build pipelines to auto ([#38](https://github.com/sekwah41/Re-Skin/pull/38))
+
+There was a critical error before for joining servers due to one of the new args registering at the wrong time.
+
+---
+
+#### 💥 Breaking Change
+
+- Added /setmodel command & rewrote parts of /setskin [#22](https://github.com/sekwah41/Re-Skin/pull/22) ([@sekwah41](https://github.com/sekwah41))
+
+#### 🐛 Bug Fix
+
+- refactor: Cleaning up some code with client [#38](https://github.com/sekwah41/Re-Skin/pull/38) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Update build pipelines to auto [#38](https://github.com/sekwah41/Re-Skin/pull/38) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Auto detect mixins using manifest [#38](https://github.com/sekwah41/Re-Skin/pull/38) ([@sekwah41](https://github.com/sekwah41))
+- refactor: Added a dedicated resetSkin method to remove ambiguity [#38](https://github.com/sekwah41/Re-Skin/pull/38) ([@Kariaro](https://github.com/Kariaro))
+- refactor: Updated packet uuid type to use UUID [#38](https://github.com/sekwah41/Re-Skin/pull/38) ([@Kariaro](https://github.com/Kariaro))
+- Configure Renovate [#34](https://github.com/sekwah41/Re-Skin/pull/34) ([@renovate-bot](https://github.com/renovate-bot) [@renovate[bot]](https://github.com/renovate[bot]))
+- Attempt at releasing 1.4.1 [#31](https://github.com/sekwah41/Re-Skin/pull/31) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Add logging for Auto to debug issues [#30](https://github.com/sekwah41/Re-Skin/pull/30) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Update CHANGELOG.md [#29](https://github.com/sekwah41/Re-Skin/pull/29) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Ignoring more build cases [#28](https://github.com/sekwah41/Re-Skin/pull/28) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Updating to stop fails [#27](https://github.com/sekwah41/Re-Skin/pull/27) ([@sekwah41](https://github.com/sekwah41))
+- Updating changelog generation [#26](https://github.com/sekwah41/Re-Skin/pull/26) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Upload build files ([@sekwah41](https://github.com/sekwah41))
+- chore: Trying to fix new pipelines ([@sekwah41](https://github.com/sekwah41))
+- Release skin fixes (fixes #24) [#25](https://github.com/sekwah41/Re-Skin/pull/25) ([@sekwah41](https://github.com/sekwah41))
+- Update CI actions [#23](https://github.com/sekwah41/Re-Skin/pull/23) ([@sekwah41](https://github.com/sekwah41))
+
+#### Authors: 4
+
+- [@renovate[bot]](https://github.com/renovate[bot])
+- HardCoded ([@Kariaro](https://github.com/Kariaro))
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v1.4.1 (Sun Jun 06 2021)
 
 #### 🐛 Bug Fix
