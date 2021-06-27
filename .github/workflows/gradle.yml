@@ -36,8 +36,6 @@ jobs:
           echo $(yarn bin) >> $GITHUB_PATH
       - name: Build with Gradle
         run: ./gradlew build
-      - name: Clear build folder(cleans up releases)
-        run: rm -rfv ./build/libs/
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
