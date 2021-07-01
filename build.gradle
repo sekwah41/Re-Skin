@@ -146,7 +146,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.32'
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 
     // Trick intellij to allow for better editing in here for the discord task
     // compile "org.apache.httpcomponents:httpmime:4.5.13"
