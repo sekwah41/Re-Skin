@@ -16,9 +16,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.0.+', changing: true
         classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
-        classpath "com.wynprice.cursemaven:CurseMaven:2.1.5"
         classpath "org.apache.httpcomponents:httpmime:4.5.13"
     }
 }
@@ -32,7 +31,6 @@ apply plugin: "java"
 apply plugin: 'eclipse'
 
 apply plugin: "org.spongepowered.mixin"
-apply plugin: "com.wynprice.cursemaven"
 
 def branch = System.getenv("GITHUB_REF")
 if(branch != null) {
