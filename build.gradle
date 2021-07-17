@@ -16,7 +16,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.0.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.0.14', changing: true
         classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
         classpath "org.apache.httpcomponents:httpmime:4.5.13"
     }
@@ -29,7 +29,9 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: "java"
 apply plugin: 'eclipse'
+//apply plugin: 'maven-publish'
 
+// May be able to remove it
 apply plugin: "org.spongepowered.mixin"
 
 def branch = System.getenv("GITHUB_REF")
@@ -43,11 +45,17 @@ archivesBaseName = project.archive
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-    maven { url = "https://maven.sekwah.com" }
-}
+//repositories {
+//    mavenLocal()
+//    mavenCentral()
+//    maven {
+//        url 'https://dvs1.progwml6.com/files/maven'
+//    }
+//    maven { url = "https://maven.sekwah.com" }
+//    maven {
+//        url "https://minecraft.curseforge.com/api/maven/"
+//    }
+//}
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
@@ -107,6 +115,7 @@ minecraft {
         data {
             workingDirectory project.file('run')
 
+            forceExit false
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', ''
             //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -125,19 +134,9 @@ minecraft {
     }
 }
 
-configurations {
-    include {
-        compile.extendsFrom(include)
-    }
-    includePlusMeta {
-        include.extendsFrom(includePlusMeta)
-    }
-}
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-
-    // to stop IntelliJ complaining about this build script
-    testCompile "org.apache.httpcomponents:httpmime:4.5.13"
 
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
@@ -146,6 +145,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 
+    //compile "com.sekwah:SekCLib:${sekclib_version}:deobf"
     // Trick intellij to allow for better editing in here for the discord task
     // compile "org.apache.httpcomponents:httpmime:4.5.13"
 
@@ -215,6 +215,24 @@ task deobfJar(type: Jar) {
     from file("LICENSE")
 }
 
+//publishing {
+//    publications {
+//        mavenJava(MavenPublication) {
+//            artifact reobfArtifact
+//            artifact srcJar
+//            artifact deobfJar
+//        }
+//    }
+//    repositories {
+//        maven {
+//            url "s3://sekwah-maven/"
+//            authentication {
+//                awsIm(AwsImAuthentication)
+//            }
+//        }
+//    }
+//}
+
 /** For pre-releases and testers to be able to try the latest commits if they want.
  * If the builds start exceeding 8MB then we may want to upload to s3 instead and periodically clear.
  * TODO possibly add a task that announces when builds are made?
@@ -232,7 +250,6 @@ task discordupload {
             HttpPost uploadFile = new HttpPost(discordWebhook)
 
             MultipartEntityBuilder builder = MultipartEntityBuilder.create()
-
             if(isCanary) {
                 builder.addTextBody("content", "New canary Build")
             } else {
@@ -266,7 +283,7 @@ curseforge {
     project {
         id = project.curse_project_id
         // TODO add code to reference this but also cut the latest change logs in for the files
-        changelog = "${project.github}/blob/${branch}/CHANGELOG.md"
+        changelog = "${project.github}/blob/${branch}/docs/CHANGELOG.md"
         changelogType = 'markdown'
         releaseType = 'release'
         addGameVersion '1.16.1'
