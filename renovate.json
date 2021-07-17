@@ -10,7 +10,7 @@
       "automergeType": "branch",
       "groupName": "Deps",
       "schedule": ["every weekend"],
-      "excludePackageNames": ["net.minecraftforge:forge"]
+      "excludePackageNames": ["net.minecraftforge.gradle:ForgeGradle"]
     }
   ]
 }
