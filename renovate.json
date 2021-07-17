@@ -8,8 +8,9 @@
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeType": "branch",
-      "groupName": "Dep Updates",
-      "schedule": ["every weekend"]
+      "groupName": "Deps",
+      "schedule": ["every weekend"],
+      "excludePackageNames": ["net.minecraftforge:forge"]
     }
   ]
 }
