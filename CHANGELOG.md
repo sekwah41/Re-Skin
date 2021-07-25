@@ -1,3 +1,43 @@
+# v2.1.0 (Sun Jul 25 2021)
+
+#### 🚀 Enhancement
+
+- feat: Updated support to 1.17 [#61](https://github.com/sekwah41/Re-Skin/pull/61) ([@sekwah41](https://github.com/sekwah41))
+
+#### 🐛 Bug Fix
+
+- fix: Mixins not working wirh forge. Removing for now [#61](https://github.com/sekwah41/Re-Skin/pull/61) ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): Updating basic deps to 1.17 [#61](https://github.com/sekwah41/Re-Skin/pull/61) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Update renovate rules ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): update dependency net.minecraftforge:forge to v1.16.5-36.1.58 ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Fixed group reference ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Change renovate group name ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): update dependency net.minecraftforge:forge to v1.16.5-36.1.36 [#53](https://github.com/sekwah41/Re-Skin/pull/53) ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Fix gradle script [#54](https://github.com/sekwah41/Re-Skin/pull/54) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Update renovate settings [#54](https://github.com/sekwah41/Re-Skin/pull/54) ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): Update gradle and forgegradle [#54](https://github.com/sekwah41/Re-Skin/pull/54) ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): update dependency net.minecraftforge:forge to v1.16.5-36.1.33 [#52](https://github.com/sekwah41/Re-Skin/pull/52) ([@renovate-bot](https://github.com/renovate-bot))
+- chore(deps): update dependency org.spongepowered:mixin to v0.8.3 [#51](https://github.com/sekwah41/Re-Skin/pull/51) ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Add build folder cleaning ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): Update auto dep versions [#46](https://github.com/sekwah41/Re-Skin/pull/46) ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): update actions/setup-java action to v2 [#46](https://github.com/sekwah41/Re-Skin/pull/46) ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Clean build/libs folder to stop dupe artifacts [#50](https://github.com/sekwah41/Re-Skin/pull/50) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Fix reference to changelogs [#50](https://github.com/sekwah41/Re-Skin/pull/50) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Update MC version string to better support renovate [#44](https://github.com/sekwah41/Re-Skin/pull/44) ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): update dependency net.minecraftforge:forge to v1.16.5-36.1.32 [#44](https://github.com/sekwah41/Re-Skin/pull/44) ([@renovate-bot](https://github.com/renovate-bot))
+- chore(deps): update actions/setup-node action to v2 [#47](https://github.com/sekwah41/Re-Skin/pull/47) ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Fix issue with commits made by auto [#41](https://github.com/sekwah41/Re-Skin/pull/41) ([@sekwah41](https://github.com/sekwah41))
+- chore(deps): update dependency gradle to v6.9 [#45](https://github.com/sekwah41/Re-Skin/pull/45) ([@renovate-bot](https://github.com/renovate-bot))
+- chore(deps): pin dependencies [#49](https://github.com/sekwah41/Re-Skin/pull/49) ([@renovate-bot](https://github.com/renovate-bot))
+- chore(deps): update dependency com.wynprice.cursemaven:cursemaven to v2.1.5 [#43](https://github.com/sekwah41/Re-Skin/pull/43) ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 2
+
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v2.0.0 (Fri Jun 18 2021)
 
 ### Release Notes
