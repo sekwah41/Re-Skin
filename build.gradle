@@ -169,9 +169,10 @@ dependencies {
 
 }
 
-mixin {
+// these currently don't work. Re-enable them when forge is shipping with them again.
+/*mixin {
     add sourceSets.main, "mixins.${project.modid}.refmap.json"
-}
+}*/
 
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
