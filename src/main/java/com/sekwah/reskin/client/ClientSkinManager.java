@@ -4,9 +4,9 @@ import com.google.common.collect.Maps;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.sekwah.reskin.ReSkin;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.*;
 
@@ -34,7 +34,7 @@ public class ClientSkinManager {
             textureManager.release(resource);
         }
         cachedUrls.clear();
-        
+
         for(Map.Entry<UUID, ClientSkinData> entry : playerSkinMap.entrySet()) {
             ClientSkinData skinData = originalSkinMap.getOrDefault(entry.getKey(), missing);
             playerSkinMap.put(entry.getKey(), skinData == null ? missing : skinData);
@@ -45,7 +45,7 @@ public class ClientSkinManager {
         playerSkinMap.clear();
         originalSkinMap.clear();
     }
-    
+
     /**
      * Change the model of the target player.
      *
@@ -64,7 +64,7 @@ public class ClientSkinManager {
             texturesToLoad.add(new SkinLoadJob(uuid, url, bodyType, isTransparent));
         }
     }
-    
+
     /**
      * Reset the skin of the target player.
      *
@@ -98,9 +98,9 @@ public class ClientSkinManager {
         }
     }
 
-    public static void checkSkin(AbstractClientPlayerEntity player) {
+    public static void checkSkin(AbstractClientPlayer player) {
         if(player.playerInfo == null) return;
-        
+
         ResourceLocation currentSkin = player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN);
         ClientSkinData wantedSkin = playerSkinMap.get(player.getUUID());
         if(wantedSkin != null) {

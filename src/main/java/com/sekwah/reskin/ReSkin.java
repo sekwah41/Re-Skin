@@ -1,6 +1,6 @@
 package com.sekwah.reskin;
 
-import com.sekwah.reskin.capabilities.CapabilityHandler;
+import com.sekwah.reskin.capabilities.SkinCapabilityHandler;
 import com.sekwah.reskin.client.ClientSkinManager;
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.config.SkinConfig;
@@ -42,7 +42,7 @@ public class ReSkin {
 
     private void setup(final FMLCommonSetupEvent event) {
         PacketHandler.init();
-        CapabilityHandler.register();
+        SkinCapabilityHandler.register();
         SkinCommands.registerNewArgTypes();
     }
 

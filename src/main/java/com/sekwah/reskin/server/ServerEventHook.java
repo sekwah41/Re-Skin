@@ -2,11 +2,12 @@ package com.sekwah.reskin.server;
 
 import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.ReSkin;
-import com.sekwah.reskin.capabilities.SkinLocationProvider;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
+import com.sekwah.reskin.capabilities.SkinCapabilityHandler;
+import com.sekwah.reskin.capabilities.SkinData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -20,19 +21,19 @@ public class ServerEventHook {
 
     @SubscribeEvent
     public static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
-        if (event.getObject() instanceof PlayerEntity) {
-            event.addCapability(SKIN_LOCATION, new SkinLocationProvider());
+        if (event.getObject() instanceof Player) {
+            event.addCapability(SKIN_LOCATION, new SkinData());
         }
     }
 
     @SubscribeEvent
     public static void playerJoin(EntityJoinWorldEvent event) {
-        if(event.getEntity() instanceof PlayerEntity) {
-            event.getEntity().getCapability(SkinLocationProvider.SKIN_LOC, null).ifPresent(skin -> {
-                CustomSkinManager.setSkin((PlayerEntity) event.getEntity(),
+        if(event.getEntity() instanceof Player player) {
+            event.getEntity().getCapability(SkinCapabilityHandler.SKIN_LOC, null).ifPresent(skin -> {
+                CustomSkinManager.setSkin(player,
                         skin.getSkin());
-                if(event.getEntity() instanceof ServerPlayerEntity) {
-                    CustomSkinManager.sendAllToPlayer((ServerPlayerEntity) event.getEntity(), true);
+                if(event.getEntity() instanceof ServerPlayer serverPlayer) {
+                    CustomSkinManager.sendAllToPlayer(serverPlayer, true);
                 }
             });
         }
