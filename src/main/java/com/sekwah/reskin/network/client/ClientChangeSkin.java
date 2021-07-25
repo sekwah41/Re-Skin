@@ -1,8 +1,8 @@
 package com.sekwah.reskin.network.client;
 
 import com.sekwah.reskin.client.ClientSkinManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -21,14 +21,14 @@ public class ClientChangeSkin {
         this.isTransparent = isTransparent;
     }
 
-    public static void encode(ClientChangeSkin msg, PacketBuffer outBuffer) {
+    public static void encode(ClientChangeSkin msg, FriendlyByteBuf outBuffer) {
         outBuffer.writeUUID(msg.uuid);
         outBuffer.writeUtf(msg.url);
         outBuffer.writeUtf(msg.bodyType);
         outBuffer.writeBoolean(msg.isTransparent);
     }
 
-    public static ClientChangeSkin decode(PacketBuffer inBuffer) {
+    public static ClientChangeSkin decode(FriendlyByteBuf inBuffer) {
         UUID uuid = inBuffer.readUUID();
         String url = inBuffer.readUtf();
         String bodyType = inBuffer.readUtf();

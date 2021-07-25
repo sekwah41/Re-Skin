@@ -1,17 +1,17 @@
 package com.sekwah.reskin.network.server;
 
 import com.sekwah.reskin.CustomSkinManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
 public class ServerRequestSkins {
 
-    public static void encode(ServerRequestSkins msg, PacketBuffer outBuffer) {
+    public static void encode(ServerRequestSkins msg, FriendlyByteBuf outBuffer) {
     }
 
-    public static ServerRequestSkins decode(PacketBuffer inBuffer) {
+    public static ServerRequestSkins decode(FriendlyByteBuf inBuffer) {
         return new ServerRequestSkins();
     }
 

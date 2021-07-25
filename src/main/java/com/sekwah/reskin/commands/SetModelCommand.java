@@ -7,41 +7,41 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.config.SkinConfig;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.ISuggestionProvider;
-import net.minecraft.command.arguments.EntityArgument;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Collection;
 import java.util.Collections;
 
-import static net.minecraft.command.Commands.argument;
-import static net.minecraft.command.Commands.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
 
 public class SetModelCommand {
 
-    private static SuggestionProvider<CommandSource> MODEL_SUGGESTIONS = (ctx, builder)
-            -> ISuggestionProvider.suggest(new String[]{"default", "slim"}, builder);
+    private static SuggestionProvider<CommandSourceStack> MODEL_SUGGESTIONS = (ctx, builder)
+            -> SharedSuggestionProvider.suggest(new String[]{"default", "slim"}, builder);
 
     private static final String MODEL_ARG = "modelType";
 
-    public static void register(CommandDispatcher<CommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
 
         // Thing to note, arguments are handled in alphabetical order.
-        LiteralArgumentBuilder<CommandSource> setModel = literal("setmodel")
+        LiteralArgumentBuilder<CommandSourceStack> setModel = literal("setmodel")
                 .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                 .then(argument(MODEL_ARG, StringArgumentType.word())
                         .suggests(MODEL_SUGGESTIONS)
                         .executes(ctx -> {
-                            ServerPlayerEntity entity = ctx.getSource().getPlayerOrException();
+                            ServerPlayer entity = ctx.getSource().getPlayerOrException();
                             String modelType = StringArgumentType.getString(ctx, MODEL_ARG);
                             return execute(ctx.getSource(), Collections.singletonList(entity), modelType);
                         })
                         .requires((sender) -> (!SkinConfig.OTHERS_SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                         .then(argument("targets", EntityArgument.players())
                                 .executes(ctx -> {
-                                    Collection<ServerPlayerEntity> targetPlayers = EntityArgument.getPlayers(ctx, "targets");
+                                    Collection<ServerPlayer> targetPlayers = EntityArgument.getPlayers(ctx, "targets");
                                     String modelType = StringArgumentType.getString(ctx, MODEL_ARG);
                                     return execute(ctx.getSource(), targetPlayers, modelType);
                                 })));
@@ -49,12 +49,12 @@ public class SetModelCommand {
         dispatcher.register(setModel);
     }
 
-    private static int execute(CommandSource source, Collection<ServerPlayerEntity> targets, String modelType) {
+    private static int execute(CommandSourceStack source, Collection<ServerPlayer> targets, String modelType) {
         targets.forEach(target -> {
             if (target == null) {
                 return;
             }
-            source.sendSuccess(new TranslationTextComponent("setskin.setplayermodel", target.getDisplayName(), modelType), false);
+            source.sendSuccess(new TranslatableComponent("setskin.setplayermodel", target.getDisplayName(), modelType), false);
             CustomSkinManager.setModel(target, modelType);
         });
         if (targets.size() == 0) {

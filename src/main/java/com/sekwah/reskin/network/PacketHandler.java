@@ -4,11 +4,11 @@ import com.sekwah.reskin.ReSkin;
 import com.sekwah.reskin.network.client.ClientChangeSkin;
 import com.sekwah.reskin.network.client.ClientClearSkinCache;
 import com.sekwah.reskin.network.server.ServerRequestSkins;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import net.minecraftforge.fmllegacy.network.NetworkRegistry;
+import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
 
 public class PacketHandler {
 
@@ -30,7 +30,7 @@ public class PacketHandler {
         SKIN_CHANNEL.registerMessage(100, ServerRequestSkins.class, ServerRequestSkins::encode, ServerRequestSkins::decode, ServerRequestSkins.Handler::handle);
     }
 
-    public static void sendToPlayer(Object obj, ServerPlayerEntity player) {
+    public static void sendToPlayer(Object obj, ServerPlayer player) {
         SKIN_CHANNEL.sendTo(obj, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 }

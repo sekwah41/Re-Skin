@@ -1,14 +1,14 @@
 package com.sekwah.reskin.client;
 
+import com.mojang.blaze3d.platform.NativeImage;
+import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.DownloadingTexture;
-import net.minecraft.client.renderer.texture.NativeImage;
+import net.minecraft.client.renderer.texture.HttpTexture;
 import net.minecraft.client.renderer.texture.SimpleTexture;
-import net.minecraft.client.renderer.texture.TextureUtil;
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.io.FileUtils;
@@ -75,7 +75,7 @@ public class HDDownloadingTexture extends SimpleTexture {
     }
 
     @Override
-    public void load(IResourceManager manager) throws IOException {
+    public void load(ResourceManager manager) throws IOException {
         Minecraft.getInstance().execute(() -> {
             if (!this.textureUploaded) {
                 try {
@@ -157,7 +157,7 @@ public class HDDownloadingTexture extends SimpleTexture {
     }
 
     /**
-     * {@link DownloadingTexture#processLegacySkin(net.minecraft.client.renderer.texture.NativeImage)}
+     * HttpTexture#processLegacySkin(com.mojang.blaze3d.platform.NativeImage)
      * @param nativeImageIn
      * @return
      */

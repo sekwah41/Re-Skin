@@ -1,6 +1,6 @@
 package com.sekwah.reskin.client;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class ClientSkinData {
 
