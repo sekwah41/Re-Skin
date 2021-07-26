@@ -1,3 +1,18 @@
+# v2.1.1 (Mon Jul 26 2021)
+
+#### 🐛 Bug Fix
+
+- fix: Capability info lost on player death and cross dimension [#63](https://github.com/sekwah41/Re-Skin/pull/63) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Update Deps ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Update Deps [#60](https://github.com/sekwah41/Re-Skin/pull/60) ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 2
+
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v2.1.0 (Sun Jul 25 2021)
 
 #### 🚀 Enhancement
