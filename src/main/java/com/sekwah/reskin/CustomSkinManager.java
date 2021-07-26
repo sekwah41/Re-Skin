@@ -19,7 +19,7 @@ public class CustomSkinManager {
 
     public static void setSkin(Player target, String url) {
         if(target != null) {
-            target.getCapability(SkinCapabilityHandler.SKIN_LOC, null).ifPresent(skinCap -> {
+            target.getCapability(SkinCapabilityHandler.SKIN_DATA, null).ifPresent(skinCap -> {
                 skinCap.setSkin(url);
                 if(url.length() > 0) {
                     PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUUID(), url, skinCap.getModelType(), SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));
@@ -40,7 +40,7 @@ public class CustomSkinManager {
 
     public static void setModel(Player target, String modelType) {
         if(target != null) {
-            target.getCapability(SkinCapabilityHandler.SKIN_LOC, null).ifPresent(skinCap -> {
+            target.getCapability(SkinCapabilityHandler.SKIN_DATA, null).ifPresent(skinCap -> {
                 skinCap.setModelType(modelType);
                 if(modelType.length() > 0) {
                     PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUUID(), skinCap.getSkin(), modelType, SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));

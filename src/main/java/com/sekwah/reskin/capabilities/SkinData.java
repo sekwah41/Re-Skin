@@ -5,7 +5,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
@@ -15,7 +14,7 @@ import javax.annotation.Nullable;
  * Its best to use the type tag for now as if there is old data from earlier mc versions it can be a blank string
  * or other types of data. So just type cast and rip out what data you can.
  */
-public class SkinData implements ISkinData, INBTSerializable<Tag>, ICapabilityProvider {
+public class SkinData implements ISkinData, ICapabilityProvider {
 
     private String url = "";
     private String bodyType = "default";
@@ -65,6 +64,6 @@ public class SkinData implements ISkinData, INBTSerializable<Tag>, ICapabilityPr
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return SkinCapabilityHandler.SKIN_LOC.orEmpty(cap, holder);
+        return SkinCapabilityHandler.SKIN_DATA.orEmpty(cap, holder);
     }
 }
