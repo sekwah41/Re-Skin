@@ -1,3 +1,17 @@
+# v2.1.2 (Thu Aug 05 2021)
+
+#### 🐛 Bug Fix
+
+- fix: Skin transparency in first person [#64](https://github.com/sekwah41/Re-Skin/pull/64) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Update Deps ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 2
+
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v2.1.1 (Mon Jul 26 2021)
 
 #### 🐛 Bug Fix
