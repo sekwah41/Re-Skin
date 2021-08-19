@@ -1,0 +1,8 @@
+{
+  "setskin.clearedcache": "Skin cache cleared. Will now re-download all needed skins.",
+  "setskin.notwhitelisted": "The desired skin url is not from a whitelisted server.",
+  "setskin.setplayerskin": "Set %s's skin to %s",
+  "setskin.setplayermodel": "Set %s's model to %s",
+  "setskin.resetplayer": "Reset %s's skin",
+  "argument.nohttps": "URL must start with https://"
+}

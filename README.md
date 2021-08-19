@@ -1,25 +1,13 @@
 # Re:Skin Advanced Portals ![GitHub Workflow Status](https://github.com/sekwah41/Re-Skin/actions/workflows/gradle.yml/badge.svg?branch=release-forge-1.16)
 Skin customiser for mc https://www.curseforge.com/minecraft/mc-mods/re-skin
 
+# Current setup
+Currently, I am using a multi project setup to help handle keeping versions relatively up to date.
+It's also so that I don't get overrun with repos and forget about a version or the versions between fabric and forge mismatch.
 
-# Contributing
-Please ensure that your commits are in the following style for PR's
+Due to the automations I have made I can't really have different branches for each version.
 
-https://www.conventionalcommits.org/en/v1.0.0/
+# How to run forge or fabric in intellij.
+You will need to generate the runs and then select the main module. Same for fabric.
+![img.png](.github/images/intellij.png)
 
-Accepted tags mostly follow the Angular style and are meant to only loosely be followed.
-When commits close an issue refer in the commit description in the following style (Refs #1, #2, #3)
-## Types available
-* **build**: Changes that affect the build system or external dependencies
-* **ci**: Changes to our CI configuration files and scripts
-* **docs**: Documentation only changes
-* **feat**: A new feature
-* **fix**: A bug fix
-* **perf**: A code change that improves performance
-* **refactor**: A code change that neither fixes a bug nor adds a feature
-* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-* **chore**: Other changes that don't modify src or test files
-<!---
-We don't currently do tests. But in case.
- * **test**: Adding missing tests or correcting existing tests
--->

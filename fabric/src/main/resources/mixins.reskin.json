@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.sekwah.whilewewait.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+  ],
+  "client": [
+    "GameStartMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "version": "${version}",
+  "id": "whilewewait",
+  "name": "While We Wait",
+  "environment" : "client",
+  "authors": [
+    "Sekwah"
+  ],
+  "contact": {
+    "homepage": "https://minecraft.curseforge.com/projects/whilewewait",
+    "sources": "https://github.com/sekwah41/While-We-Wait",
+    "issues": "https://github.com/sekwah41/While-We-Wait/issues"
+  },
+  "description": "Just a little something to fill the void that is waiting for a world\n\nMusic is The Elevator Bossa Nova from Bensound.com",
+  "mixins": ["mixins.reskin.json"],
+  "custom": {
+    "modmenu:clientsideOnly": true
+  }
+}

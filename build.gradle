@@ -1,36 +1,20 @@
-import org.apache.http.HttpEntity
-import org.apache.http.client.methods.CloseableHttpResponse
-import org.apache.http.client.methods.HttpPost
-import org.apache.http.entity.ContentType
-import org.apache.http.entity.mime.MultipartEntityBuilder
-import org.apache.http.impl.client.CloseableHttpClient
-import org.apache.http.impl.client.HttpClients
 
 buildscript {
     repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url = "https://repo.spongepowered.org/maven" }
         maven {url "https://plugins.gradle.org/m2/"}
+        maven {
+            name = "FabricMC"
+            url = "https://maven.fabricmc.net"
+        }
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
-        classpath "org.apache.httpcomponents:httpmime:4.5.13"
     }
 }
 plugins {
-    id "com.matthewprenger.cursegradle" version "1.4.0"
     id 'net.researchgate.release' version '2.8.1'
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: "java"
-apply plugin: 'eclipse'
-//apply plugin: 'maven-publish'
-
-// May be able to remove it
-apply plugin: "org.spongepowered.mixin"
 
 def branch = System.getenv("GITHUB_REF")
 if(branch != null) {
@@ -39,263 +23,8 @@ if(branch != null) {
 def isCanary = version.toString().contains('canary')
 
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = project.archive
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
-
-//repositories {
-//    mavenLocal()
-//    mavenCentral()
-//    maven {
-//        url 'https://dvs1.progwml6.com/files/maven'
-//    }
-//    maven { url = "https://maven.sekwah.com" }
-//    maven {
-//        url "https://minecraft.curseforge.com/api/maven/"
-//    }
-//}
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-minecraft {
-    // The mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   Snapshot are built nightly.
-    // stable_#            Stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not always work.
-    // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'official', version: project.minecraft_version
-
-    // This is for personal local tests i was doing ignore it ;)
-    //mappings channel: 'snapshot', version: '20200706-unofficialtest-1.16.1'
-
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-
-            mods {
-                "${project.modid}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', ''
-            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                "${project.modid}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            forceExit false
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', ''
-            //property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', project.modid, '--all', '--output', file('src/generated/resources/')
-
-            mods {
-                "${project.modid}" {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-configurations {
-    annotationProcessor.extendsFrom minecraft
-}
-
-dependencies {
-
-    // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
-    // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
-    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.43'
-
-    //compile "com.sekwah:SekCLib:${sekclib_version}:deobf"
-    // Trick intellij to allow for better editing in here for the discord task
-    // compile "org.apache.httpcomponents:httpmime:4.5.13"
-
-    // compile fg.deobf("curse.maven:neat:${project.neat_fileid}")
-
-    // compile fg.deobf("curse.maven:hwyla:${project.hwyla_fileid}")
-
-    //include('org.ow2.asm:asm-debug-all:5.2')
-
-    // You may put jars on which you depend on in ./libs or you may define them like so..
-    // compile "some.group:artifact:version:classifier"
-    // compile "some.group:artifact:version"
-
-    // Real examples
-    // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-}
-
-// these currently don't work. Re-enable them when forge is shipping with them again.
-/*mixin {
-    add sourceSets.main, "mixins.${project.modid}.refmap.json"
-}*/
-
-// Example for how to get properties into the manifest for reading by the runtime..
-jar {
-    finalizedBy 'reobfJar'
-    classifier = 'forge'
-    manifest {
-        attributes([
-                "Specification-Title": project.modid,
-                "Specification-Vendor": project.vendor,
-                "Specification-Version": "1", // We are version 1 of ourselves
-                "Implementation-Title": project.name,
-                "Implementation-Version": "${version}",
-                "Implementation-Vendor" :project.vendor,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "mixins.${project.modid}.json"
-        ])
-    }
-}
-
-// Example configuration to allow publishing using the maven-publish task
-// we define a custom artifact that is sourced from the reobfJar output task
-// and then declare that to be published
-// Note you'll need to add a repository here
-def reobfFile = file("$buildDir/reobfJar/output.jar")
-def reobfArtifact = artifacts.add('default', reobfFile) {
-    type 'jar'
-    builtBy 'reobfJar'
-}
-
-task srcJar(type: Jar) {
-    build.dependsOn it
-    from sourceSets.main.allSource
-    classifier = 'forge-sources'
-    from file("LICENSE")
-}
-
-task deobfJar(type: Jar) {
-    build.dependsOn it
-    from sourceSets.main.output
-    classifier = 'forge-deobf'
-    from file("LICENSE")
-}
-
-//publishing {
-//    publications {
-//        mavenJava(MavenPublication) {
-//            artifact reobfArtifact
-//            artifact srcJar
-//            artifact deobfJar
-//        }
-//    }
-//    repositories {
-//        maven {
-//            url "s3://sekwah-maven/"
-//            authentication {
-//                awsIm(AwsImAuthentication)
-//            }
-//        }
-//    }
-//}
-
-/** For pre-releases and testers to be able to try the latest commits if they want.
- * If the builds start exceeding 8MB then we may want to upload to s3 instead and periodically clear.
- * TODO possibly add a task that announces when builds are made?
- * Though add a note that it may take a while for Curse to approve the files.
- */
-task discordupload {
-    dependsOn(jar)
-    doLast {
-        String discordWebhook = System.getenv("DISCORD_WEBHOOK")
-
-        if(discordWebhook != null) {
-            println("Logging Into Discord")
-
-            CloseableHttpClient httpClient = HttpClients.createDefault()
-            HttpPost uploadFile = new HttpPost(discordWebhook)
-
-            MultipartEntityBuilder builder = MultipartEntityBuilder.create()
-            if(isCanary) {
-                builder.addTextBody("content", "New canary Build")
-            } else {
-                builder.addTextBody("content", "New release build\n\n" +
-                        "Current Features: <${project.github}/blob/${branch}/CHANGELOG.md>")
-            }
-
-            builder.addBinaryBody("file", file(jar.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jar.archiveName)
-
-            HttpEntity multipart = builder.build()
-
-            uploadFile.setEntity(multipart)
-            CloseableHttpResponse response = httpClient.execute(uploadFile)
-            response.getEntity()
-
-            println("Posted build")
-
-        } else {
-            println("Discord webhook unspecified")
-        }
-    }
-}
-
-tasks.curseforge.enabled = System.getenv("CURSE_API") != null
-
-curseforge {
-    logger.info("Curse api: " + System.getenv("CURSE_API"))
-    if (System.getenv("CURSE_API") != null) {
-        apiKey = System.getenv("CURSE_API")
-    }
-    project {
-        id = project.curse_project_id
-        // TODO add code to reference this but also cut the latest change logs in for the files
-        changelog = "${project.github}/blob/${branch}/CHANGELOG.md"
-        changelogType = 'markdown'
-        releaseType = 'release'
-        addGameVersion '1.17.1'
-
-        mainArtifact(jar){
-
-        }
-        addArtifact srcJar
-        addArtifact deobfJar
-    }
-}
 
 // https://github.com/researchgate/gradle-release
 // Only other plugin I can find using auto & gradle https://github.com/intuit/hooks
@@ -326,12 +55,32 @@ task cleanbuildfolder {
     }
 }
 
+task build {
+    doLast {
+        println "Copy all files for release plugin."
+        copy {
+            from "${rootDir}/fabric/build/libs"
+            into "${rootDir}/build/libs"
+        }
+        copy {
+            from "${rootDir}/forge/build/libs"
+            into "${rootDir}/build/libs"
+        }
+    }
+}
+
+task compileJava {
+    doLast {
+        println "This is a dummy task to run the underlying projects"
+    }
+}
+
 compileJava.dependsOn 'cleanbuildfolder'
 
 // Publish rules
 // Current behavior seems to be canary or release. Though pre-releases may break this pattern.
 publish.dependsOn 'build'
-publish.finalizedBy 'discordupload'
+//publish.finalizedBy 'discordupload'
 if (!isCanary) {
-    publish.finalizedBy 'curseforge'
+    //publish.finalizedBy 'curseforge'
 }

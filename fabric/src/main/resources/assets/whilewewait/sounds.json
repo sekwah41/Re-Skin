@@ -1,0 +1,11 @@
+{
+  "waiting": {
+    "category": "record",
+    "sounds": [
+      {
+        "name": "whilewewait:music/waiting",
+        "stream": false
+      }
+    ]
+  }
+}
