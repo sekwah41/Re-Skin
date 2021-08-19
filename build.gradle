@@ -177,7 +177,7 @@ dependencies {
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     finalizedBy 'reobfJar'
-    classifier = 'universal'
+    classifier = 'forge'
     manifest {
         attributes([
                 "Specification-Title": project.modid,
@@ -205,14 +205,14 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
 task srcJar(type: Jar) {
     build.dependsOn it
     from sourceSets.main.allSource
-    classifier = 'sources'
+    classifier = 'forge-sources'
     from file("LICENSE")
 }
 
 task deobfJar(type: Jar) {
     build.dependsOn it
     from sourceSets.main.output
-    classifier = 'deobf'
+    classifier = 'forge-deobf'
     from file("LICENSE")
 }
 
