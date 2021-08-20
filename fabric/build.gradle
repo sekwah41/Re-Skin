@@ -30,6 +30,10 @@ repositories {
 		name = "Terrafromer MC"
 		url = "https://maven.terraformersmc.com/releases"
 	}
+	maven {
+		name = 'Ladysnake Mods'
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
 }
 
 processResources {
@@ -53,6 +57,11 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:0.37.1+1.17"
+
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:3.1.1"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:3.1.1"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:3.1.1"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:3.1.1"
 }
 
 
