@@ -3,6 +3,9 @@ plugins {
 	id "com.matthewprenger.cursegradle" version "1.4.0"
 }
 
+// Needs to be applied after plugins so it knows what (jar) is
+apply from: '../discord.gradle'
+
 def branch = System.getenv("GITHUB_REF")
 if(branch != null) {
 	branch = branch.replace('refs/heads/', '')
@@ -62,7 +65,11 @@ curseforge {
 		changelog = "${project.github}/blob/${branch}/CHANGELOG.md"
 		changelogType = 'markdown'
 		releaseType = 'release'
+		addGameVersion 'Fabric'
 		addGameVersion '1.17.1'
+		relations {
+			requiredDependency "fabric-api"
+		}
 
 		mainArtifact remapJar
 		addArtifact jar
@@ -91,6 +98,7 @@ compileJava.dependsOn 'cleanbuildfolder'
 // Publish rules
 // Current behavior seems to be canary or release. Though pre-releases may break this pattern.
 publish.dependsOn 'build'
+//publish.finalizedBy 'discordupload'
 if (!isCanary) {
 	publish.finalizedBy 'curseforge'
 }
