@@ -21,7 +21,9 @@ buildscript {
  * Though add a note that it may take a while for Curse to approve the files.
  */
 task discordupload {
-    dependsOn(jar)
+    // Check if its trying to upload the fabric dev copy as jar is release for forge but remapJar is for fabric.
+    var jarTask = jar.getArchiveClassifier().get().endsWith("-dev") ? remapJar : jar
+    dependsOn(jarTask)
     doLast {
         String discordWebhook = System.getenv("DISCORD_WEBHOOK")
 
@@ -39,7 +41,7 @@ task discordupload {
                         "Current Features: <${project.github}/blob/${branch}/CHANGELOG.md>")
             }
 
-            builder.addBinaryBody("file", file(jar.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jar.archiveName)
+            builder.addBinaryBody("file", file(jarTask.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jarTask.archiveName)
 
             HttpEntity multipart = builder.build()
 

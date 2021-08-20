@@ -1,11 +1,11 @@
 {
   "required": true,
-  "package": "com.sekwah.whilewewait.mixin",
+  "package": "com.sekwah.reskin.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
   ],
   "client": [
-    "GameStartMixin"
+    "client.PlayerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

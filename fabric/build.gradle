@@ -25,6 +25,7 @@ repositories {
 		name = "FabricMC"
 		url = "https://maven.fabricmc.net"
 	}
+	maven { url "https://maven.shedaniel.me/" }
 	maven {
 		name = "Terrafromer MC"
 		url = "https://maven.terraformersmc.com/releases"
@@ -42,10 +43,13 @@ processResources {
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:1.17.1"
-	mappings "net.fabricmc:yarn:1.17.1+build.29"
+	mappings minecraft.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:0.11.6"
 
-	modRuntime  "com.terraformersmc:modmenu:2.0.5"
+	modImplementation "com.terraformersmc:modmenu:2.0.5"
+
+	include "me.shedaniel.cloth:cloth-config-fabric:5.0.38"
+	modImplementation "me.shedaniel.cloth:cloth-config-fabric:5.0.38"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:0.37.1+1.17"
@@ -98,7 +102,7 @@ compileJava.dependsOn 'cleanbuildfolder'
 // Publish rules
 // Current behavior seems to be canary or release. Though pre-releases may break this pattern.
 publish.dependsOn 'build'
-//publish.finalizedBy 'discordupload'
+publish.finalizedBy 'discordupload'
 if (!isCanary) {
 	publish.finalizedBy 'curseforge'
 }

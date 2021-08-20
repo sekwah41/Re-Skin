@@ -1,20 +1,31 @@
 {
   "schemaVersion": 1,
   "version": "${version}",
-  "id": "whilewewait",
-  "name": "While We Wait",
-  "environment" : "client",
+  "id": "reskin",
+  "name": "Re:Skin",
+  "environment" : "*",
   "authors": [
     "Sekwah"
   ],
-  "contact": {
-    "homepage": "https://minecraft.curseforge.com/projects/whilewewait",
-    "sources": "https://github.com/sekwah41/While-We-Wait",
-    "issues": "https://github.com/sekwah41/While-We-Wait/issues"
+  "entrypoints": {
+    "main": [
+      "com.sekwah.reskin.ReSkin"
+    ],
+    "client": [
+      "com.sekwah.reskin.ReSkinClient"
+    ],
+    "modmenu": [
+      "com.sekwah.reskin.config.ModMenuIntegration"
+    ]
   },
-  "description": "Just a little something to fill the void that is waiting for a world\n\nMusic is The Elevator Bossa Nova from Bensound.com",
-  "mixins": ["mixins.reskin.json"],
-  "custom": {
-    "modmenu:clientsideOnly": true
-  }
+  "depends": {
+    "fabric": "*"
+  },
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/re-skin",
+    "sources": "https://github.com/sekwah41/Re-Skin",
+    "issues": "https://github.com/sekwah41/Re-Skin/issues"
+  },
+  "description": "A skin editing mod for role plays, HD skins and whatever you can imagine!",
+  "mixins": ["mixins.reskin.json"]
 }
