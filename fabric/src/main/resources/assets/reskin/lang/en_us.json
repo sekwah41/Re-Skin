@@ -1,6 +1,8 @@
 {
-  "text.autoconfig.reskin.option.allowTransparentSkin": "Server side variable allowing transparent skins to be set",
+  "text.autoconfig.reskin.title": "Re:Skin Config",
+  "text.autoconfig.reskin.option.allowTransparentSkin": "Server side, enables transparent skins",
   "text.autoconfig.reskin.option.selfSkinNeedsOp": "Does setting their own skins need op?",
   "text.autoconfig.reskin.option.othersSkinNeedsOp": "Does setting other peoples skins need op?",
-  "text.autoconfig.reskin.option.enableSkinServerWhitelist": "Server skin whitelist"
+  "text.autoconfig.reskin.option.enableSkinServerWhitelist": "Server skin whitelist",
+  "text.autoconfig.reskin.option.skinServerWhitelist": "List of servers, separated using ';'"
 }
