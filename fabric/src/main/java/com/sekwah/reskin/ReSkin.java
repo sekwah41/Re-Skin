@@ -2,6 +2,7 @@ package com.sekwah.reskin;
 
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.config.SkinConfig;
+import com.sekwah.reskin.network.server.ServerPacketHandler;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -10,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ReSkin implements ModInitializer {
+
+    public static final String MOD_ID = "reskin";
 
     public static final Logger LOGGER = LogManager.getLogger("Re:Skin");
 
@@ -20,6 +23,8 @@ public class ReSkin implements ModInitializer {
          * SkinConfig config = AutoConfig.getConfigHolder(SkinConfig.class).getConfig();
          */
         AutoConfig.register(SkinConfig.class, GsonConfigSerializer::new);
+
+        ServerPacketHandler.registerServerPackets();
 
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             SkinCommands.register(dispatcher);

@@ -23,6 +23,7 @@ Due to the fact the mappings are the same the majority of the non api specific c
 https://mcforge.readthedocs.io/en/1.17.x/
 
 #Fabric
-https://fabricmc.net/wiki/tutorial:introduction
+https://fabricmc.net/wiki/tutorial:introduction  
 https://shedaniel.gitbook.io/cloth-config/auto-config/annotations
+https://github.com/OnyxStudios/Cardinal-Components-API/tree/1.17
 
