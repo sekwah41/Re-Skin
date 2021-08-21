@@ -18,13 +18,11 @@ public class ReSkin implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        /**
-         * To get
-         * SkinConfig config = AutoConfig.getConfigHolder(SkinConfig.class).getConfig();
-         */
         AutoConfig.register(SkinConfig.class, GsonConfigSerializer::new);
 
         ServerPacketHandler.registerServerPackets();
+
+        SkinCommands.registerNewArgTypes();
 
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             SkinCommands.register(dispatcher);
