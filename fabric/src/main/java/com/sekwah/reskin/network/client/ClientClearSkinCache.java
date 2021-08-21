@@ -1,14 +1,28 @@
 package com.sekwah.reskin.network.client;
 
 import com.sekwah.reskin.ReSkin;
+import com.sekwah.reskin.network.NetworkConst;
+import com.sekwah.reskin.network.PacketEncoder;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
-public class ClientClearSkinCache {
+public class ClientClearSkinCache implements PacketEncoder {
 
-    public static void encode(ClientClearSkinCache msg, FriendlyByteBuf outBuffer) {
+    @Override
+    public ResourceLocation getPacketId() {
+        return NetworkConst.CLIENT_CLEAR_SKIN_CACHE_PACKET;
+    }
+
+    @Override
+    public FriendlyByteBuf encode() {
+        return PacketByteBufs.create();
+    }
+
+    public void encode(ClientClearSkinCache msg, FriendlyByteBuf outBuffer) {
     }
 
     public static ClientClearSkinCache decode(FriendlyByteBuf inBuffer) {

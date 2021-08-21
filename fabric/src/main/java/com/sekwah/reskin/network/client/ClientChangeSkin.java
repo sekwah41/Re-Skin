@@ -1,14 +1,18 @@
 package com.sekwah.reskin.network.client;
 
 import com.sekwah.reskin.ReSkin;
+import com.sekwah.reskin.network.NetworkConst;
+import com.sekwah.reskin.network.PacketEncoder;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.UUID;
 
-public class ClientChangeSkin {
+public class ClientChangeSkin implements PacketEncoder {
 
     public final UUID uuid;
     public final String url;
@@ -22,11 +26,19 @@ public class ClientChangeSkin {
         this.isTransparent = isTransparent;
     }
 
-    public static void encode(ClientChangeSkin msg, FriendlyByteBuf outBuffer) {
-        outBuffer.writeUUID(msg.uuid);
-        outBuffer.writeUtf(msg.url);
-        outBuffer.writeUtf(msg.bodyType);
-        outBuffer.writeBoolean(msg.isTransparent);
+    @Override
+    public ResourceLocation getPacketId() {
+        return NetworkConst.SERVER_REQUEST_SKINS_PACKET;
+    }
+
+    @Override
+    public FriendlyByteBuf encode() {
+        FriendlyByteBuf buf = PacketByteBufs.create();
+        buf.writeUUID(this.uuid);
+        buf.writeUtf(this.url);
+        buf.writeUtf(this.bodyType);
+        buf.writeBoolean(this.isTransparent);
+        return buf;
     }
 
     public static ClientChangeSkin decode(FriendlyByteBuf inBuffer) {
