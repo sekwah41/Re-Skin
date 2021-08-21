@@ -16,10 +16,18 @@
     ],
     "modmenu": [
       "com.sekwah.reskin.config.ModMenuIntegration"
+    ],
+    "cardinal-components": [
+      "com.sekwah.reskin.components.SkinComponent"
     ]
   },
   "depends": {
     "fabric": "*"
+  },
+  "custom": {
+    "cardinal-components": [
+      "reskin:skindata"
+    ]
   },
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/re-skin",
