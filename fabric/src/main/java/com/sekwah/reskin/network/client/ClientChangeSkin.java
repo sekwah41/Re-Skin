@@ -6,6 +6,8 @@ import com.sekwah.reskin.network.NetworkConst;
 import com.sekwah.reskin.network.PacketEncoder;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -30,7 +32,7 @@ public class ClientChangeSkin implements PacketEncoder {
 
     @Override
     public ResourceLocation getPacketId() {
-        return NetworkConst.SERVER_REQUEST_SKINS_PACKET;
+        return NetworkConst.CLIENT_SKIN_CHANGE_PACKET;
     }
 
     @Override
@@ -52,10 +54,10 @@ public class ClientChangeSkin implements PacketEncoder {
         return new ClientChangeSkin(uuid, url, bodyType, isTransparent);
     }
 
-    public static void receive(MinecraftServer server, ServerPlayer player, ServerGamePacketListenerImpl handler, FriendlyByteBuf buf, PacketSender responseSender) {
+    public static void receive(Minecraft client, ClientPacketListener handler, FriendlyByteBuf buf, PacketSender responseSender) {
         ClientChangeSkin msg = decode(buf);
         ReSkin.LOGGER.info("Change Skin Packet");
-        server.execute(() ->
+        client.execute(() ->
                 ClientSkinManager.setSkin(msg.uuid, msg.url, msg.bodyType, msg.isTransparent));
     }
 }

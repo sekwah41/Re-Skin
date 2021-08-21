@@ -2,6 +2,7 @@ package com.sekwah.reskin.network.client;
 
 import com.sekwah.reskin.network.NetworkConst;
 import com.sekwah.reskin.network.PacketEncoder;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.resources.ResourceLocation;
@@ -20,8 +21,8 @@ public class ClientPacketHandler {
         wrapPacket(NetworkConst.CLIENT_CLEAR_SKIN_CACHE_PACKET, ClientClearSkinCache::receive);
     }
 
-    public static void wrapPacket(ResourceLocation location, ServerPlayNetworking.PlayChannelHandler recieve) {
-        ServerPlayNetworking.registerGlobalReceiver(location, recieve);
+    public static void wrapPacket(ResourceLocation location, ClientPlayNetworking.PlayChannelHandler recieve) {
+        ClientPlayNetworking.registerGlobalReceiver(location, recieve);
     }
 
     public static void sendToPlayer(PacketEncoder packet, ServerPlayer player) {

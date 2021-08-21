@@ -3,6 +3,7 @@ package com.sekwah.reskin.commands;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.config.SkinConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.commands.CommandSourceStack;
@@ -45,8 +46,7 @@ public class ClearSkinCommand {
                 return;
             }
             source.sendSuccess(new TranslatableComponent("setskin.resetplayer", target.getDisplayName()), false);
-            // TODO uncomment
-            //CustomSkinManager.resetSkin(target);
+            CustomSkinManager.resetSkin(target);
         });
         if(targets.size() == 0) {
             return -1;

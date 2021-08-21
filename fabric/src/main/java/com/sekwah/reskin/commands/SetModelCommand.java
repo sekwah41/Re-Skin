@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
+import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.config.SkinConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.commands.CommandSourceStack;
@@ -57,8 +58,7 @@ public class SetModelCommand {
                 return;
             }
             source.sendSuccess(new TranslatableComponent("setskin.setplayermodel", target.getDisplayName(), modelType), false);
-            // TODO uncomment
-            //CustomSkinManager.setModel(target, modelType);
+            CustomSkinManager.setModel(target, modelType);
         });
         if (targets.size() == 0) {
             return -1;

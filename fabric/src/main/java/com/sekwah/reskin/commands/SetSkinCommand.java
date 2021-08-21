@@ -4,6 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
+import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.commands.arguments.URLArgument;
 import com.sekwah.reskin.config.SkinConfig;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -70,8 +71,7 @@ public class SetSkinCommand {
                 return;
             }
             source.sendSuccess(new TranslatableComponent("setskin.setplayerskin", target.getDisplayName(), url), false);
-            // TODO uncomment
-            //CustomSkinManager.setSkin(target, url);
+            CustomSkinManager.setSkin(target, url);
         });
         if (targets.size() == 0) {
             return -1;

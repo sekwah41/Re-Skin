@@ -9,6 +9,8 @@ public class ReSkinClient implements ClientModInitializer {
     public void onInitializeClient() {
         ReSkin.LOGGER.info("Initialising Re:Skin client");
 
+        ClientPacketHandler.registerClientPackets();
+
     }
 
 }
