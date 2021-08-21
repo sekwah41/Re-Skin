@@ -5,7 +5,9 @@
   "mixins": [
   ],
   "client": [
-    "client.PlayerRendererMixin"
+    "client.PlayerRendererMixin",
+    "client.PlayerInfoAccessor",
+    "client.AbstractClientPlayerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

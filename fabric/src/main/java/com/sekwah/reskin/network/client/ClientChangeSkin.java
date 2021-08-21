@@ -1,14 +1,16 @@
 package com.sekwah.reskin.network.client;
 
 import com.sekwah.reskin.ReSkin;
+import com.sekwah.reskin.client.ClientSkinManager;
 import com.sekwah.reskin.network.NetworkConst;
 import com.sekwah.reskin.network.PacketEncoder;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import java.util.UUID;
 
@@ -50,10 +52,10 @@ public class ClientChangeSkin implements PacketEncoder {
         return new ClientChangeSkin(uuid, url, bodyType, isTransparent);
     }
 
-    public static void receive(Minecraft client, ClientPacketListener handler, FriendlyByteBuf buf, PacketSender responseSender) {
+    public static void receive(MinecraftServer server, ServerPlayer player, ServerGamePacketListenerImpl handler, FriendlyByteBuf buf, PacketSender responseSender) {
         ClientChangeSkin msg = decode(buf);
         ReSkin.LOGGER.info("Change Skin Packet");
-//      client.execute(() ->
-//          ClientSkinManager.setSkin(msg.uuid, msg.url, msg.bodyType, msg.isTransparent));
+        server.execute(() ->
+                ClientSkinManager.setSkin(msg.uuid, msg.url, msg.bodyType, msg.isTransparent));
     }
 }

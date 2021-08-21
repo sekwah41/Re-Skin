@@ -5,6 +5,7 @@ import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.ComponentRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
+import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
@@ -17,6 +18,6 @@ public class SkinComponent implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(new ResourceLocation(ReSkin.MOD_ID, "skindata"), ISkinData.class);
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        registry.beginRegistration(Player.class, SKIN_DATA).impl(SkinData.class).end(SkinData::new);
+        registry.registerForPlayers(SKIN_DATA, SkinData::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 }

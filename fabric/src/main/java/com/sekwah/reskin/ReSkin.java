@@ -2,6 +2,7 @@ package com.sekwah.reskin;
 
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.config.SkinConfig;
+import com.sekwah.reskin.network.client.ClientPacketHandler;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -20,6 +21,8 @@ public class ReSkin implements ModInitializer {
         AutoConfig.register(SkinConfig.class, GsonConfigSerializer::new);
 
         SkinCommands.registerNewArgTypes();
+
+        ClientPacketHandler.registerClientPackets();
 
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             SkinCommands.register(dispatcher);
