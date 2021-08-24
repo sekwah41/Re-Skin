@@ -75,6 +75,12 @@ task compileJava {
     }
 }
 
+task curseforge {
+    doLast {
+        println "This is a dummy task to run the underlying projects"
+    }
+}
+
 compileJava.dependsOn 'cleanbuildfolder'
 
 // Publish rules
@@ -82,5 +88,5 @@ compileJava.dependsOn 'cleanbuildfolder'
 publish.dependsOn 'build'
 //publish.finalizedBy 'discordupload'
 if (!isCanary) {
-    //publish.finalizedBy 'curseforge'
+    publish.finalizedBy 'curseforge'
 }
