@@ -1,3 +1,21 @@
+# v2.2.0 (Tue Aug 24 2021)
+
+#### 🚀 Enhancement
+
+- feat: Fabric support [#66](https://github.com/sekwah41/Re-Skin/pull/66) ([@sekwah41](https://github.com/sekwah41))
+
+#### 🐛 Bug Fix
+
+- chore(ci): Update Deps ([@renovate-bot](https://github.com/renovate-bot))
+- chore: Removed unneeded file [#65](https://github.com/sekwah41/Re-Skin/pull/65) ([@sekwah41](https://github.com/sekwah41))
+
+#### Authors: 2
+
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v2.1.2 (Thu Aug 05 2021)
 
 #### 🐛 Bug Fix
