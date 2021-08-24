@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "version": "${version}",
+  "id": "reskin",
+  "name": "Re:Skin",
+  "environment" : "*",
+  "authors": [
+    "Sekwah"
+  ],
+  "entrypoints": {
+    "main": [
+      "com.sekwah.reskin.ReSkin"
+    ],
+    "client": [
+      "com.sekwah.reskin.ReSkinClient"
+    ],
+    "modmenu": [
+      "com.sekwah.reskin.config.ModMenuIntegration"
+    ],
+    "cardinal-components": [
+      "com.sekwah.reskin.components.SkinComponent"
+    ]
+  },
+  "depends": {
+    "fabric": "*"
+  },
+  "custom": {
+    "cardinal-components": [
+      "reskin:skindata"
+    ]
+  },
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/re-skin",
+    "sources": "https://github.com/sekwah41/Re-Skin",
+    "issues": "https://github.com/sekwah41/Re-Skin/issues"
+  },
+  "description": "A skin editing mod for role plays, HD skins and whatever you can imagine!",
+  "mixins": ["mixins.reskin.json"]
+}

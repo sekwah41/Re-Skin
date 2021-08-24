@@ -1,0 +1,116 @@
+plugins {
+	id 'fabric-loom' version '0.9-SNAPSHOT'
+	id "com.matthewprenger.cursegradle" version "1.4.0"
+}
+
+// Needs to be applied after plugins so it knows what (jar) is
+apply from: '../discord.gradle'
+
+def branch = System.getenv("GITHUB_REF")
+if(branch != null) {
+	branch = branch.replace('refs/heads/', '')
+}
+def isCanary = version.toString().contains('canary')
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16
+
+archivesBaseName = "${project.archive}-fabric"
+group = project.package
+
+loom {
+}
+
+repositories {
+	maven {
+		name = "FabricMC"
+		url = "https://maven.fabricmc.net"
+	}
+	maven { url "https://maven.shedaniel.me/" }
+	maven {
+		name = "Terrafromer MC"
+		url = "https://maven.terraformersmc.com/releases"
+	}
+	maven {
+		name = 'Ladysnake Mods'
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+dependencies {
+	//to change the versions see the gradle.properties file
+	minecraft "com.mojang:minecraft:1.17.1"
+	mappings minecraft.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:0.11.6"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.37.1+1.17"
+
+	modImplementation "com.terraformersmc:modmenu:2.0.5"
+
+	include "me.shedaniel.cloth:cloth-config-fabric:5.0.38"
+	modImplementation "me.shedaniel.cloth:cloth-config-fabric:5.0.38"
+
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:3.1.1"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:3.1.1"
+
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:3.1.1"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:3.1.1"
+}
+
+
+tasks.curseforge.enabled = System.getenv("CURSE_API") != null
+
+curseforge {
+	logger.info("Curse api: " + System.getenv("CURSE_API"))
+	if (System.getenv("CURSE_API") != null) {
+		apiKey = System.getenv("CURSE_API")
+	}
+	project {
+		id = project.curse_project_id
+		// TODO add code to reference this but also cut the latest change logs in for the files
+		changelog = "${project.github}/blob/${branch}/CHANGELOG.md"
+		changelogType = 'markdown'
+		releaseType = 'release'
+		addGameVersion 'Fabric'
+		addGameVersion '1.17.1'
+		relations {
+			requiredDependency "fabric-api"
+		}
+
+		mainArtifact remapJar
+		addArtifact jar
+	}
+
+	options {
+		forgeGradleIntegration = false
+	}
+}
+
+task publish {
+	doLast {
+		println "This is a dummy task to run others for version: ${version}"
+	}
+}
+
+task cleanbuildfolder {
+	doLast {
+		println "Cleaning up previous builds (to stop publishing old ones by mistake)"
+		project.delete(files("${buildDir}/libs"))
+	}
+}
+
+compileJava.dependsOn 'cleanbuildfolder'
+
+// Publish rules
+// Current behavior seems to be canary or release. Though pre-releases may break this pattern.
+publish.dependsOn 'build'
+publish.finalizedBy 'discordupload'
+if (!isCanary) {
+	publish.finalizedBy 'curseforge'
+}

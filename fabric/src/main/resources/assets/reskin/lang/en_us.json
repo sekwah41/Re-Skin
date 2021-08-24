@@ -1,0 +1,14 @@
+{
+  "text.autoconfig.reskin.title": "Re:Skin Config",
+  "text.autoconfig.reskin.option.allowTransparentSkin": "Server side, enables transparent skins",
+  "text.autoconfig.reskin.option.selfSkinNeedsOp": "Does setting their own skins need op?",
+  "text.autoconfig.reskin.option.othersSkinNeedsOp": "Does setting other peoples skins need op?",
+  "text.autoconfig.reskin.option.enableSkinServerWhitelist": "Server skin whitelist",
+  "text.autoconfig.reskin.option.skinServerWhitelist": "List of servers, separated using ';'",
+  "setskin.clearedcache": "Skin cache cleared. Will now re-download all needed skins.",
+  "setskin.notwhitelisted": "The desired skin url is not from a whitelisted server.",
+  "setskin.setplayerskin": "Set %s's skin to %s",
+  "setskin.setplayermodel": "Set %s's model to %s",
+  "setskin.resetplayer": "Reset %s's skin",
+  "argument.nohttps": "URL must start with https://"
+}
