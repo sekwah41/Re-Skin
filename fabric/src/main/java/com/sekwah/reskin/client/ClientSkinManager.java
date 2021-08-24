@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
 import org.objectweb.asm.tree.AbstractInsnNode;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 public class ClientSkinManager {
@@ -104,7 +105,7 @@ public class ClientSkinManager {
 
     public static void checkSkin(AbstractClientPlayer player) {
 
-        PlayerInfo playerInfo = ((AbstractClientPlayerAccessor) player).getPlayerInfo();
+        PlayerInfo playerInfo = ((AbstractClientPlayerAccessor) player).getPlayerInfoFunc();
         if(playerInfo == null) return;
 
         PlayerInfoAccessor playerInfoAccessor = ((PlayerInfoAccessor) playerInfo);

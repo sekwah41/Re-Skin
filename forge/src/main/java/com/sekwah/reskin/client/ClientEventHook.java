@@ -18,10 +18,10 @@ public class ClientEventHook {
     public static void doRender(TickEvent.RenderTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
             ClientSkinManager.loadQueuedSkins();
-        }
-        LocalPlayer client = Minecraft.getInstance().player;
-        if(client != null) {
-            ClientSkinManager.checkSkin(client);
+            LocalPlayer client = Minecraft.getInstance().player;
+            if(client != null) {
+                ClientSkinManager.checkSkin(client);
+            }
         }
     }
 
@@ -29,7 +29,7 @@ public class ClientEventHook {
     public static void leaveWorldEvent(ClientPlayerNetworkEvent.LoggedOutEvent event) {
         ClientSkinManager.clearSkinCache();
         LocalPlayer client = event.getPlayer();
-        if(client instanceof AbstractClientPlayer) {
+        if(client != null) {
             ClientSkinManager.checkSkin(client);
         }
         ClientSkinManager.cleanupSkinData();
