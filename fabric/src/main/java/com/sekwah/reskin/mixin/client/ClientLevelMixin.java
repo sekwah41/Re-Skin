@@ -1,4 +1,4 @@
-package com.sekwah.reskin.mixin.server;
+package com.sekwah.reskin.mixin.client;
 
 import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.components.ISkinData;

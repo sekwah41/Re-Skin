@@ -3,13 +3,16 @@
   "package": "com.sekwah.reskin.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "server.ServerLevelMixin",
+    "server.PlayerListMixin"
   ],
   "client": [
     "client.PlayerRendererMixin",
     "client.PlayerInfoAccessor",
     "client.GameRendererMixin",
     "client.MinecraftMixin",
-    "client.AbstractClientPlayerAccessor"
+    "client.AbstractClientPlayerAccessor",
+    "client.ClientLevelMixin"
   ],
   "injectors": {
     "defaultRequire": 1
