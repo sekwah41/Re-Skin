@@ -10,6 +10,9 @@ def branch = System.getenv("GITHUB_REF")
 if(branch != null) {
 	branch = branch.replace('refs/heads/', '')
 }
+if(branch != null) {
+	branch = "master"
+}
 def isCanary = version.toString().contains('canary')
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_16

@@ -29,6 +29,9 @@ def branch = System.getenv("GITHUB_REF")
 if(branch != null) {
     branch = branch.replace('refs/heads/', '')
 }
+if(branch != null) {
+    branch = "master"
+}
 def isCanary = version.toString().contains('canary')
 
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
