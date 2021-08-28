@@ -22,9 +22,10 @@ buildscript {
  */
 task discordupload {
     // Check if its trying to upload the fabric dev copy as jar is release for forge but remapJar is for fabric.
-    var jarTask = jar.getArchiveClassifier().get().endsWith("-dev") ? remapJar : jar
-    dependsOn(jarTask)
+
+    dependsOn(jar)
     doLast {
+        var jarTask = jar.getArchiveClassifier().get().equals("dev") ? remapJar : jar
         String discordWebhook = System.getenv("DISCORD_WEBHOOK")
 
         if(discordWebhook != null) {
