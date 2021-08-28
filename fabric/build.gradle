@@ -23,6 +23,14 @@ group = project.package
 loom {
 }
 
+sourceSets {
+	main {
+		resources {
+			srcDirs "../core/src/main/resources"
+		}
+	}
+}
+
 repositories {
 	maven {
 		name = "FabricMC"
