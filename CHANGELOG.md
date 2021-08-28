@@ -1,3 +1,22 @@
+# v2.3.0 (Sat Aug 28 2021)
+
+#### 🚀 Enhancement
+
+- feat: Splitting code into core components [#68](https://github.com/sekwah41/Re-Skin/pull/68) ([@sekwah41](https://github.com/sekwah41))
+- feat: Separate some resources to be common across fabric and forge [#68](https://github.com/sekwah41/Re-Skin/pull/68) ([@sekwah41](https://github.com/sekwah41))
+
+#### 🐛 Bug Fix
+
+- chore(ci): Wrong file uploaded to discord [#68](https://github.com/sekwah41/Re-Skin/pull/68) ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Fix branch versions ([@sekwah41](https://github.com/sekwah41))
+- chore(ci): Uncommnted curseforge but ran manually ([@sekwah41](https://github.com/sekwah41))
+
+#### Authors: 1
+
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+
+---
+
 # v2.2.0 (Tue Aug 24 2021)
 
 #### 🚀 Enhancement
