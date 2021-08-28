@@ -15,7 +15,6 @@ plugins {
     id 'net.researchgate.release' version '2.8.1'
 }
 
-
 def branch = System.getenv("GITHUB_REF")
 if(branch != null) {
     branch = branch.replace('refs/heads/', '')
