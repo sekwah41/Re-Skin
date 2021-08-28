@@ -1,21 +1,17 @@
-package com.sekwah.reskin.client;
+package com.sekwah.reskin.core.client;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.TextureUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.HttpTexture;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -24,11 +20,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.CompletableFuture;
 
-@OnlyIn(Dist.CLIENT)
 public class HDDownloadingTexture extends SimpleTexture {
 
     private static final Logger LOGGER = LogManager.getLogger();
-    @Nullable
+
     private final File cacheFile;
     private final String imageUrl;
 
@@ -37,13 +32,13 @@ public class HDDownloadingTexture extends SimpleTexture {
     private boolean isTransparent;
 
     private final boolean legacySkin = true;
-    @Nullable
+
     private final Runnable processTask;
-    @Nullable
+
     private CompletableFuture<?> future;
     private boolean textureUploaded;
 
-    public HDDownloadingTexture(@Nullable File cacheFileIn, String imageUrlIn, ResourceLocation textureResourceLocation, boolean isTransparent, @Nullable Runnable processTaskIn) {
+    public HDDownloadingTexture(File cacheFileIn, String imageUrlIn, ResourceLocation textureResourceLocation, boolean isTransparent, Runnable processTaskIn) {
         super(textureResourceLocation);
         this.cacheFile = cacheFileIn;
         this.imageUrl = imageUrlIn;
@@ -140,7 +135,6 @@ public class HDDownloadingTexture extends SimpleTexture {
         }
     }
 
-    @Nullable
     private NativeImage loadTexture(InputStream inputStreamIn) {
         NativeImage nativeimage = null;
 

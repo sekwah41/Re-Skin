@@ -5,7 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.sekwah.reskin.CustomSkinManager;
-import com.sekwah.reskin.commands.arguments.URLArgument;
+import com.sekwah.reskin.core.arguments.URLArgument;
 import com.sekwah.reskin.config.SkinConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.ChatFormatting;

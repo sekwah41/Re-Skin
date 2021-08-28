@@ -1,4 +1,4 @@
-package com.sekwah.reskin.client;
+package com.sekwah.reskin.core.client;
 
 import net.minecraft.resources.ResourceLocation;
 

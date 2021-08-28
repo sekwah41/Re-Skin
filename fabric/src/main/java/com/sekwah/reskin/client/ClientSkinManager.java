@@ -3,6 +3,9 @@ package com.sekwah.reskin.client;
 import com.google.common.collect.Maps;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.sekwah.reskin.ReSkin;
+import com.sekwah.reskin.core.client.ClientSkinData;
+import com.sekwah.reskin.core.client.HDDownloadingTexture;
+import com.sekwah.reskin.core.client.SkinLoadJob;
 import com.sekwah.reskin.mixin.client.AbstractClientPlayerAccessor;
 import com.sekwah.reskin.mixin.client.PlayerInfoAccessor;
 import net.minecraft.client.Minecraft;
@@ -10,9 +13,6 @@ import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
-import org.objectweb.asm.tree.AbstractInsnNode;
-
-import java.lang.reflect.Field;
 import java.util.*;
 
 public class ClientSkinManager {

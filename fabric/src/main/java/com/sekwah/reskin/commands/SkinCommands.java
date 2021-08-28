@@ -1,7 +1,7 @@
 package com.sekwah.reskin.commands;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.sekwah.reskin.commands.arguments.URLArgument;
+import com.sekwah.reskin.core.arguments.URLArgument;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.synchronization.ArgumentTypes;
 import net.minecraft.commands.synchronization.EmptyArgumentSerializer;

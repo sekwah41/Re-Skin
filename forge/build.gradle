@@ -130,14 +130,13 @@ minecraft {
 
 sourceSets {
     main {
+        java {
+            srcDir "../core/src/main/java"
+        }
         resources {
             srcDirs "src/generated/resources", "../core/src/main/resources"
         }
     }
-}
-
-configurations {
-    annotationProcessor.extendsFrom minecraft
 }
 
 dependencies {
@@ -146,6 +145,8 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.17.1-37.0.34'
+
+    implementation project(":core")
 
     //compile "com.sekwah:SekCLib:${sekclib_version}:deobf"
     // Trick intellij to allow for better editing in here for the discord task

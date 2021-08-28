@@ -10,6 +10,8 @@ Due to the automations I have made I can't really have different branches for ea
 Though using the current setup we could also build two copies of the mod into one so it works for both fabric and forge possibly.
 I will hold off on that for now.
 
+**Intellij will complain about duplicate resources though it should be fine**
+
 # How to run forge or fabric in intellij.
 You will need to generate the runs and then select the main module. Same for fabric.
 

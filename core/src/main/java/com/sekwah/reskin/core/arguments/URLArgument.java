@@ -1,4 +1,4 @@
-package com.sekwah.reskin.commands.arguments;
+package com.sekwah.reskin.core.arguments;
 
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;

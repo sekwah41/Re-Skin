@@ -11,5 +11,6 @@ pluginManagement {
 
 rootProject.name = "Re-Skin"
 
-include 'forge'
+include 'core'
 include 'fabric'
+include 'forge'
