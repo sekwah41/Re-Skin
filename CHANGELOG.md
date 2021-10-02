@@ -1,3 +1,23 @@
+# v2.3.1 (Sat Oct 02 2021)
+
+#### 🐛 Bug Fix
+
+- chore(ci): Fix branch reference [#74](https://github.com/sekwah41/Re-Skin/pull/74) ([@sekwah41](https://github.com/sekwah41))
+- refactor: Switched transparent arm back to mixins [#73](https://github.com/sekwah41/Re-Skin/pull/73) ([@sekwah41](https://github.com/sekwah41))
+- refector: Moving network packets ([@sekwah41](https://github.com/sekwah41))
+- make fabric formatting the same as forge [#72](https://github.com/sekwah41/Re-Skin/pull/72) ([@JackTGG](https://github.com/JackTGG))
+- chore(ci): Update Deps to v10.32.1 ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Update Deps to v10.32.0 ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Update dependency conventional-changelog-angular to v5.0.13 ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 3
+
+- Jack ([@JackTGG](https://github.com/JackTGG))
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v2.3.0 (Sat Aug 28 2021)
 
 #### 🚀 Enhancement
