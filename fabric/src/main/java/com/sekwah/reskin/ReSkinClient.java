@@ -1,7 +1,6 @@
 package com.sekwah.reskin;
 
-import com.sekwah.reskin.client.ClientSkinManager;
-import com.sekwah.reskin.network.client.ClientPacketHandler;
+import com.sekwah.reskin.network.s2c.ClientPacketHandler;
 import net.fabricmc.api.ClientModInitializer;
 
 public class ReSkinClient implements ClientModInitializer {

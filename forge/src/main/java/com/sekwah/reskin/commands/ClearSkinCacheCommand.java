@@ -8,7 +8,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.ReSkin;
 import com.sekwah.reskin.network.PacketHandler;
-import com.sekwah.reskin.network.client.ClientClearSkinCache;
+import com.sekwah.reskin.network.s2c.ClientClearSkinCache;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.TranslatableComponent;
 

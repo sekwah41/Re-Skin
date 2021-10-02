@@ -1,4 +1,4 @@
-package com.sekwah.reskin.network.client;
+package com.sekwah.reskin.network.s2c;
 
 import com.sekwah.reskin.client.ClientSkinManager;
 import net.minecraft.network.FriendlyByteBuf;

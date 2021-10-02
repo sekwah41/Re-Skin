@@ -4,7 +4,7 @@ import com.google.common.collect.Maps;
 import com.sekwah.reskin.capabilities.SkinCapabilityHandler;
 import com.sekwah.reskin.config.SkinConfig;
 import com.sekwah.reskin.network.PacketHandler;
-import com.sekwah.reskin.network.client.ClientChangeSkin;
+import com.sekwah.reskin.network.s2c.ClientChangeSkin;
 import com.sekwah.reskin.server.ServerSkinData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

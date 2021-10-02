@@ -1,8 +1,8 @@
 package com.sekwah.reskin.network;
 
 import com.sekwah.reskin.ReSkin;
-import com.sekwah.reskin.network.client.ClientChangeSkin;
-import com.sekwah.reskin.network.client.ClientClearSkinCache;
+import com.sekwah.reskin.network.s2c.ClientChangeSkin;
+import com.sekwah.reskin.network.s2c.ClientClearSkinCache;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fmllegacy.network.NetworkDirection;

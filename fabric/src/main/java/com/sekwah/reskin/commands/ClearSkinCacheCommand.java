@@ -7,10 +7,8 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.ReSkin;
-import com.sekwah.reskin.config.SkinConfig;
-import com.sekwah.reskin.network.client.ClientClearSkinCache;
-import com.sekwah.reskin.network.client.ClientPacketHandler;
-import me.shedaniel.autoconfig.AutoConfig;
+import com.sekwah.reskin.network.s2c.ClientClearSkinCache;
+import com.sekwah.reskin.network.s2c.ClientPacketHandler;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.TranslatableComponent;
 

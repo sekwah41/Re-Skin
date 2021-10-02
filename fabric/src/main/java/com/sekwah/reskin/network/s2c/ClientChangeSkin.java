@@ -1,4 +1,4 @@
-package com.sekwah.reskin.network.client;
+package com.sekwah.reskin.network.s2c;
 
 import com.sekwah.reskin.ReSkin;
 import com.sekwah.reskin.client.ClientSkinManager;
@@ -10,9 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import java.util.UUID;
 

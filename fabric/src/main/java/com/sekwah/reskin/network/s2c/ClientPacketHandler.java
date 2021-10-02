@@ -1,4 +1,4 @@
-package com.sekwah.reskin.network.client;
+package com.sekwah.reskin.network.s2c;
 
 import com.sekwah.reskin.network.NetworkConst;
 import com.sekwah.reskin.network.PacketEncoder;
