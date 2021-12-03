@@ -8,7 +8,7 @@ import com.sekwah.reskin.network.s2c.ClientChangeSkin;
 import com.sekwah.reskin.server.ServerSkinData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
 
 import java.util.Map;
 import java.util.UUID;

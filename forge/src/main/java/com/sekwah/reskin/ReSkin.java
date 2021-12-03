@@ -1,10 +1,12 @@
 package com.sekwah.reskin;
 
+import com.sekwah.reskin.capabilities.ISkinData;
 import com.sekwah.reskin.capabilities.SkinCapabilityHandler;
 import com.sekwah.reskin.client.ClientSkinManager;
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.config.SkinConfig;
 import com.sekwah.reskin.network.PacketHandler;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,6 +36,11 @@ public class ReSkin {
 
         eventBus.addListener(this::clientSetup);
         eventBus.addListener(this::setup);
+        eventBus.addListener(this::registerCapabilities);
+    }
+
+    private void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.register(ISkinData.class);
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
@@ -42,7 +49,6 @@ public class ReSkin {
 
     private void setup(final FMLCommonSetupEvent event) {
         PacketHandler.init();
-        SkinCapabilityHandler.register();
         SkinCommands.registerNewArgTypes();
     }
 
