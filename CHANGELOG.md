@@ -1,3 +1,21 @@
+# v2.4.0 (Fri Dec 03 2021)
+
+#### 🚀 Enhancement
+
+- feat(forge): Update to 1.18 [#77](https://github.com/sekwah41/Re-Skin/pull/77) ([@sekwah41](https://github.com/sekwah41))
+
+#### 🐛 Bug Fix
+
+- chore(ci): Update Deps to v10.32.2 ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Add manual publish trigger ([@sekwah41](https://github.com/sekwah41))
+
+#### Authors: 2
+
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v2.3.1 (Sat Oct 02 2021)
 
 #### 🐛 Bug Fix
