@@ -5,8 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,12 +17,7 @@ public class SkinCapabilityHandler {
 
     public static final ResourceLocation SKIN_LOCATION = new ResourceLocation(ReSkin.MOD_ID, "skin");
 
-    @CapabilityInject(ISkinData.class)
-    public static final Capability<ISkinData> SKIN_DATA = null;
-
-    public static void register() {
-        CapabilityManager.INSTANCE.register(ISkinData.class);
-    }
+    public static final Capability<ISkinData> SKIN_DATA = CapabilityManager.get(new CapabilityToken<>() {});
 
     @SubscribeEvent
     public static void attachCapability(AttachCapabilitiesEvent<Entity> event) {
