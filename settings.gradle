@@ -12,6 +12,5 @@ pluginManagement {
 rootProject.name = "Re-Skin"
 
 include 'core'
-// TODO Ignore fabric until all deps are updates
-//include 'fabric'
+include 'fabric'
 include 'forge'

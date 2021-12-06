@@ -11,6 +11,8 @@ Though using the current setup we could also build two copies of the mod into on
 I will hold off on that for now.
 
 **Intellij will complain about duplicate resources though it should be fine**
+If you want to edit the fabric code and avoid the problems of intellij complaining about code in other modules,
+comment out the other module in settings.gradle and reload the project. (just remember not to commit it)
 
 # How to run forge or fabric in intellij.
 You will need to generate the runs and then select the main module. Same for fabric.
@@ -25,8 +27,6 @@ Due to the fact the mappings are the same the majority of the non api specific c
 https://mcforge.readthedocs.io/en/1.17.x/
 
 # Fabric
-https://fabricmc.net/wiki/tutorial:introduction  
+https://fabricmc.net/wiki/tutorial:introduction
 https://shedaniel.gitbook.io/cloth-config/auto-config/annotations
 https://github.com/OnyxStudios/Cardinal-Components-API/tree/1.17
-
-
