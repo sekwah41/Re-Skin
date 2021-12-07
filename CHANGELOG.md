@@ -1,3 +1,21 @@
+# v2.5.0 (Tue Dec 07 2021)
+
+#### 🚀 Enhancement
+
+- feat: Update fabric to 1.18 [#78](https://github.com/sekwah41/Re-Skin/pull/78) ([@sekwah41](https://github.com/sekwah41))
+
+#### 🐛 Bug Fix
+
+- chore(ci): Update dependency me.shedaniel.cloth:cloth-config-fabric to v6.0.45 ([@renovate-bot](https://github.com/renovate-bot))
+- chore(ci): Update Deps ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 2
+
+- Sekwah ([@sekwah41](https://github.com/sekwah41))
+- WhiteSource Renovate ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v2.4.0 (Fri Dec 03 2021)
 
 #### 🚀 Enhancement
