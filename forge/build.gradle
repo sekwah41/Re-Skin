@@ -85,6 +85,7 @@ minecraft {
             mods {
                 "${project.modid}" {
                     source sourceSets.main
+                    source project(":core").sourceSets.main
                 }
             }
         }
@@ -102,6 +103,7 @@ minecraft {
             mods {
                 "${project.modid}" {
                     source sourceSets.main
+                    source project(":core").sourceSets.main
                 }
             }
         }
@@ -122,13 +124,14 @@ minecraft {
             mods {
                 "${project.modid}" {
                     source sourceSets.main
+                    source project(":core").sourceSets.main
                 }
             }
         }
     }
 }
 
-sourceSets {
+/*sourceSets {
     main {
         java {
             srcDir "../core/src/main/java"
@@ -137,6 +140,14 @@ sourceSets {
             srcDirs "src/generated/resources", "../core/src/main/resources"
         }
     }
+}*/
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
+tasks.withType(JavaCompile) {
+    source(project(":core").sourceSets.main.allSource)
+}
+processResources {
+    from project(":core").sourceSets.main.resources
 }
 
 dependencies {

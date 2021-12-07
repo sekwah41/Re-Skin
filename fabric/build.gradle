@@ -21,15 +21,18 @@ archivesBaseName = "${project.archive}-fabric"
 group = project.package
 
 loom {
-}
-
-sourceSets {
-    main {
-        java {
-            srcDir "../core/src/main/java"
+    runs {
+        client {
+            client()
+            setConfigName("Fabric Client")
+            ideConfigGenerated(true)
+            runDir("run")
         }
-        resources {
-            srcDirs "../core/src/main/resources"
+        server {
+            server()
+            setConfigName("Fabric Server")
+            ideConfigGenerated(true)
+            runDir("run")
         }
     }
 }
@@ -51,6 +54,7 @@ repositories {
 }
 
 processResources {
+    from project(":core").sourceSets.main.resources
     inputs.property "version", project.version
 
     filesMatching("fabric.mod.json") {
@@ -84,6 +88,7 @@ dependencies {
 
     modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:4.0.0"
     include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:4.0.0"
+    implementation project(":core")
 }
 
 
@@ -113,6 +118,10 @@ curseforge {
     options {
         forgeGradleIntegration = false
     }
+}
+
+tasks.withType(JavaCompile) {
+    source(project(":core").sourceSets.main.allSource)
 }
 
 task publish {

@@ -63,10 +63,10 @@ task build {
     doLast {
         println "Copy all files for release plugin."
         // TODO Un-comment when fabric is supported again
-        /*copy {
+        copy {
             from "${rootDir}/fabric/build/libs"
             into "${rootDir}/build/libs"
-        }*/
+        }
         copy {
             from "${rootDir}/forge/build/libs"
             into "${rootDir}/build/libs"
