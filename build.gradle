@@ -311,8 +311,11 @@ curseforge {
         addGameVersion '1.18'
         addGameVersion '1.18.1'
 
-        mainArtifact(jar){
+        relations {
+            requiredDependency 'sekclib'
+        }
 
+        mainArtifact(jar){
         }
         addArtifact srcJar
         addArtifact deobfJar
