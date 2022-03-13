@@ -22,6 +22,7 @@ public class CustomSkinManager {
             target.getCapability(SkinCapabilityHandler.SKIN_DATA, null).ifPresent(skinCap -> {
                 skinCap.setSkin(url);
                 if(url.length() > 0) {
+                    // TODO replace with data to add this to the player capability.
                     PacketHandler.SKIN_CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientChangeSkin(target.getUUID(), url, skinCap.getModelType(), SkinConfig.ALLOW_TRANSPARENT_SKIN.get()));
                     playerSkins.put(target.getUUID(), new ServerSkinData(url, skinCap.getModelType()));
                 }

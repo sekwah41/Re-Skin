@@ -2,10 +2,16 @@ package com.sekwah.reskin;
 
 import com.sekwah.reskin.capabilities.ISkinData;
 import com.sekwah.reskin.capabilities.SkinCapabilityHandler;
+import com.sekwah.reskin.capabilities.SkinData;
 import com.sekwah.reskin.client.ClientSkinManager;
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.config.SkinConfig;
 import com.sekwah.reskin.network.PacketHandler;
+import com.sekwah.reskin.network.s2c.ClientChangeSkin;
+import com.sekwah.reskin.trackers.ClientChangeSkinSyncTracker;
+import com.sekwah.sekclib.capabilitysync.capabilitysync.RegisterCapabilitySyncEvent;
+import com.sekwah.sekclib.capabilitysync.capabilitysync.RegisterSyncTrackerTypeEvent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -37,6 +43,8 @@ public class ReSkin {
         eventBus.addListener(this::clientSetup);
         eventBus.addListener(this::setup);
         eventBus.addListener(this::registerCapabilities);
+        eventBus.addListener(this::registerSyncTrackerEvent);
+        eventBus.addListener(this::registerCapabilitySync);
     }
 
     private void registerCapabilities(RegisterCapabilitiesEvent event) {
@@ -55,6 +63,14 @@ public class ReSkin {
     @SubscribeEvent
     public static void onServerStarting(RegisterCommandsEvent event) {
         SkinCommands.register(event.getDispatcher());
+    }
+
+    public void registerSyncTrackerEvent(RegisterSyncTrackerTypeEvent event) {
+        event.registerSyncTracker(ClientChangeSkin.class, new ClientChangeSkinSyncTracker());
+    }
+
+    public void registerCapabilitySync(RegisterCapabilitySyncEvent event) {
+        event.registerPlayerCap(new ResourceLocation(ReSkin.MOD_ID, "skin_data"), SkinCapabilityHandler.SKIN_DATA, SkinData.class);
     }
 
 }
