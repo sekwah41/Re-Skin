@@ -10,14 +10,18 @@ def branch = System.getenv("GITHUB_REF")
 if(branch != null) {
     branch = branch.replace('refs/heads/', '')
 }
-if(branch == null) {
-    branch = "master"
-}
-def isCanary = version.toString().contains('canary')
+def isRelease = System.getenv("IS_RELEASE") == "true"
+def snapshotName = (branch == null || branch.startsWith("release-please")) ? "SNAPSHOT" : branch
+def githubSha = System.getenv("GITHUB_SHA")
+def shaRef = githubSha != null ? "-${githubSha.substring(0, 8)}" : ""
+
+def versionString = (file('../version.txt').text + (isRelease ? "" : "-${snapshotName}${shaRef}")).replaceAll('\n', '')
+setVersion(versionString)
+println "Version: ${getVersion()}"
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 
-archivesBaseName = "${project.archive}-fabric"
+archivesBaseName = "${project.archive}-fabric-${project.minecraft_version}"
 group = project.package
 
 loom {

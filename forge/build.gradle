@@ -29,10 +29,14 @@ def branch = System.getenv("GITHUB_REF")
 if(branch != null) {
     branch = branch.replace('refs/heads/', '')
 }
-if(branch == null) {
-    branch = "master"
-}
-def isCanary = version.toString().contains('canary')
+def isRelease = System.getenv("IS_RELEASE") == "true"
+def snapshotName = (branch == null || branch.startsWith("release-please")) ? "SNAPSHOT" : branch
+def githubSha = System.getenv("GITHUB_SHA")
+def shaRef = githubSha != null ? "-${githubSha.substring(0, 8)}" : ""
+
+def versionString = (file('../version.txt').text + (isRelease ? "" : "-${snapshotName}${shaRef}")).replaceAll('\n', '')
+setVersion(versionString)
+println "Version: ${getVersion()}"
 
 group = project.package // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "${project.archive}-forge"
@@ -205,6 +209,7 @@ jar {
                 "MixinConfigs": "mixins.${project.modid}.json"
         ])
     }
+    baseName "${archivesBaseName}-${project.minecraft_version}"
 }
 
 // Example configuration to allow publishing using the maven-publish task
@@ -221,6 +226,7 @@ task srcJar(type: Jar) {
     build.dependsOn it
     from sourceSets.main.allSource
     archiveClassifier.set('sources')
+    baseName "${archivesBaseName}-${project.minecraft_version}"
     from file("LICENSE")
 }
 
@@ -228,6 +234,7 @@ task deobfJar(type: Jar) {
     build.dependsOn it
     from sourceSets.main.output
     archiveClassifier.set('deobf')
+    baseName "${archivesBaseName}-${project.minecraft_version}"
     from file("LICENSE")
 }
 
