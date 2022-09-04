@@ -30,8 +30,8 @@ public class ClearSkinCommand {
                     ServerPlayer entity = ctx.getSource().getPlayerOrException();
                     return execute(ctx.getSource(), Collections.singletonList(entity));
                 })
-                .requires((sender) -> (!config.othersSkinNeedsOp || sender.hasPermission(2)))
                 .then(argument("targets", EntityArgument.players())
+                        .requires((sender) -> (!config.othersSkinNeedsOp || sender.hasPermission(2)))
                         .executes(ctx -> {
                             Collection<ServerPlayer> targetPlayers = EntityArgument.getPlayers(ctx, "targets");
                             return execute(ctx.getSource(), targetPlayers);
