@@ -249,6 +249,14 @@ There was a critical error before for joining servers due to one of the new args
 
 ---
 
+## [2.5.1](https://github.com/sekwah41/Re-Skin/compare/v2.5.0...v2.5.1) (2022-09-04)
+
+
+### Bug Fixes 🐛
+
+* permissions were applied wrong to setskin forcing you to need op or setotherskinsop ([2fd777c](https://github.com/sekwah41/Re-Skin/commit/2fd777c65d26d85386d2b4b1b5abed1f2e6009a6))
+* update release names and fix env variables ([56b0149](https://github.com/sekwah41/Re-Skin/commit/56b01499c9780b7c84beb4041203dba6eeedf262))
+
 ## 1.4.0 (2021-06-04)
 
 
