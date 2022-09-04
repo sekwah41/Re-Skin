@@ -1,4 +1,6 @@
-# v2.5.0 (Tue Dec 07 2021)
+# Changelog
+
+## v2.5.0 (Tue Dec 07 2021)
 
 #### 🚀 Enhancement
 
@@ -16,7 +18,7 @@
 
 ---
 
-# v2.4.0 (Fri Dec 03 2021)
+## v2.4.0 (Fri Dec 03 2021)
 
 #### 🚀 Enhancement
 
@@ -34,7 +36,7 @@
 
 ---
 
-# v2.3.1 (Sat Oct 02 2021)
+## v2.3.1 (Sat Oct 02 2021)
 
 #### 🐛 Bug Fix
 
@@ -73,7 +75,7 @@
 
 ---
 
-# v2.2.0 (Tue Aug 24 2021)
+## v2.2.0 (Tue Aug 24 2021)
 
 #### 🚀 Enhancement
 
@@ -120,7 +122,7 @@
 
 ---
 
-# v2.1.0 (Sun Jul 25 2021)
+## v2.1.0 (Sun Jul 25 2021)
 
 #### 🚀 Enhancement
 
@@ -160,7 +162,7 @@
 
 ---
 
-# v2.0.0 (Fri Jun 18 2021)
+## v2.0.0 (Fri Jun 18 2021)
 
 ### Release Notes
 
@@ -202,7 +204,7 @@ There was a critical error before for joining servers due to one of the new args
 
 ---
 
-# v1.4.1 (Sun Jun 06 2021)
+## v1.4.1 (Sun Jun 06 2021)
 
 #### 🐛 Bug Fix
 
@@ -226,7 +228,7 @@ There was a critical error before for joining servers due to one of the new args
 
 ---
 
-# v1.4.1 (Sun Jun 06 2021)
+## v1.4.1 (Sun Jun 06 2021)
 
 #### 🐛 Bug Fix
 
