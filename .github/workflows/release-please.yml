@@ -30,9 +30,6 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 17
-      - name: Download MC assets
-        if: ${{ steps.release.outputs.release_created }}
-        run: ./gradlew downloadAssets || ./gradlew downloadAssets || (sleep 30s && ./gradlew downloadAssets)
       - name: Build and publish (release)
         if: ${{ steps.release.outputs.release_created }}
         env:
