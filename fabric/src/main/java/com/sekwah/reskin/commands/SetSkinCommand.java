@@ -37,21 +37,22 @@ public class SetSkinCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         // Thing to note, arguments are handled in alphabetical order.
         LiteralArgumentBuilder<CommandSourceStack> setSkin = literal("setskin")
-                .requires((sender) -> (!config.selfSkinNeedsOp || sender.hasPermission(2)))
                 .then(argument(URL_ARG, URLArgument.urlArg())
+                        .requires((sender) -> (!config.selfSkinNeedsOp || sender.hasPermission(2)))
                         .suggests(URL_SUGGESTIONS)
                         .executes(ctx -> {
                             ServerPlayer entity = ctx.getSource().getPlayerOrException();
                             String url = URLArgument.getURL(ctx, URL_ARG);
                             return execute(ctx.getSource(), Collections.singletonList(entity), url);
                         })
-                        .requires(sender -> (!config.othersSkinNeedsOp || sender.hasPermission(2)))
                         .then(argument("targets", EntityArgument.players())
+                                .requires(sender -> (!config.othersSkinNeedsOp || sender.hasPermission(2)))
                                 .executes(ctx -> {
                                     String url = URLArgument.getURL(ctx, URL_ARG);
                                     Collection<ServerPlayer> targetPlayers = EntityArgument.getPlayers(ctx, "targets");
                                     return execute(ctx.getSource(), targetPlayers, url);
-                                })));
+                                }))
+                );
 
         dispatcher.register(setSkin);
     }
