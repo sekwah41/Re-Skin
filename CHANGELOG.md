@@ -249,6 +249,34 @@ There was a critical error before for joining servers due to one of the new args
 
 ---
 
+## [3.0.0](https://github.com/sekwah41/Re-Skin/compare/v2.5.1...v3.0.0) (2022-09-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Specifically relating to if you have command blocks. targeting other entities with /setskin now is /setskin (url) (targets)
+
+### Features ✨
+
+* Added /setmodel command & Reworked /setskin ([01083f1](https://github.com/sekwah41/Re-Skin/commit/01083f13e420ab5f84c1e8bcef230541fc12834c))
+* **fabric:** Added fabric support ([#66](https://github.com/sekwah41/Re-Skin/issues/66)) ([4faa53e](https://github.com/sekwah41/Re-Skin/commit/4faa53ed790232dff2ba4ce0020150e6f4357605))
+* **forge:** Update to 1.18 ([529cd80](https://github.com/sekwah41/Re-Skin/commit/529cd80d535689f043fff5d2f674ed3fe4c37cde))
+* Separate some resources to be common across fabric and forge ([992b313](https://github.com/sekwah41/Re-Skin/commit/992b313a24c2c35d2ea03f23bdaaa4b4a0e88c5a))
+* Splitting code into core components ([4482cb3](https://github.com/sekwah41/Re-Skin/commit/4482cb344cf9babc44d4fbfc85db26d55dea5729))
+* Update fabric to 1.18 ([5d90808](https://github.com/sekwah41/Re-Skin/commit/5d908087a981b89e61458d55864db987ac834151))
+* Updated support to 1.17 ([fcc21e5](https://github.com/sekwah41/Re-Skin/commit/fcc21e5988e478f604e973f90339ff81367bf693))
+
+
+### Bug Fixes 🐛
+
+* Capability info lost on player death and cross dimension ([72df38b](https://github.com/sekwah41/Re-Skin/commit/72df38ba919aadc9d8978a3178538de2ce0eaf49))
+* Client render errors with /clearskin ([40f16d6](https://github.com/sekwah41/Re-Skin/commit/40f16d60e646b207b46959d508a388d523c1bc38))
+* Command arg types causing network errors ([29c17e8](https://github.com/sekwah41/Re-Skin/commit/29c17e8c71f508c2c157d283142afed6739fd765))
+* Mixins not working wirh forge. Removing for now ([4c9d63a](https://github.com/sekwah41/Re-Skin/commit/4c9d63ac95c67e99d60286bd15f5a15a6a375606))
+* permissions were applied wrong to setskin forcing you to need op or setotherskinsop ([2fd777c](https://github.com/sekwah41/Re-Skin/commit/2fd777c65d26d85386d2b4b1b5abed1f2e6009a6))
+* Skin transparency in first person ([8c2e59c](https://github.com/sekwah41/Re-Skin/commit/8c2e59c1d1f8426c11b753ff960fa6979170f616)), closes [#62](https://github.com/sekwah41/Re-Skin/issues/62)
+* update release names and fix env variables ([56b0149](https://github.com/sekwah41/Re-Skin/commit/56b01499c9780b7c84beb4041203dba6eeedf262))
+
 ## [2.5.1](https://github.com/sekwah41/Re-Skin/compare/v2.5.0...v2.5.1) (2022-09-04)
 
 
