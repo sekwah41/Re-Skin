@@ -27,7 +27,6 @@ public class ClearSkinCacheCommand {
     private static int run(CommandContext<CommandSourceStack> ctx) {
         try {
             PacketHandler.sendToPlayer(new ClientClearSkinCache(), ctx.getSource().getPlayerOrException());
-            CustomSkinManager.sendAllToPlayer(ctx.getSource().getPlayerOrException(), false);
         } catch (CommandSyntaxException e) {
             ReSkin.LOGGER.info("This command can only be run from the console");
         }

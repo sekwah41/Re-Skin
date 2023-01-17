@@ -25,7 +25,7 @@ license="All rights reserved"
 [[dependencies.reskin]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.3,)"
+    versionRange="[1.19,)"
     ordering="NONE"
     side="BOTH"
 

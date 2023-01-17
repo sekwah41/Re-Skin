@@ -1,6 +1,6 @@
 package com.sekwah.reskin.capabilities;
 
-import com.sekwah.reskin.network.s2c.ClientChangeSkin;
+import com.sekwah.reskin.config.SkinConfig;
 import com.sekwah.sekclib.capabilitysync.capabilitysync.annotation.Sync;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -18,25 +18,30 @@ import javax.annotation.Nullable;
  */
 public class SkinData implements ISkinData, ICapabilityProvider {
 
+    @Sync(syncGlobally = true)
     private String url = "";
+
+    @Sync(syncGlobally = true)
     private String bodyType = "default";
+
+    @Sync(syncGlobally = true)
+    public boolean isTransparent = SkinConfig.ALLOW_TRANSPARENT_SKIN.get();
 
     private static final String SKIN_TAG = "skin";
     private static final String BODY_TYPE_TAG = "bodyType";
 
-    @Sync(syncGlobally = true)
-    private ClientChangeSkin clientChangeSkin;
-
     private final LazyOptional<ISkinData> holder = LazyOptional.of(() -> this);
 
     @Override
-    public String getSkin() {
+    public String getSkinUrl() {
         return this.url;
     }
 
     @Override
     public void setSkin(String url) {
         this.url = url == null ? "" : url;
+        // Updates the transparency
+        this.isTransparent = SkinConfig.ALLOW_TRANSPARENT_SKIN.get();
     }
 
     @Override
@@ -50,9 +55,14 @@ public class SkinData implements ISkinData, ICapabilityProvider {
     }
 
     @Override
+    public boolean isTransparent() {
+        return this.isTransparent;
+    }
+
+    @Override
     public Tag serializeNBT() {
         final CompoundTag tag = new CompoundTag();
-        tag.putString(SKIN_TAG, this.getSkin());
+        tag.putString(SKIN_TAG, this.getSkinUrl());
         tag.putString(BODY_TYPE_TAG, this.getModelType());
         return tag;
     }

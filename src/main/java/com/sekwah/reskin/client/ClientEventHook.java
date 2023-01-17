@@ -17,7 +17,6 @@ public class ClientEventHook {
     @SubscribeEvent
     public static void doRender(TickEvent.RenderTickEvent event) {
         if (event.phase == TickEvent.Phase.START) {
-            ClientSkinManager.loadQueuedSkins();
             LocalPlayer client = Minecraft.getInstance().player;
             if(client != null) {
                 ClientSkinManager.checkSkin(client);

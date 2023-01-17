@@ -1,7 +1,6 @@
 package com.sekwah.reskin.network;
 
 import com.sekwah.reskin.ReSkin;
-import com.sekwah.reskin.network.s2c.ClientChangeSkin;
 import com.sekwah.reskin.network.s2c.ClientClearSkinCache;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,7 +23,6 @@ public class PacketHandler {
             .simpleChannel();
 
     public static void init() {
-        SKIN_CHANNEL.registerMessage(0, ClientChangeSkin.class, ClientChangeSkin::encode, ClientChangeSkin::decode, ClientChangeSkin.Handler::handle);
         SKIN_CHANNEL.registerMessage(1, ClientClearSkinCache.class, ClientClearSkinCache::encode, ClientClearSkinCache::decode, ClientClearSkinCache.Handler::handle);
     }
 
