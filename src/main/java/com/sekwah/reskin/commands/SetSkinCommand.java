@@ -11,9 +11,10 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Collection;
@@ -57,7 +58,7 @@ public class SetSkinCommand {
         List<? extends String> whitelist = SkinConfig.SKIN_SERVER_WHITELIST.get();
         long passedWhitelist = whitelist.stream().filter(value -> url.startsWith(value)).count();
         if (Boolean.TRUE.equals(SkinConfig.ENABLE_SKIN_SERVER_WHITELIST.get()) && passedWhitelist == 0) {
-            TranslatableComponent message = new TranslatableComponent("setskin.notwhitelisted");
+            MutableComponent message = Component.translatable("setskin.notwhitelisted");
             Style redMessage = message.getStyle().withColor(TextColor.fromLegacyFormat(ChatFormatting.RED));
             source.sendSuccess(message.setStyle(redMessage), false);
             return -1;
@@ -66,7 +67,7 @@ public class SetSkinCommand {
             if (target == null) {
                 return;
             }
-            source.sendSuccess(new TranslatableComponent("setskin.setplayerskin", target.getDisplayName(), url), false);
+            source.sendSuccess(Component.translatable("setskin.setplayerskin", target.getScoreboardName(), url), false);
             CustomSkinManager.setSkin(target, url);
         });
         if (targets.size() == 0) {

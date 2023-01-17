@@ -29,7 +29,7 @@ public class SkinCapabilityHandler {
     @SubscribeEvent
     public static void playerClone(PlayerEvent.Clone event) {
         event.getOriginal().getCapability(SKIN_DATA).ifPresent(original ->
-                event.getPlayer().getCapability(SKIN_DATA).ifPresent(future ->
+                event.getEntity().getCapability(SKIN_DATA).ifPresent(future ->
                         future.deserializeNBT(original.serializeNBT())));
     }
 
