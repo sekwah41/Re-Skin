@@ -7,7 +7,7 @@ import com.sekwah.reskin.CustomSkinManager;
 import com.sekwah.reskin.config.SkinConfig;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Collection;
@@ -42,7 +42,7 @@ public class ClearSkinCommand {
             if(target == null) {
                 return;
             }
-            source.sendSuccess(new TranslatableComponent("setskin.resetplayer", target.getDisplayName()), false);
+            source.sendSuccess(Component.translatable("setskin.resetplayer", target.getDisplayName()), false);
             CustomSkinManager.resetSkin(target);
         });
         if(targets.size() == 0) {

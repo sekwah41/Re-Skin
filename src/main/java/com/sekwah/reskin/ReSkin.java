@@ -4,6 +4,7 @@ import com.sekwah.reskin.capabilities.ISkinData;
 import com.sekwah.reskin.capabilities.SkinCapabilityHandler;
 import com.sekwah.reskin.capabilities.SkinData;
 import com.sekwah.reskin.client.ClientSkinManager;
+import com.sekwah.reskin.commands.ReskinArguments;
 import com.sekwah.reskin.commands.SkinCommands;
 import com.sekwah.reskin.config.SkinConfig;
 import com.sekwah.reskin.network.PacketHandler;
@@ -45,6 +46,8 @@ public class ReSkin {
         eventBus.addListener(this::registerCapabilities);
         eventBus.addListener(this::registerSyncTrackerEvent);
         eventBus.addListener(this::registerCapabilitySync);
+
+        ReskinArguments.register(eventBus);
     }
 
     private void registerCapabilities(RegisterCapabilitiesEvent event) {
@@ -57,7 +60,6 @@ public class ReSkin {
 
     private void setup(final FMLCommonSetupEvent event) {
         PacketHandler.init();
-        SkinCommands.registerNewArgTypes();
     }
 
     @SubscribeEvent

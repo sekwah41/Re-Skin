@@ -5,7 +5,7 @@ import com.sekwah.reskin.ReSkin;
 import com.sekwah.reskin.capabilities.SkinCapabilityHandler;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ServerEventHook {
 
     @SubscribeEvent
-    public static void playerJoin(EntityJoinWorldEvent event) {
+    public static void playerJoin(EntityJoinLevelEvent event) {
         if(event.getEntity() instanceof Player player) {
             event.getEntity().getCapability(SkinCapabilityHandler.SKIN_DATA, null).ifPresent(skin -> {
                 CustomSkinManager.setSkin(player,
@@ -28,7 +28,7 @@ public class ServerEventHook {
 
     @SubscribeEvent
     public static void playerLeave(PlayerEvent.PlayerLoggedOutEvent event) {
-        CustomSkinManager.playerLoggedOut(event.getPlayer().getUUID());
+        CustomSkinManager.playerLoggedOut(event.getEntity().getUUID());
     }
 
 }

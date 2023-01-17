@@ -6,7 +6,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,7 +15,7 @@ public class URLArgument implements ArgumentType<String> {
 
    private static final String HTTPS_START = "https://";
 
-   private static final SimpleCommandExceptionType HTTPS_EXCEPTION = new SimpleCommandExceptionType(new TranslatableComponent("argument.nohttps"));
+   private static final SimpleCommandExceptionType HTTPS_EXCEPTION = new SimpleCommandExceptionType(Component.translatable("argument.nohttps"));
 
    private static final Collection<String> EXAMPLES = Arrays.asList(HTTPS_START, "https://i.imgur.com/mORJxcm.png");
 

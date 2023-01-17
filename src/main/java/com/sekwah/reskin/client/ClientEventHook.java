@@ -26,7 +26,7 @@ public class ClientEventHook {
     }
 
     @SubscribeEvent
-    public static void leaveWorldEvent(ClientPlayerNetworkEvent.LoggedOutEvent event) {
+    public static void leaveWorldEvent(ClientPlayerNetworkEvent.LoggingOut event) {
         ClientSkinManager.clearSkinCache();
         LocalPlayer client = event.getPlayer();
         if(client != null) {
@@ -38,7 +38,7 @@ public class ClientEventHook {
     @SubscribeEvent
     public static void renderPlayer(RenderPlayerEvent.Pre event) {
         LocalPlayer client = Minecraft.getInstance().player;
-        if(event.getPlayer() instanceof AbstractClientPlayer clientPlayer && clientPlayer != client) {
+        if(event.getEntity() instanceof AbstractClientPlayer clientPlayer && clientPlayer != client) {
             ClientSkinManager.checkSkin(clientPlayer);
         }
     }

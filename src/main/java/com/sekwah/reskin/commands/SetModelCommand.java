@@ -10,7 +10,7 @@ import com.sekwah.reskin.config.SkinConfig;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Collection;
@@ -54,7 +54,7 @@ public class SetModelCommand {
             if (target == null) {
                 return;
             }
-            source.sendSuccess(new TranslatableComponent("setskin.setplayermodel", target.getDisplayName(), modelType), false);
+            source.sendSuccess(Component.translatable("setskin.setplayermodel", target.getDisplayName(), modelType), false);
             CustomSkinManager.setModel(target, modelType);
         });
         if (targets.size() == 0) {
