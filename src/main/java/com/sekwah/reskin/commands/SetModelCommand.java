@@ -31,7 +31,7 @@ public class SetModelCommand {
         // Thing to note, arguments are handled in alphabetical order.
         LiteralArgumentBuilder<CommandSourceStack> setModel = literal("setmodel")
                 .then(argument(MODEL_ARG, StringArgumentType.word())
-                        .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
+                        .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || !SkinConfig.OTHERS_SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                         .suggests(MODEL_SUGGESTIONS)
                         .executes(ctx -> {
                             ServerPlayer entity = ctx.getSource().getPlayerOrException();
