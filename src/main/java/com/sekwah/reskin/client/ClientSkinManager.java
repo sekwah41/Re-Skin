@@ -68,9 +68,14 @@ public class ClientSkinManager {
             if(!skin.getSkinUrl().equals("")) {
                 if(skin.getSkinUrl().equals("reset")) {
                     var originalSkin = originalSkinMap.get(player.getUUID());
-                    if(originalSkin != null && currentSkin != originalSkin.resourceLocation) {
-                        player.playerInfo.textureLocations.put(MinecraftProfileTexture.Type.SKIN, originalSkin.resourceLocation);
-                        player.playerInfo.skinModel = originalSkin.modelType;
+                    if(originalSkin != null) {
+                        if( currentSkin != originalSkin.resourceLocation) {
+                            player.playerInfo.textureLocations.put(MinecraftProfileTexture.Type.SKIN, originalSkin.resourceLocation);
+                            player.playerInfo.skinModel = originalSkin.modelType;
+                        }
+                    } else if(currentSkin != null){
+                        player.playerInfo.textureLocations.put(MinecraftProfileTexture.Type.SKIN, null);
+                        player.playerInfo.skinModel = null;
                     }
                 } else {
                     if(currentSkin != cachedUrls.get(skin.getSkinUrl())) {
