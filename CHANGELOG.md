@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.6.0](https://github.com/sekwah41/Re-Skin/compare/v2.5.1...v2.6.0) (2023-01-18)
+
+
+### Features ✨
+
+* switched skin syncing to use SekCLib ([afcdb9a](https://github.com/sekwah41/Re-Skin/commit/afcdb9a1c8ece1d872713cb3ea97ece96721fba6))
+* update to 1.19.3 ([daa20d8](https://github.com/sekwah41/Re-Skin/commit/daa20d84f5da16276cb954cb2f972e8d0e3dadfc))
+
+
+### Bug Fixes 🐛
+
+* add original skin to map when retrieved from the server ([ee8fcc3](https://github.com/sekwah41/Re-Skin/commit/ee8fcc3dc9762c5efd1de1dcdc2de19668de459d))
+* null errors with skin url's ([fe71821](https://github.com/sekwah41/Re-Skin/commit/fe7182186b7ca3a31d499673b52b8dcc2c13f771))
+* reset command for users that don't have skins ([025d092](https://github.com/sekwah41/Re-Skin/commit/025d092b413592f987d7b5de319ccbe7de695944))
+
 ## [2.5.1](https://github.com/sekwah41/Re-Skin/compare/v2.5.0...v2.5.1) (2022-09-04)
 
 
