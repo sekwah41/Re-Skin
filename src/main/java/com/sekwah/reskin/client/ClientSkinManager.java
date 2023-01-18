@@ -20,7 +20,7 @@ public class ClientSkinManager {
 
     private static ClientSkinData missing = new ClientSkinData(new ResourceLocation("textures/entity/steve.png"), "default");
 
-    private static final Map<UUID, ClientSkinData> originalSkinMap = Maps.newHashMap();
+    public static final Map<UUID, ClientSkinData> originalSkinMap = Maps.newHashMap();
 
     private static Map<String, ResourceLocation> cachedUrls = Maps.newHashMap();
 
@@ -58,19 +58,14 @@ public class ClientSkinManager {
     public static void checkSkin(AbstractClientPlayer player) {
 
         player.getCapability(SkinCapabilityHandler.SKIN_DATA).ifPresent(skin -> {
-            if(!cachedUrls.containsKey(skin.getSkinUrl())) {
+            if(!cachedUrls.containsKey(skin.getSkinUrl()) && !skin.getSkinUrl().equals("reset")) {
                 loadSkin(new SkinLoadJob(skin.getSkinUrl(), skin.isTransparent()));
             }
             if(player.playerInfo == null) return;
 
             ResourceLocation currentSkin = player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN);
-            if(!originalSkinMap.containsKey(player.getUUID())) {
-                if(currentSkin == null || player.playerInfo.skinModel == null) {
-                    return;
-                }
-                originalSkinMap.put(player.getUUID(), new ClientSkinData(currentSkin, player.playerInfo.skinModel));
-            }
-            else if(!skin.getSkinUrl().equals("")) {
+
+            if(!skin.getSkinUrl().equals("")) {
                 if(skin.getSkinUrl().equals("reset")) {
                     var originalSkin = originalSkinMap.get(player.getUUID());
                     if(originalSkin != null && currentSkin != originalSkin.resourceLocation) {
