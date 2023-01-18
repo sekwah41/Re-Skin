@@ -35,7 +35,7 @@ public class SetSkinCommand {
         // Thing to note, arguments are handled in alphabetical order.
         LiteralArgumentBuilder<CommandSourceStack> setSkin = literal("setskin")
                 .then(argument(URL_ARG, URLArgument.urlArg())
-                        .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
+                        .requires((sender) -> (!SkinConfig.SELF_SKIN_NEEDS_OP.get() || !SkinConfig.OTHERS_SELF_SKIN_NEEDS_OP.get() || sender.hasPermission(2)))
                         .suggests(URL_SUGGESTIONS)
                         .executes(ctx -> {
                             ServerPlayer entity = ctx.getSource().getPlayerOrException();
