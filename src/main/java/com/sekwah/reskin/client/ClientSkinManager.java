@@ -58,15 +58,15 @@ public class ClientSkinManager {
     public static void checkSkin(AbstractClientPlayer player) {
 
         player.getCapability(SkinCapabilityHandler.SKIN_DATA).ifPresent(skin -> {
-            if(!cachedUrls.containsKey(skin.getSkinUrl()) && !skin.getSkinUrl().equals("reset")) {
+            if(skin.getSkinUrl() != null && !cachedUrls.containsKey(skin.getSkinUrl()) && !Objects.equals(skin.getSkinUrl(),"reset")) {
                 loadSkin(new SkinLoadJob(skin.getSkinUrl(), skin.isTransparent()));
             }
             if(player.playerInfo == null) return;
 
             ResourceLocation currentSkin = player.playerInfo.textureLocations.get(MinecraftProfileTexture.Type.SKIN);
 
-            if(!skin.getSkinUrl().equals("")) {
-                if(skin.getSkinUrl().equals("reset")) {
+            if(!Objects.equals(skin.getSkinUrl(), "")) {
+                if(Objects.equals(skin.getSkinUrl(), "reset")) {
                     var originalSkin = originalSkinMap.get(player.getUUID());
                     if(originalSkin != null) {
                         if( currentSkin != originalSkin.resourceLocation) {
