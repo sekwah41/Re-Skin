@@ -249,6 +249,12 @@ publishing {
     }
 }
 
+def getReleaseChangelog() {
+    def changelogFile = file('CHANGELOG.md')
+    def changelog = "## [${changelogFile.text.split('\n## \\[')[1]}\n\n"// ${project.github}/blob/${branch}/CHANGELOG.md
+    return changelog;
+}
+
 /**
  * For pre-releases and testers to be able to try the latest commits if they want.
  * If the builds start exceeding 8MB then we may want to upload to s3 instead and periodically clear.
@@ -271,7 +277,9 @@ task discordupload {
                 builder.addTextBody("content", "New snapshot or testing build")
             } else {
                 builder.addTextBody("content", "New release build\n\n" +
-                        "Current Features: <${project.github}/blob/master/CHANGELOG.md>")
+                        "```markdown\n" +
+                        "${getReleaseChangelog()}\n" +
+                        "```")
             }
 
             builder.addBinaryBody("file", file(jar.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jar.archiveName)
@@ -300,7 +308,7 @@ curseforge {
     project {
         id = project.curse_project_id
         // TODO add code to reference this but also cut the latest change logs in for the files
-        changelog = "${project.github}/blob/${branch}/CHANGELOG.md"
+        changelog = getReleaseChangelog()
         changelogType = 'markdown'
         releaseType = 'release'
         addGameVersion '1.19'
@@ -327,6 +335,7 @@ modrinth {
     uploadFile = jar
     additionalFiles = [srcJar, deobfJar]
     gameVersions = ["1.19", "1.19.1", "1.19.2", "1.19.3"]
+    changelog = getReleaseChangelog()
     dependencies {
         required.project "sekclib" // Creates a new required dependency on Fabric API
     }
