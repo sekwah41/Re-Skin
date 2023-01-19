@@ -23,6 +23,7 @@ buildscript {
     }
 }
 plugins {
+    id "com.modrinth.minotaur" version "2.+"
     id "com.matthewprenger.cursegradle" version "1.4.0"
 }
 
@@ -315,5 +316,18 @@ curseforge {
         }
         addArtifact srcJar
         addArtifact deobfJar
+    }
+}
+
+// https://github.com/modrinth/minotaur
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = project.modrinth_slug
+    versionType = "release"
+    uploadFile = jar
+    additionalFiles = [srcJar, deobfJar]
+    gameVersions = ["1.19", "1.19.1", "1.19.2", "1.19.3"]
+    dependencies {
+        required.project "sekclib" // Creates a new required dependency on Fabric API
     }
 }
