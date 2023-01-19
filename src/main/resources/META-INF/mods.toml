@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="[42,)"
 issueTrackerURL="https://github.com/sekwah41/Re-Skin/issues"
-license="All rights reserved"
+license="MIT"
 [[mods]] #mandatory
     modId="reskin"
     version="${file.jarVersion}"
