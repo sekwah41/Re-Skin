@@ -52,5 +52,5 @@ jobs:
           IS_RELEASE: true
         run: |
           # Build
-          ./gradlew build ${{ matrix.task }}
+          ./gradlew build ${{ matrix.release-task }}
 
