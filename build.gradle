@@ -276,7 +276,7 @@ task discordupload {
             if(!isRelease) {
                 builder.addTextBody("content", "New snapshot or testing build")
             } else {
-                builder.addTextBody("content", "New release build\n\n" +
+                builder.addTextBody("content", "New release build\n" +
                         "```markdown\n" +
                         "${getReleaseChangelog()}\n" +
                         "```")
