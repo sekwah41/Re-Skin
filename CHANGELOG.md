@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.1](https://github.com/sekwah41/Re-Skin/compare/v2.6.0...v2.6.1) (2023-01-20)
+
+
+### Bug Fixes 🐛
+
+* override setSelfSkinsNeedsOp if setOtherSkinsNeedsOp is true ([0416dac](https://github.com/sekwah41/Re-Skin/commit/0416dac5c000266ed9861f104b1dafcd324351f2))
+
 ## [2.6.0](https://github.com/sekwah41/Re-Skin/compare/v2.5.1...v2.6.0) (2023-01-18)
 
 
