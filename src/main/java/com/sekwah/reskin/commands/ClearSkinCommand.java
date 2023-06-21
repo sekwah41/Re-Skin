@@ -42,7 +42,7 @@ public class ClearSkinCommand {
             if(target == null) {
                 return;
             }
-            source.sendSuccess(Component.translatable("setskin.resetplayer", target.getDisplayName()), false);
+            source.sendSuccess(() -> Component.translatable("setskin.resetplayer", target.getDisplayName()), false);
             CustomSkinManager.resetSkin(target);
         });
         if(targets.size() == 0) {

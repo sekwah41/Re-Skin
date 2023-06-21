@@ -54,7 +54,7 @@ public class SetModelCommand {
             if (target == null) {
                 return;
             }
-            source.sendSuccess(Component.translatable("setskin.setplayermodel", target.getDisplayName(), modelType), false);
+            source.sendSuccess(() -> Component.translatable("setskin.setplayermodel", target.getDisplayName(), modelType), false);
             CustomSkinManager.setModel(target, modelType);
         });
         if (targets.size() == 0) {

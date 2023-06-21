@@ -30,7 +30,7 @@ public class ClearSkinCacheCommand {
         } catch (CommandSyntaxException e) {
             ReSkin.LOGGER.info("This command can only be run from the console");
         }
-        ctx.getSource().sendSuccess(Component.translatable("setskin.clearedcache"), false);
+        ctx.getSource().sendSuccess(() -> Component.translatable("setskin.clearedcache"), false);
         return Command.SINGLE_SUCCESS;
     }
 }

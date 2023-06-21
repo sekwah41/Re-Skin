@@ -60,14 +60,14 @@ public class SetSkinCommand {
         if (Boolean.TRUE.equals(SkinConfig.ENABLE_SKIN_SERVER_WHITELIST.get()) && passedWhitelist == 0) {
             MutableComponent message = Component.translatable("setskin.notwhitelisted");
             Style redMessage = message.getStyle().withColor(TextColor.fromLegacyFormat(ChatFormatting.RED));
-            source.sendSuccess(message.setStyle(redMessage), false);
+            source.sendSuccess(() -> message.setStyle(redMessage), false);
             return -1;
         }
         targets.forEach(target -> {
             if (target == null) {
                 return;
             }
-            source.sendSuccess(Component.translatable("setskin.setplayerskin", target.getScoreboardName(), url), false);
+            source.sendSuccess(() -> Component.translatable("setskin.setplayerskin", target.getScoreboardName(), url), false);
             CustomSkinManager.setSkin(target, url);
         });
         if (targets.size() == 0) {
