@@ -9,15 +9,15 @@ license="MIT"
     updateJSONURL="https://www.sekwah.com/modversions/reskin.json"
     displayURL="https://www.planetminecraft.com/mod/re-skin-4249296/"
     logoFile="reskinlogo.png"
-    authors="Sekwah41"
+    authors="Sekwah"
     description='''
-    A skin editing mod for role plays, HD skins and whatever you can imagine!
-    '''
+A skin editing mod for role plays, HD skins and whatever you can imagine!
+'''
 
 [[dependencies.reskin]]
     modId="forge"
     mandatory=true
-    versionRange="[42,)"
+    versionRange="[46,)"
     ordering="NONE"
     side="BOTH"
 
@@ -25,13 +25,13 @@ license="MIT"
 [[dependencies.reskin]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19,)"
+    versionRange="[1.20,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.reskin]]
     modId="sekclib"
     mandatory=true
-    versionRange="[0.4.3,)"
+    versionRange="[1.0.0,)"
     ordering="NONE"
     side="BOTH"
