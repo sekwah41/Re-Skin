@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/sekwah41/Re-Skin/compare/v2.6.1...v3.0.0) (2023-06-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* dropped 1.19 support
+
+### Features ✨
+
+* update to 1.20 ([75d2037](https://github.com/sekwah41/Re-Skin/commit/75d203758012b694624139b3fa6e2722df2a9988))
+
 ## [2.6.1](https://github.com/sekwah41/Re-Skin/compare/v2.6.0...v2.6.1) (2023-01-20)
 
 
