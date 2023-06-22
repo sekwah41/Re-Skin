@@ -32,6 +32,6 @@ A skin editing mod for role plays, HD skins and whatever you can imagine!
 [[dependencies.reskin]]
     modId="sekclib"
     mandatory=true
-    versionRange="[1.0.0,)"
+    versionRange="[1.0.0,2)"
     ordering="NONE"
     side="BOTH"

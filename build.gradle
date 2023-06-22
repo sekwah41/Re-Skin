@@ -269,7 +269,6 @@ task discordupload {
         String discordWebhook = System.getenv("DISCORD_WEBHOOK")
 
         if(discordWebhook != null) {
-            println("Logging Into Discord")
 
             CloseableHttpClient httpClient = HttpClients.createDefault()
             HttpPost uploadFile = new HttpPost(discordWebhook)
@@ -284,7 +283,7 @@ task discordupload {
                         "```")
             }
 
-            builder.addBinaryBody("file", file(jar.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jar.getArchivesBaseName())
+            builder.addBinaryBody("file", file(jar.archiveFile).newInputStream(), ContentType.APPLICATION_OCTET_STREAM, jar.archiveBaseName.get())
 
             HttpEntity multipart = builder.build()
 
@@ -312,10 +311,8 @@ curseforge {
         changelog = getReleaseChangelog()
         changelogType = 'markdown'
         releaseType = 'release'
-        addGameVersion '1.19'
-        addGameVersion '1.19.1'
-        addGameVersion '1.19.2'
-        addGameVersion '1.19.3'
+        addGameVersion '1.20'
+        addGameVersion '1.20.1'
 
         relations {
             requiredDependency 'sekclib'
@@ -335,7 +332,7 @@ modrinth {
     versionType = "release"
     uploadFile = jar
     additionalFiles = [srcJar, deobfJar]
-    gameVersions = ["1.19", "1.19.1", "1.19.2", "1.19.3"]
+    gameVersions = ["1.20", "1.20.1"]
     changelog = getReleaseChangelog()
     dependencies {
         required.project "sekclib" // Creates a new required dependency on Fabric API
