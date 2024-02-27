@@ -104,6 +104,7 @@ public class HDDownloadingTexture extends SimpleTexture {
                         httpurlconnection = (HttpURLConnection)(new URL(this.imageUrl)).openConnection(Minecraft.getInstance().getProxy());
                         httpurlconnection.setDoInput(true);
                         httpurlconnection.setDoOutput(false);
+                        httpurlconnection.setRequestProperty("Accept", "image/png");
                         httpurlconnection.connect();
                         if (httpurlconnection.getResponseCode() == 200) {
                             InputStream inputstream;
