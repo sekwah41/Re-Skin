@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/sekwah41/Re-Skin/compare/v3.0.0...v3.0.1) (2024-02-27)
+
+
+### Bug Fixes 🐛
+
+* add Accept request header (fixes imgur issue) ([62730e5](https://github.com/sekwah41/Re-Skin/commit/62730e56505304d5c60b9e8f2428a9fac782634b))
+
 ## [3.0.0](https://github.com/sekwah41/Re-Skin/compare/v2.6.1...v3.0.0) (2023-06-22)
 
 
