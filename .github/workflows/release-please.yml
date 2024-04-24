@@ -43,9 +43,9 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          DISCORD_WEBHOOK: "${{ secrets.OP_ADVANCED_PORTALS_VAULT_ITEM }}/discord_webhook"
-          CURSE_API: "${{ secrets.OP_ADVANCED_PORTALS_VAULT_ITEM }}/curse"
-          MODRINTH_TOKEN: "${{ secrets.OP_ADVANCED_PORTALS_VAULT_ITEM }}/modrinth"
+          DISCORD_WEBHOOK: "${{ secrets.OP_RESKIN_VAULT_ITEM }}/discord_webhook"
+          CURSE_API: "${{ secrets.OP_RESKIN_VAULT_ITEM }}/curse"
+          MODRINTH_TOKEN: "${{ secrets.OP_RESKIN_VAULT_ITEM }}/modrinth"
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:

@@ -30,17 +30,9 @@ jobs:
           export-env: true
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
-          DISCORD_WEBHOOK: "${{ secrets.OP_ADVANCED_PORTALS_VAULT_ITEM }}/discord_webhook"
-          TEST_OUT: "${{ secrets.OP_ADVANCED_PORTALS_VAULT_ITEM }}/testout"
+          DISCORD_WEBHOOK: "${{ secrets.OP_RESKIN_VAULT_ITEM }}/discord_webhook"
       - name: Build and upload preview (run for non-release builds)
         if: ${{ github.ref }}
         run: |
           # Build
           ./gradlew build discordupload
-      - name: Write TEST_OUT to a file
-        run: echo "$TEST_OUT" > test_output.txt
-      - name: Upload test output as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-output
-          path: test_output.txt
