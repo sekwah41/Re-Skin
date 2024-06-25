@@ -62,8 +62,8 @@ public class SkinData implements ISkinData, ICapabilityProvider {
     @Override
     public Tag serializeNBT() {
         final CompoundTag tag = new CompoundTag();
-        tag.putString(SKIN_TAG, this.getSkinUrl());
-        tag.putString(BODY_TYPE_TAG, this.getModelType());
+        if(this.getSkinUrl() != null) tag.putString(SKIN_TAG, this.getSkinUrl());
+        if(this.getModelType() != null) tag.putString(BODY_TYPE_TAG, this.getModelType());
         return tag;
     }
 
