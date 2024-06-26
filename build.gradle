@@ -10,7 +10,6 @@ buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = "https://repo.spongepowered.org/maven" }
-        //maven { url = 'https://sizableshrimp.me/maven' }
         maven { url = "https://plugins.gradle.org/m2/" }
         maven { url = "https://maven.parchmentmc.org" }
         mavenCentral()
@@ -216,6 +215,12 @@ def reobfFile = file("$buildDir/reobfJar/output.jar")
 def reobfArtifact = artifacts.add('default', reobfFile) {
     type 'jar'
     builtBy 'reobfJar'
+}
+
+processResources {
+    filesMatching('META-INF/mods.toml') {
+        expand('file': [jarVersion: project.version])
+    }
 }
 
 task srcJar(type: Jar) {
