@@ -24,7 +24,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'oracle'
+          distribution: 'temurin'
           java-version: 17
 
       - name: Load secrets
@@ -35,15 +35,7 @@ jobs:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           DISCORD_WEBHOOK: "${{ secrets.OP_RESKIN_VAULT_ITEM }}/discord_webhook"
 
-      - name: Debug Environment
-        run: |
-          echo "Java Version:"
-          java -version
-          echo "Environment Variables:"
-          printenv
-
       - name: Build and upload preview (run for non-release builds)
         if: ${{ github.ref }}
         run: |
-          ./gradlew build --info
-          ./gradlew discordupload --info
+          ./gradlew build discordupload --info
