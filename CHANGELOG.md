@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/sekwah41/Re-Skin/compare/v3.0.1...v3.0.2) (2024-07-02)
+
+
+### Bug Fixes 🐛
+
+* null issue with nbt data ([377517a](https://github.com/sekwah41/Re-Skin/commit/377517aab8a501566e7199a7e139316c1d913535))
+
 ## [3.0.1](https://github.com/sekwah41/Re-Skin/compare/v3.0.0...v3.0.1) (2024-02-27)
 
 
