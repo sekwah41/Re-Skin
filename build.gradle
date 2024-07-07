@@ -153,12 +153,13 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.neoforged:forge:1.20.1-47.1.62'
+    minecraft 'net.neoforged:forge:1.20.1-47.1.106'
 
     implementation 'org.spongepowered:mixin:0.8.5'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     implementation fg.deobf("com.sekwah:sekclib-forge:[1.0.0,2)")
+
     // Trick intellij to allow for better editing in here for the discord task
     // compile "org.apache.httpcomponents:httpmime:4.5.13"
     //implementation fg.deobf("curse.maven:torohealth-damage-indicators-245733:3556931")
