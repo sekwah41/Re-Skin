@@ -23,7 +23,7 @@ public class PlayerRendererMixin {
         return RenderType.entityTranslucent(resourceLocation);
     }
 
-    @Inject(method = "render", at = @At(value = "HEAD"))
+    @Inject(method = "render*", at = @At(value = "HEAD"))
     public void render(AbstractClientPlayer p_117788_, float p_117789_, float p_117790_, PoseStack p_117791_, MultiBufferSource p_117792_, int p_117793_, CallbackInfo ci) {
         LocalPlayer client = Minecraft.getInstance().player;
         if(p_117788_ != client) {
