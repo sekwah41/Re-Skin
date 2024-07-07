@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.2](https://github.com/sekwah41/Re-Skin/compare/v3.0.1...v3.0.2) (2024-07-07)
+
+
+### Bug Fixes 🐛
+
+* default skin cache lambda mixin not executing properly ([#142](https://github.com/sekwah41/Re-Skin/issues/142)) ([db3e5c1](https://github.com/sekwah41/Re-Skin/commit/db3e5c169b29d8483058c8183f91581e095f8dad))
+* null issue with nbt data ([377517a](https://github.com/sekwah41/Re-Skin/commit/377517aab8a501566e7199a7e139316c1d913535))
+
 ## [3.0.1](https://github.com/sekwah41/Re-Skin/compare/v3.0.0...v3.0.1) (2024-02-27)
 
 
