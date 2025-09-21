@@ -47,7 +47,7 @@ def shaRef = githubSha != null ? "-${githubSha.substring(0, 8)}" : ""
 println "Branch ${branch}${shaRef} isRelease: '${isRelease}'"
 
 // Get version from file managed by please-release
-def versionString = (file('./version.txt').text + (isRelease ? "" : "-${snapshotName}${shaRef}")).replaceAll('\n', '')
+def versionString = ((file('./version.txt').text + isRelease ? "" : "-${snapshotName}${shaRef}")).replaceAll('\n', '')
 setVersion(versionString)
 println "Version: ${getVersion()}"
 
