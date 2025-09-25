@@ -54,7 +54,7 @@ jobs:
           CURSE_API: "${{ secrets.OP_RESKIN_VAULT_ITEM }}/curse"
           MODRINTH_TOKEN: "${{ secrets.OP_RESKIN_VAULT_ITEM }}/modrinth"
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
           java-version: 17
