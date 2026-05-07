@@ -15,7 +15,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.spongepowered:mixingradle:0.7+"
+        classpath "org.spongepowered:mixingradle:0.7.38"
         classpath "org.apache.httpcomponents:httpmime:4.5.14"
         classpath "org.parchmentmc:librarian:1.+"
     }
@@ -155,8 +155,8 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.neoforged:forge:1.20.1-47.1.106'
 
-    implementation 'org.spongepowered:mixin:0.8.5'
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation 'org.spongepowered:mixin:0.8.7'
+    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 
     implementation fg.deobf("com.sekwah:sekclib-forge:[1.0.0,2)")
 
